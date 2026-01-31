@@ -12,6 +12,7 @@
 - Brand colors: emerald-500/600/700 for primary CTAs and accents (healthcare-appropriate)
 - For content switching with animations: use AnimatePresence with mode="wait" and unique key props on motion.div
 - SVG icons: Place in components/icons/[category]/ with barrel export (index.ts), accept className prop, use aria-hidden="true"
+- **Animation timing standard**: Entrances 300-500ms (ease-out), Hover/interactions 150-200ms (ease-in-out). Use `duration-200` for snappy hovers.
 
 ---
 
@@ -699,5 +700,58 @@
 - For infinite/repeating animations (like pulsing indicators), check reduceMotion && !reduceMotion in the animate condition
 - The CSS media query @media (prefers-reduced-motion: reduce) catches any CSS animations/transitions not handled by Framer Motion
 - Existing FadeIn component already uses useReducedMotion - good reference pattern
+
+---
+
+## 2026-01-31 - US-029
+**Status:** ✅ PASSED
+**What was implemented:**
+- Mobile responsiveness audit completed for all sections
+- Fixed AudienceToggle tap targets: increased outer container to h-12/sm:h-14 (48px/56px) and buttons to h-10/sm:h-12 (40px/48px) with min-w-[88px]/sm:min-w-[100px]
+- Fixed mobile navbar hamburger button: increased to h-11 w-11 min-h-[44px] min-w-[44px]
+- Fixed mobile nav menu items: increased to min-h-[44px] py-3 px-2 with proper hover states (bg-accent/bg-accent/50)
+- Fixed mobile login/CTA buttons in Sheet: increased to h-12 min-h-[48px] with larger text (text-base) and icons (h-5 w-5)
+- Verified workflow visualization already has proper vertical layout on mobile (lg:hidden for vertical, hidden lg:block for horizontal)
+- Verified text is readable at all breakpoints with responsive font sizes (text-4xl md:text-5xl lg:text-6xl xl:text-7xl pattern)
+
+**Files changed:**
+- components/audience-toggle.tsx (modified - increased heights and widths for 44px tap targets)
+- app/(marketing)/marketing-navbar.tsx (modified - fixed hamburger button, mobile nav items, and mobile CTA buttons)
+
+**Learnings for future iterations:**
+- WCAG minimum touch target size is 44x44px - use min-h-[44px] min-w-[44px] for explicit compliance
+- Mobile nav items benefit from background hover states (hover:bg-accent/50) for visual feedback
+- Sheet component's mobile menu should use space-y-1 instead of space-y-4 when items have proper min-height
+- Tailwind h-11 = 44px (2.75rem), h-12 = 48px (3rem) - use these for touch-friendly components
+- Always audit: audience toggle, hamburger button, nav items, form inputs, and CTA buttons for touch targets
+- Responsive font scaling pattern: text-sm → text-base on mobile, text-base → text-lg on desktop for readability
+
+---
+
+## 2026-01-31 - US-030
+**Status:** ✅ PASSED
+**What was implemented:**
+- Final visual polish and animation timing audit completed
+- Standardized all hover/interaction transition durations from 300ms to 200ms (target: 150-200ms)
+- Verified entrance animations are 300-500ms with ease-out easing across all sections
+- Confirmed AnimatePresence transitions use mode="wait" and overflow-hidden to prevent layout shifts
+- Verified loading states exist for async operations (RequestAccessForm has isSubmitting state with Loader2 spinner)
+
+**Files changed:**
+- app/(marketing)/features-provider.tsx (modified - duration-300 → duration-200 for hover effects)
+- app/(marketing)/features-patient.tsx (modified - duration-300 → duration-200 for hover effects)
+- app/(marketing)/marketing-social-proof.tsx (modified - duration-300 → duration-200 for practice cards, badges)
+- app/(marketing)/pricing-provider.tsx (modified - duration-300 → duration-200 for card hover shadow)
+- app/(marketing)/marketing-cta.tsx (modified - duration-300 → duration-200 for button hover)
+- app/(marketing)/marketing-faq.tsx (modified - duration-300 → duration-200 for card hover shadows)
+- app/(marketing)/marketing-how-it-works.tsx (modified - duration-300 → duration-200 for icon hover opacity)
+
+**Learnings for future iterations:**
+- Animation timing standard: entrances 300-500ms with ease-out, hovers/interactions 150-200ms with ease-in-out
+- Tailwind duration classes: duration-150 (150ms), duration-200 (200ms), duration-300 (300ms), duration-500 (500ms)
+- For snappy hover feedback, prefer duration-200 over duration-300 - the difference is perceptible
+- Framer Motion spring animations don't need explicit duration - stiffness/damping control timing
+- AnimatePresence mode="wait" with overflow-hidden on height animations prevents layout shift
+- Check for loading states in all forms: isSubmitting state, Loader2 spinner, disabled inputs during submit
 
 ---

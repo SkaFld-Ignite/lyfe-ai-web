@@ -505,8 +505,8 @@
         "Verify in browser using dev-browser skill at mobile viewport"
       ],
       "priority": 29,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Fixed AudienceToggle to h-12 (48px) on mobile, hamburger button to min-h-[44px], mobile nav items to min-h-[44px] with proper padding and hover states, mobile login/CTA buttons to min-h-[48px]"
     },
     {
       "id": "US-030",
@@ -522,8 +522,8 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 30,
-      "passes": false,
-      "notes": ""
+      "passes": true,
+      "notes": "Standardized hover transitions from duration-300 to duration-200 across all feature cards, social proof, pricing, CTA, FAQ, and how-it-works sections. Verified entrance animations are 300-500ms with ease-out, AnimatePresence transitions have proper layout shift prevention, and loading states exist for form submissions."
     }
   ]
 }
