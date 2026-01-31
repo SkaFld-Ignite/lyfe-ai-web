@@ -7,7 +7,7 @@ import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 
 import { MarketingCTA } from "./marketing-cta"
 import MarketingFAQ from "./marketing-faq"
-import { MarketingPartners } from "./marketing-partners"
+import { MarketingSocialProof } from "./marketing-social-proof"
 import { MarketingPricing } from "./marketing-pricing"
 import { MarketingQuote } from "./marketing-quote"
 import { MarketingTestimonial } from "./marketing-testimonial"
@@ -64,7 +64,7 @@ export default async function LandingPage() {
     <div className="space-y-1 md:space-y-4 ">
       <LandingHeroSection />
       <FadeIn>
-        <MarketingPartners />
+        <MarketingSocialProof />
       </FadeIn>
       <FadeIn>
         <ProductWorkflow />
