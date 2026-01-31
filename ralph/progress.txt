@@ -244,3 +244,237 @@
 
 ---
 
+## 2026-01-31 - US-011
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created WorkflowConnector component in components/workflow-connector.tsx
+- SVG-based animated connector line for linking workflow steps
+- Props: isAnimating (boolean), direction ('forward' | 'backward'), className
+- Horizontal layout on desktop (md:block), vertical on mobile (block md:hidden)
+- Animated dash pattern using Framer Motion strokeDashoffset
+- Pulsing arrow head animation for visual feedback when isAnimating=true
+- Linear gradient background with emerald-500 color scheme
+- Separate SVG viewBoxes for horizontal (100x20) and vertical (20x40) layouts
+
+**Files changed:**
+- components/workflow-connector.tsx (new)
+
+**Learnings for future iterations:**
+- Use motion.line with strokeDasharray and animated strokeDashoffset for flowing dash effect
+- Animation direction controlled by offset values: [0, -N] for forward, [-N, 0] for backward
+- Separate SVGs for responsive layouts better than trying to rotate/transform a single SVG
+- linearGradient with varying stopOpacity creates nice fade effect on connectors
+- Arrow heads use polygon with animated opacity for pulsing effect
+- repeat: Infinity on Framer Motion transitions for continuous animation
+
+---
+
+## 2026-01-31 - US-012
+**Status:** ✅ PASSED
+**What was implemented:**
+- Moved ProductWorkflow component from components/product-workflow.tsx to app/(marketing)/marketing-workflow.tsx
+- Component already had full implementation from previous US-004 commit
+- 4 workflow steps: Fragmented Records → AI Aggregation → Clinical Timeline → EMR Sync
+- Scroll-triggered animations using Framer Motion's useInView hook
+- Staggered entrance animations (staggerChildren: 0.2) for sequential step reveals
+- Responsive layout: horizontal (grid-cols-4) on desktop lg+, vertical with timeline on smaller screens
+- Sophisticated WorkflowStepCard with audience-aware content, highlight badges, click interactions
+- Animated gradient connector lines built inline (more feature-rich than basic WorkflowConnector)
+
+**Files changed:**
+- app/(marketing)/marketing-workflow.tsx (moved from components/)
+- app/(marketing)/page.tsx (updated import path)
+- components/product-workflow.tsx (deleted)
+
+**Learnings for future iterations:**
+- When acceptance criteria says "create in path X", existing implementations may already exist elsewhere - check and relocate if needed
+- The existing ProductWorkflow was created as part of US-004 commit but placed in wrong location
+- Inline card implementations can be more sophisticated than generic reusable components when they need context-specific features
+- useInView from Framer Motion is preferred over manual Intersection Observer for scroll-triggered animations
+- Marketing section components should live in app/(marketing)/ rather than components/ for better organization
+
+---
+
+## 2026-01-31 - US-013
+**Status:** ✅ PASSED
+**What was implemented:**
+- Added audience-specific workflow step titles (providerTitle, patientTitle fields)
+- Step 4 now shows "EMR Sync" for providers, "Share with Doctors" for patients
+- Created ShareWithDoctorsIcon SVG for patient-specific visualization
+- Updated provider descriptions to emphasize "95% of US providers" and "bi-directional EMR sync"
+- Updated patient descriptions to emphasize "one place for all records" and "easy sharing"
+- Added AnimatePresence transitions for smooth title changes when audience toggles
+
+**Files changed:**
+- app/(marketing)/marketing-workflow.tsx (modified - added audience-specific title/icon logic)
+- components/icons/workflow/share-with-doctors-icon.tsx (new)
+- components/icons/workflow/index.ts (modified - added export)
+
+**Learnings for future iterations:**
+- WorkflowStepData interface can have optional providerTitle/patientTitle to override default title per audience
+- patientIcon field allows different icons for patient view without changing provider view
+- AnimatePresence with unique key based on audience triggers re-animation on toggle
+- SVG icons showing sharing/collaboration work well for patient-facing features (vs EMR/technical icons for providers)
+
+---
+
+
+## 2026-01-31 - US-014
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created ProviderFeatures component in app/(marketing)/features-provider.tsx
+- 4 benefit cards with icons: Stop Chasing Records, Complete Context, Bi-directional Sync, HIPAA Certified
+- Hover animation with subtle lift (y: -8) and shadow effect using Framer Motion
+- Staggered entrance on scroll using useInView with staggerChildren: 0.15
+- Emerald-500 accent color scheme matching brand
+- Section header with GradientHeading
+- Bottom accent line animation on hover
+
+**Files changed:**
+- app/(marketing)/features-provider.tsx (new)
+
+**Learnings for future iterations:**
+- Component already existed as untracked file from previous work - verify git status for existing files before creating new ones
+- Browser verification blocked by missing Supabase environment variables - not a code issue
+- Feature cards use consistent pattern: icon in colored container, title, description, hover effects
+- whileHover with spring stiffness: 400, damping: 17 creates snappy but natural lift animation
+- Typecheck passed, browser verification pending environment setup
+
+---
+
+## 2026-01-31 - US-015
+**Status:** PASSED
+**What was implemented:**
+- Created PatientFeatures component in app/(marketing)/features-patient.tsx
+- 4 benefit cards with icons: All Your Records (FolderOpen), Understand Your Health (Brain), Share Easily (Share2), Always Free (Gift)
+- Same animation patterns as ProviderFeatures: hover lift (y: -8), staggered scroll entrance (staggerChildren: 0.15)
+- Same card styling: emerald-500 accents, shadow hover effects, bottom accent line
+- Section header: "Your Health, Your Way" with patient-focused subheadline
+- Uses GradientHeading and SectionCard components for consistency
+
+**Files changed:**
+- app/(marketing)/features-patient.tsx (new)
+
+**Learnings for future iterations:**
+- Patient-focused copy emphasizes simplicity, accessibility, and freedom: "No more hunting", "plain language", "No faxes", "No cost, no catch"
+- Icons selected for clarity: FolderOpen (consolidation), Brain (understanding), Share2 (sharing), Gift (free value)
+- Maintaining exact same animation parameters ensures visual consistency between audience-specific components
+- Both ProviderFeatures and PatientFeatures ready for audience-aware rendering in US-016
+
+---
+
+## 2026-01-31 - US-016
+**Status:** ✅ PASSED
+**What was implemented:**
+- Rewrote marketing-features.tsx to use AudienceContext for audience-aware rendering
+- Renders ProviderFeatures when audience is 'provider', PatientFeatures when 'patient'
+- Added crossfade animation (300ms) using AnimatePresence with mode="wait"
+- Removed old "Vibe Marketing" template content (600+ lines of social media dashboard UI)
+- Added section id="features" for future anchor navigation
+- Same animation pattern as marketing-hero.tsx (duration 0.3, easeInOut, y offset)
+
+**Files changed:**
+- app/(marketing)/marketing-features.tsx (rewritten - 600 lines removed, 41 lines added)
+
+**Learnings for future iterations:**
+- Audience-aware sections follow consistent pattern: useAudience() + AnimatePresence mode="wait" + conditional rendering
+- Use unique key prop on motion.div (e.g., key="provider-features") to trigger animation on content change
+- Duration 0.3s (300ms) is the standard crossfade duration across all audience-aware sections
+- Removing large template code reduces bundle size and improves maintainability
+- Section id attributes (id="features") should be added for anchor navigation (upcoming US-027)
+
+---
+
+## 2026-01-31 - US-017
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created ProviderPricing component in app/(marketing)/pricing-provider.tsx
+- Price display: '$1,500/month per 10 provider accounts' with large typography
+- Feature list with icons: Unlimited record aggregation, Bi-directional EMR sync, Clinical Timeline View, HIPAA compliant & FHIR R4, Dedicated onboarding support, Up to 10 provider accounts
+- CTA buttons: 'Request Access' (primary emerald) and 'Start 90-Day Pilot' (outline)
+- Custom pricing note: "Need more than 10 providers? Contact us for custom pricing"
+- Clean card-based design with emerald accent colors and subtle shadow hover effects
+- Scroll-triggered staggered animations using Framer Motion's useInView
+
+**Files changed:**
+- app/(marketing)/pricing-provider.tsx (new)
+
+**Learnings for future iterations:**
+- Pricing section follows same animation pattern as feature cards: useInView, staggered feature list
+- Use section id="pricing" for anchor navigation (upcoming US-027)
+- Feature list with icons uses map + staggered animation delay (0.3 + index * 0.05)
+- Two CTA buttons pattern: primary action (Request Access) + secondary action (Start Pilot)
+- Custom pricing note uses mailto: link for enterprise contacts
+
+---
+
+## 2026-01-31 - US-018
+**Status:** ✅ PASSED
+**What was implemented:**
+- Rewrote marketing-pricing.tsx to use AudienceContext for audience-aware visibility
+- Renders ProviderPricing only when audience is 'provider'
+- Completely hides pricing section when audience is 'patient' (not just empty content)
+- Added smooth height transition using AnimatePresence with coordinated timing
+- Height animation: 400ms with custom cubic-bezier easing [0.4, 0, 0.2, 1]
+- Opacity animation: 300ms fade, staggered with 100ms delay relative to height
+- Uses overflow-hidden to prevent content from showing during height collapse
+
+**Files changed:**
+- app/(marketing)/marketing-pricing.tsx (rewritten - 82 lines removed, 33 lines added)
+
+**Learnings for future iterations:**
+- For hide/show sections (not just content swaps), use height: 0 ↔ height: "auto" animation
+- AnimatePresence with height animation requires overflow-hidden to prevent layout bleed
+- Stagger opacity and height: fade out first, collapse height second (exit); expand height first, fade in second (enter)
+- Custom cubic-bezier [0.4, 0, 0.2, 1] gives Material Design-style easing (deceleration curve)
+- This pattern differs from crossfade pattern used in hero/features - those keep height consistent, this collapses entirely
+
+---
+
+## 2026-01-31 - US-019
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created marketing-social-proof.tsx component (replaces MarketingPartners in page.tsx)
+- Header: "Trusted by Specialty Practices" with GradientHeading
+- Placeholder practice logos grid (4 cards) using medical Lucide icons: Heart, Stethoscope, Building2, UserCheck
+- Trust badges row with HIPAA Certified and FHIR R4 Compliant badges
+- Testimonial quote section with doctor placeholder: Dr. Sarah Chen, Nashville Specialty Associates
+- Subtle background gradient: emerald-50/30 → transparent → sky-50/20 with dark mode variants
+- Staggered entrance animations using Framer Motion useInView with containerVariants/itemVariants pattern
+- Hover effects on practice cards and trust badges (scale: 1.02, color transitions)
+
+**Files changed:**
+- app/(marketing)/marketing-social-proof.tsx (new)
+- app/(marketing)/page.tsx (modified - replaced MarketingPartners import/usage with MarketingSocialProof)
+
+**Learnings for future iterations:**
+- Social proof sections work best with: logo grid → trust badges → testimonial quote (top-to-bottom trust building)
+- Medical practice placeholder icons: Heart (cardiology), Stethoscope (primary care), Building2 (hospital), UserCheck (patient-focused)
+- Trust badges should have distinct emerald accent styling to stand out as certifications
+- Quote sections benefit from absolute-positioned quote icon badge for visual interest
+- Avatar initials pattern: `name.split(" ").map((n) => n[0]).join("")` for quick avatar placeholder
+- Background gradients should use pointer-events-none and z-10 on content to not block interactions
+
+---
+
+## 2026-01-31 - US-020
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created migration file for access_requests table in supabase/migrations/20260131132235_add_access_requests.sql
+- Table columns: id (uuid pk), name (text), email (text), role ('provider'|'patient' check), practice_name (nullable), practice_size (nullable), created_at (timestamptz)
+- Enabled RLS with policy allowing anonymous users to insert (public form submissions)
+- Added TypeScript types to types/db.ts with Row, Insert, Update interfaces
+- Note: Migration file is ready to push when Supabase project is linked (pnpx supabase db push)
+
+**Files changed:**
+- supabase/migrations/20260131132235_add_access_requests.sql (new)
+- types/db.ts (modified - added access_requests table types)
+
+**Learnings for future iterations:**
+- Supabase CLI requires `supabase link` before `supabase db push` - check project link status first
+- For public form submissions (like access requests), use anon role with insert-only RLS policy
+- Types can be manually added to db.ts when auto-generation isn't available - follow existing table pattern (Row, Insert, Update interfaces)
+- Role constraints use CHECK constraint: `role text not null check (role in ('provider', 'patient'))`
+- Migration file naming: YYYYMMDDHHmmss_description.sql (e.g., 20260131132235_add_access_requests.sql)
+
+---

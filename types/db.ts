@@ -9,6 +9,36 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      access_requests: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          role: "provider" | "patient"
+          practice_name: string | null
+          practice_size: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          role: "provider" | "patient"
+          practice_name?: string | null
+          practice_size?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          email?: string
+          role?: "provider" | "patient"
+          practice_name?: string | null
+          practice_size?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           amount: number
