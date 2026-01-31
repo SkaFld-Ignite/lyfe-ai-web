@@ -11,7 +11,7 @@ export function LandingHeroSection() {
   const { audience } = useAudience()
 
   return (
-    <section className="relative w-full py-16 md:py-24 lg:py-32">
+    <section id="hero" className="relative w-full py-16 md:py-24 lg:py-32">
       <div className="container mx-auto px-4">
         {/* Audience Toggle */}
         <motion.div

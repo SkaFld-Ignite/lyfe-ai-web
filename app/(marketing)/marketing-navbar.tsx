@@ -7,6 +7,8 @@ import { LogIn, Menu } from "lucide-react"
 import { motion, useScroll, useTransform } from "motion/react"
 
 import { cn } from "@/lib/utils"
+import { useAudience, Audience } from "@/lib/context/audience-context"
+import { useRequestAccessModal } from "@/lib/context/request-access-modal-context"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -20,6 +22,8 @@ type MainNavProps = {
 export function MainNav({ session }: MainNavProps) {
   const pathname = usePathname()
   const { scrollY } = useScroll()
+  const { audience, setAudience } = useAudience()
+  const { openModal } = useRequestAccessModal()
 
   // Transform scroll position to backdrop blur and shadow
   const headerOpacity = useTransform(scrollY, [0, 50], [0, 1])
@@ -32,10 +36,25 @@ export function MainNav({ session }: MainNavProps) {
     return pathname.startsWith(path)
   }
 
+  // Handle audience-specific navigation (scrolls to hero and sets audience toggle)
+  const handleAudienceNavClick = (targetAudience: Audience) => {
+    setAudience(targetAudience)
+    // Scroll to hero section
+    const heroElement = document.getElementById("hero")
+    if (heroElement) {
+      heroElement.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  // Handle Request Access button click (opens modal with current audience)
+  const handleRequestAccess = () => {
+    openModal(audience)
+  }
+
   const navItems = [
     { href: "#how-it-works", label: "How It Works" },
-    { href: "#providers", label: "For Providers" },
-    { href: "#patients", label: "For Patients" },
+    { href: "#providers", label: "For Providers", audienceAction: "provider" as Audience },
+    { href: "#patients", label: "For Patients", audienceAction: "patient" as Audience },
     { href: "/about", label: "About" },
   ]
 
@@ -64,27 +83,49 @@ export function MainNav({ session }: MainNavProps) {
 
             {/* Primary navigation - desktop */}
             <nav className="hidden lg:flex items-center space-x-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "relative py-1 text-sm transition-colors",
-                    isActive(item.href)
-                      ? "text-foreground font-medium"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {item.label}
-                  {isActive(item.href) && (
-                    <motion.span
-                      layoutId="activeNavIndicator"
-                      className="absolute -bottom-[1px] left-0 w-full h-[1px] bg-foreground"
-                      transition={{ duration: 0.15 }}
-                    />
-                  )}
-                </Link>
-              ))}
+              {navItems.map((item) =>
+                item.audienceAction ? (
+                  <button
+                    key={item.href}
+                    onClick={() => handleAudienceNavClick(item.audienceAction!)}
+                    className={cn(
+                      "relative py-1 text-sm transition-colors cursor-pointer",
+                      audience === item.audienceAction
+                        ? "text-foreground font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {item.label}
+                    {audience === item.audienceAction && (
+                      <motion.span
+                        layoutId="activeNavIndicator"
+                        className="absolute -bottom-[1px] left-0 w-full h-[1px] bg-foreground"
+                        transition={{ duration: 0.15 }}
+                      />
+                    )}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "relative py-1 text-sm transition-colors",
+                      isActive(item.href)
+                        ? "text-foreground font-medium"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {item.label}
+                    {isActive(item.href) && (
+                      <motion.span
+                        layoutId="activeNavIndicator"
+                        className="absolute -bottom-[1px] left-0 w-full h-[1px] bg-foreground"
+                        transition={{ duration: 0.15 }}
+                      />
+                    )}
+                  </Link>
+                )
+              )}
             </nav>
           </div>
 
@@ -102,10 +143,11 @@ export function MainNav({ session }: MainNavProps) {
                 >
                   Login
                 </Link>
-                <Button asChild className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  <Link href="#request-access">
-                    Request Access
-                  </Link>
+                <Button
+                  onClick={handleRequestAccess}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                >
+                  Request Access
                 </Button>
                 <ModeToggle />
               </div>
@@ -129,20 +171,35 @@ export function MainNav({ session }: MainNavProps) {
                   <LyfeLogo />
 
                   <nav className="flex flex-col space-y-4">
-                    {navItems.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={cn(
-                          "text-sm py-2 transition-colors",
-                          isActive(item.href)
-                            ? "text-foreground font-medium"
-                            : "text-muted-foreground hover:text-foreground"
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
+                    {navItems.map((item) =>
+                      item.audienceAction ? (
+                        <button
+                          key={item.href}
+                          onClick={() => handleAudienceNavClick(item.audienceAction!)}
+                          className={cn(
+                            "text-sm py-2 transition-colors text-left cursor-pointer",
+                            audience === item.audienceAction
+                              ? "text-foreground font-medium"
+                              : "text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {item.label}
+                        </button>
+                      ) : (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={cn(
+                            "text-sm py-2 transition-colors",
+                            isActive(item.href)
+                              ? "text-foreground font-medium"
+                              : "text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {item.label}
+                        </Link>
+                      )
+                    )}
                   </nav>
 
                   {!session && (
@@ -160,10 +217,11 @@ export function MainNav({ session }: MainNavProps) {
                         <LogIn className="h-4 w-4 mr-2" />
                         Login
                       </Link>
-                      <Button asChild className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
-                        <Link href="#request-access">
-                          Request Access
-                        </Link>
+                      <Button
+                        onClick={handleRequestAccess}
+                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                      >
+                        Request Access
                       </Button>
                       <div className="flex justify-end mt-4">
                         <ModeToggle />
