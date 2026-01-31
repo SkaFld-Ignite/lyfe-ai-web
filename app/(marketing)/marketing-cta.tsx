@@ -1,46 +1,87 @@
-import Link from "next/link"
+"use client"
+
 import { ArrowRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 import { GlowEffect } from "@/components/bg-glow"
 import { GradientHeading } from "@/components/gradient-heading"
 import { Magnetic } from "@/components/magnetic"
 import { SectionCard } from "@/components/section-card"
+import { useAudience } from "@/lib/context/audience-context"
+import { useRequestAccessModal } from "@/lib/context/request-access-modal-context"
+
+const contentByAudience = {
+  provider: {
+    headline: "Ready to stop chasing records?",
+    subheadline:
+      "Join the specialty practices that have transformed their patient intake with complete medical histories.",
+    cta: "Request Access",
+  },
+  patient: {
+    headline: "Ready to own your health data?",
+    subheadline:
+      "Get your complete medical history in one place—free. Share it with any doctor, anytime.",
+    cta: "Get Started Free",
+  },
+}
 
 export function MarketingCTA() {
+  const { audience } = useAudience()
+  const { openModal } = useRequestAccessModal()
+  const content = contentByAudience[audience]
+
   return (
     <SectionCard
       className="md:container mx-auto max-w-7xl"
-      innerClassName="pt-6 pb-4 "
+      innerClassName="pt-6 pb-4"
     >
       <div className="flex flex-col md:items-center justify-center gap-8 text-left md:text-center py-8 md:py-12">
-        <GradientHeading
-          size="xxl"
-          weight="base"
-          className="max-w-2xl "
-          innerClassName="lg:leading-[4.5rem] text-left md:text-center"
-        >
-          Elevate your digital presence
-        </GradientHeading>
-        <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
-          Craft stunning experiences that captivate your audience. Join the
-          movement of creators building the future of web design.
-        </p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={audience}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="flex flex-col md:items-center gap-6"
+          >
+            <GradientHeading
+              size="xxl"
+              weight="base"
+              className="max-w-2xl"
+              innerClassName="lg:leading-[4.5rem] text-left md:text-center"
+            >
+              {content.headline}
+            </GradientHeading>
+            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl text-pretty">
+              {content.subheadline}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+
         <div>
           <div className="relative mt-4">
             <GlowEffect
               scale={0.8}
               blur="strongest"
+              colors={[
+                "#10b981",
+                "#059669",
+                "#047857",
+                "#34d399",
+                "#10b981",
+              ]}
               className="absolute inset-0 px-6 py-3.5 md:py-4.5 md:px-9"
             />
             <Magnetic>
-              <Link
-                href="/auth/sign-up"
-                className="w-full relative z-10 sm:w-auto inline-flex items-center justify-center px-6 py-3.5 md:py-4.5 md:px-9 text-xl md:text-2xl tracking-tight text-primary shadow-elevation-light dark:shadow-elevation-dark bg-secondary dark:bg-background/80 transition-all duration-300 hover:bg-secondary/60 dark:hover:bg-background/40"
+              <button
+                onClick={() => openModal(audience)}
+                className="w-full relative z-10 sm:w-auto inline-flex items-center justify-center px-6 py-3.5 md:py-4.5 md:px-9 text-xl md:text-2xl tracking-tight text-white shadow-elevation-light dark:shadow-elevation-dark bg-emerald-600 hover:bg-emerald-700 transition-all duration-300 rounded-md"
               >
                 <span className="flex items-center gap-2">
-                  Get Started <ArrowRight className="size-5 md:size-6" />
+                  {content.cta} <ArrowRight className="size-5 md:size-6" />
                 </span>
-              </Link>
+              </button>
             </Magnetic>
           </div>
         </div>
