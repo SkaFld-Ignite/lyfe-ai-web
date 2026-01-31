@@ -478,3 +478,226 @@
 - Migration file naming: YYYYMMDDHHmmss_description.sql (e.g., 20260131132235_add_access_requests.sql)
 
 ---
+
+## 2026-01-31 - US-021
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created RequestAccessForm component in components/request-access-form.tsx
+- Fields: Name (required), Email (required), Role dropdown (Provider/Patient)
+- Conditional provider fields: Practice Name (required for providers), Practice Size dropdown (required for providers)
+- Email validation with regex and clear error messages displayed below each field
+- Submit button with Loader2 spinner during submission
+- Uses Supabase browser client to insert into access_requests table
+- Added onSuccess callback prop for modal integration
+- Added defaultRole prop to pre-select based on audience toggle
+- Added shadcn Select component (pnpx shadcn@latest add select)
+
+**Files changed:**
+- components/request-access-form.tsx (new)
+- components/ui/select.tsx (new - shadcn component)
+- package.json (updated - @radix-ui/react-select dependency)
+- pnpm-lock.yaml (updated)
+
+**Learnings for future iterations:**
+- shadcn components can be added with `pnpx shadcn@latest add <component> --yes` (--yes skips prompts)
+- Select component requires SelectTrigger, SelectContent, SelectItem composition pattern
+- For controlled forms, use useState for each field and validate onSubmit
+- Email regex: `/^[^\s@]+@[^\s@]+\.[^\s@]+$/` is sufficient for basic validation
+- Use aria-invalid on inputs for accessibility and visual error styling
+- Supabase client is created per-call with createClient() from lib/db/client.ts
+- Always handle both success and error cases in try/catch for Supabase operations
+
+---
+
+## 2026-01-31 - US-022
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created RequestAccessModal component in components/request-access-modal.tsx
+- Uses shadcn Dialog component (added via `pnpx shadcn@latest add dialog`)
+- Contains RequestAccessForm with defaultRole prop for audience pre-selection
+- Success state with animated checkmark confirmation (CheckCircle2 icon)
+- Staggered Framer Motion animations for success state elements
+- Close button via Dialog's built-in X button and click-outside dismissal
+- Exposed via simple state props: open, onOpenChange, defaultRole
+- AnimatePresence mode="wait" for smooth form/success state transitions
+- Auto-reset success state when modal closes (with 300ms delay for animation)
+
+**Files changed:**
+- components/request-access-modal.tsx (new)
+- components/ui/dialog.tsx (new - shadcn component)
+
+**Learnings for future iterations:**
+- shadcn Dialog has built-in close button and click-outside dismiss via Radix primitives
+- Reset modal state in useEffect when `open` changes to false (delay reset for animation completion)
+- AnimatePresence with mode="wait" works well for form → success state transitions
+- Spring animation with stiffness: 300, damping: 20 creates nice "pop" effect for success checkmark
+- Use emerald-100/emerald-950 for success icon background (light/dark mode)
+- defaultRole prop allows modal to pre-select based on audience toggle (ready for US-023)
+
+---
+
+## 2026-01-31 - US-023
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created RequestAccessModalContext in lib/context/request-access-modal-context.tsx
+- Context provides isOpen state, openModal(role?) function, closeModal function, and defaultRole
+- openModal accepts optional role parameter to pre-select based on audience toggle
+- Created RequestAccessModalContainer component that connects context to RequestAccessModal
+- Created MarketingProviders wrapper combining AudienceProvider + RequestAccessModalProvider
+- Updated marketing layout.tsx to use MarketingProviders instead of direct AudienceProvider
+- Updated ProviderHero "Request Access" button with onClick={() => openModal("provider")}
+- Updated PatientHero "Request Access" button with onClick={() => openModal("patient")}
+- Updated ProviderPricing both CTA buttons ("Request Access" and "Start 90-Day Pilot") with onClick={() => openModal("provider")}
+
+**Files changed:**
+- lib/context/request-access-modal-context.tsx (new)
+- components/request-access-modal-container.tsx (new)
+- app/(marketing)/marketing-providers.tsx (new)
+- app/(marketing)/layout.tsx (modified - uses MarketingProviders)
+- app/(marketing)/hero-provider.tsx (modified - added openModal call)
+- app/(marketing)/hero-patient.tsx (modified - added openModal call)
+- app/(marketing)/pricing-provider.tsx (modified - added openModal calls to both buttons)
+
+**Learnings for future iterations:**
+- Context pattern for modals: separate context (state management) from container (rendering the modal component)
+- MarketingProviders wrapper pattern consolidates multiple providers into one import for cleaner layout code
+- openModal accepts optional role parameter for flexible pre-selection: openModal() uses current audience, openModal("provider") forces specific role
+- Hero and pricing CTAs should both use the modal context - don't forget pricing section has TWO buttons
+
+---
+
+## 2026-01-31 - US-024
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created HowItWorks component in app/(marketing)/marketing-how-it-works.tsx
+- 4 detailed steps: Connect, Aggregate, Unify, Sync/Share
+- Icons from Lucide: Link2, Database, Layers, ArrowLeftRight/Share2
+- Audience-aware content: Step 4 shows "Sync" for providers (EMR integration focus), "Share" for patients (sharing with doctors)
+- Alternating left/right layout on desktop with large circular icon containers
+- Step number badges positioned on icon circles
+- Animated vertical connector lines between steps with flowing gradient animation
+- Mobile vertical timeline layout with step numbers and connectors
+- Staggered entrance animations using Framer Motion (staggerChildren: 0.25)
+- AnimatePresence transitions for audience toggle changes on titles, icons, and descriptions
+
+**Files changed:**
+- app/(marketing)/marketing-how-it-works.tsx (new)
+
+**Learnings for future iterations:**
+- HowItWorks section id is "how-it-works-detail" to differentiate from ProductWorkflow which has "how-it-works"
+- Alternating layout pattern: isIconLeft = index % 2 === 0, then use flex-row/flex-row-reverse
+- Large circular icon containers (w-32 h-32 lg:w-40 lg:h-40) with step number badge positioned absolutely (-top-2 -right-2)
+- Animated flowing connectors use translateY animation with gradient from color to transparent
+- Mobile layout uses step number circle on left side with connector line below, content on right side
+- AnimatePresence with unique keys per audience triggers re-animation on audience toggle
+
+---
+
+## 2026-01-31 - US-025
+**Status:** ✅ PASSED
+**What was implemented:**
+- Updated app/(marketing)/page.tsx with new section order
+- Order: Hero → Social Proof → Workflow → How It Works → Features → Pricing → FAQ → CTA
+- Removed MarketingQuote import (old "vibe marketing" template content)
+- Removed MarketingTestimonial import (old template marquee testimonials)
+- Added HowItWorks import from marketing-how-it-works.tsx
+- Added FeaturesSection import from marketing-features.tsx (default export)
+- All sections wrapped in FadeIn components for scroll animations
+- Added comments to clarify each section's purpose
+
+**Files changed:**
+- app/(marketing)/page.tsx (modified - updated imports and section order)
+
+**Learnings for future iterations:**
+- Default exports (FeaturesSection) and named exports (HowItWorks) require different import syntax
+- MarketingQuote and MarketingTestimonial are old template files that can be removed completely in a later cleanup
+- FadeIn wrapper provides consistent scroll-triggered animation across all sections
+- Section order follows marketing funnel logic: hook (hero) → trust (social proof) → explain (workflow, how it works) → value (features) → convert (pricing, CTA)
+
+---
+
+## 2026-01-31 - US-026
+**Status:** ✅ PASSED
+**What was implemented:**
+- Rewrote marketing-cta.tsx with Lyfe AI messaging and audience-aware content
+- Provider headline: "Ready to stop chasing records?" with practice-focused subheadline
+- Patient headline: "Ready to own your health data?" with free access messaging
+- Uses AudienceContext for audience-aware rendering
+- CTA button opens Request Access modal with audience pre-selection
+- Added emerald brand colors to GlowEffect (same palette as hero buttons)
+- Crossfade animation (300ms) with AnimatePresence when audience toggles
+- Changed from Link to button for modal trigger
+
+**Files changed:**
+- app/(marketing)/marketing-cta.tsx (rewritten)
+
+**Learnings for future iterations:**
+- CTA section follows same audience-aware pattern as hero/features: useAudience() + AnimatePresence mode="wait"
+- Content object pattern { provider: {}, patient: {} } is cleaner than inline conditionals for multiple values
+- openModal(audience) passes current audience to pre-select role in form
+- GlowEffect accepts colors array for brand-specific gradients (same emerald palette used across CTAs)
+
+---
+
+## 2026-01-31 - US-027
+**Status:** ✅ PASSED
+**What was implemented:**
+- Added scroll-behavior: smooth to html element in globals.css
+- Added id="hero" attribute to marketing-hero section for anchor navigation
+- Updated marketing-navbar.tsx to use AudienceContext and RequestAccessModalContext
+- Created handleAudienceNavClick function that sets audience toggle AND scrolls to hero section
+- For Providers/For Patients nav links now use buttons with audienceAction property instead of anchor links
+- Updated Request Access buttons (desktop and mobile) to use openModal(audience) instead of linking to #request-access
+- Active audience nav item shows underline indicator using layoutId animation
+
+**Files changed:**
+- app/globals.css (modified - added smooth scroll)
+- app/(marketing)/marketing-hero.tsx (modified - added id="hero")
+- app/(marketing)/marketing-navbar.tsx (modified - audience-aware navigation)
+
+**Learnings for future iterations:**
+- For links that need to both scroll AND change state, use buttons with onClick handlers instead of anchor hrefs
+- document.getElementById() + scrollIntoView({ behavior: "smooth" }) works well with CSS scroll-behavior for fallback
+- Nav items can have optional audienceAction property to distinguish between regular links and audience toggles
+- Using useRequestAccessModal context in navbar allows Request Access to open modal directly without intermediate navigation
+- The activeNavIndicator layoutId animation automatically moves between active nav items
+- Existing section IDs: how-it-works (workflow), how-it-works-detail (HowItWorks), features, pricing, social-proof
+
+---
+
+## 2026-01-31 - US-028
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created useReducedMotion hook in hooks/use-reduced-motion.ts (wraps Framer Motion's hook with helper utilities)
+- Added @media (prefers-reduced-motion: reduce) CSS rules to globals.css
+  - Disables scroll-behavior: smooth
+  - Sets animation-duration and transition-duration to 0.01ms
+  - Disables marquee animations
+- Updated marketing-hero.tsx to use useReducedMotion and conditionally apply animations
+- Updated hero-provider.tsx and hero-patient.tsx with reduced motion support
+  - When reduced motion is preferred: no y offset, instant opacity changes, no stagger delays
+- Updated marketing-workflow.tsx comprehensively:
+  - Container and step variants respect reduced motion
+  - Vertical connector animation skips when reduced motion enabled
+  - WorkflowStepCard accepts reduceMotion prop
+  - Pulsing expand indicator animation pauses when reduced motion enabled
+  - Hover and tap animations disabled when reduced motion preferred
+  - AnimatePresence transitions use instant timing when reduced motion enabled
+
+**Files changed:**
+- hooks/use-reduced-motion.ts (new)
+- app/globals.css (modified - added prefers-reduced-motion media query)
+- app/(marketing)/marketing-hero.tsx (modified - added useReducedMotion)
+- app/(marketing)/hero-provider.tsx (modified - added useReducedMotion)
+- app/(marketing)/hero-patient.tsx (modified - added useReducedMotion)
+- app/(marketing)/marketing-workflow.tsx (modified - comprehensive reduced motion support)
+
+**Learnings for future iterations:**
+- Framer Motion provides useReducedMotion hook from "motion/react" - use this instead of manual media query detection
+- useReducedMotion returns null during SSR, so use ?? false for safe boolean conversion
+- Pattern for reduced motion in Framer Motion: check shouldReduceMotion and set duration: 0, y: 0, scale: 1 (no transforms)
+- For infinite/repeating animations (like pulsing indicators), check reduceMotion && !reduceMotion in the animate condition
+- The CSS media query @media (prefers-reduced-motion: reduce) catches any CSS animations/transitions not handled by Framer Motion
+- Existing FadeIn component already uses useReducedMotion - good reference pattern
+
+---

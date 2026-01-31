@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 
 import { useAudience } from "@/lib/context/audience-context"
 import { AudienceToggle } from "@/components/audience-toggle"
@@ -9,15 +9,20 @@ import { PatientHero } from "./hero-patient"
 
 export function LandingHeroSection() {
   const { audience } = useAudience()
+  const shouldReduceMotion = useReducedMotion()
+
+  // Animation values - reduced when user prefers reduced motion
+  const yOffset = shouldReduceMotion ? 0 : 10
+  const duration = shouldReduceMotion ? 0 : 0.3
 
   return (
     <section id="hero" className="relative w-full py-16 md:py-24 lg:py-32">
       <div className="container mx-auto px-4">
         {/* Audience Toggle */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration, ease: "easeOut" }}
           className="flex justify-center mb-8 md:mb-12"
         >
           <AudienceToggle />
@@ -29,10 +34,10 @@ export function LandingHeroSection() {
             {audience === "provider" ? (
               <motion.div
                 key="provider-hero"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                exit={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -yOffset }}
+                transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="provider-content"
               >
                 <ProviderHero />
@@ -40,10 +45,10 @@ export function LandingHeroSection() {
             ) : (
               <motion.div
                 key="patient-hero"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                exit={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -yOffset }}
+                transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="patient-content"
               >
                 <PatientHero />

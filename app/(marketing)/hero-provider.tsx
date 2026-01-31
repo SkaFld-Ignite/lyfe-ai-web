@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowRight, Play } from "lucide-react"
-import { motion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { GlowEffect } from "@/components/bg-glow"
@@ -11,19 +11,22 @@ import { useRequestAccessModal } from "@/lib/context/request-access-modal-contex
 export function ProviderHero() {
   const isMobile = useIsMobile()
   const { openModal } = useRequestAccessModal()
+  const shouldReduceMotion = useReducedMotion()
 
-  // Stagger animation values
-  const baseDelay = isMobile ? 0.1 : 0.2
-  const staggerDelay = 0.15
+  // Stagger animation values - disabled when reduced motion preferred
+  const baseDelay = shouldReduceMotion ? 0 : isMobile ? 0.1 : 0.2
+  const staggerDelay = shouldReduceMotion ? 0 : 0.15
+  const duration = shouldReduceMotion ? 0 : isMobile ? 0.3 : 0.5
+  const yOffset = shouldReduceMotion ? 0 : 20
 
   return (
     <div className="flex flex-col items-center text-center space-y-6 md:space-y-8">
       {/* Headline */}
       <motion.h1
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: isMobile ? 0.3 : 0.5,
+          duration,
           delay: baseDelay,
           ease: "easeOut"
         }}
@@ -37,10 +40,10 @@ export function ProviderHero() {
 
       {/* Subheadline */}
       <motion.p
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: isMobile ? 0.3 : 0.5,
+          duration,
           delay: baseDelay + staggerDelay,
           ease: "easeOut"
         }}
@@ -51,10 +54,10 @@ export function ProviderHero() {
 
       {/* CTA Buttons */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: isMobile ? 0.3 : 0.5,
+          duration,
           delay: baseDelay + staggerDelay * 2,
           ease: "easeOut"
         }}

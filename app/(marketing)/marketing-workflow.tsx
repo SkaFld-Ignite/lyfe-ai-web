@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { motion, useInView, AnimatePresence } from "motion/react"
+import { motion, useInView, AnimatePresence, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { useAudience } from "@/lib/context/audience-context"
@@ -83,39 +83,46 @@ export function ProductWorkflow() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.1 })
   const [activeStep, setActiveStep] = useState<string | null>(null)
+  const shouldReduceMotion = useReducedMotion()
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            staggerChildren: 0.2,
+            delayChildren: 0.1,
+          },
     },
   }
 
   const stepVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      },
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            type: "spring",
+            stiffness: 100,
+            damping: 15,
+          },
     },
   }
 
   const connectorVariants = {
-    hidden: { scaleX: 0 },
+    hidden: { scaleX: shouldReduceMotion ? 1 : 0 },
     visible: {
       scaleX: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.5,
+            ease: "easeOut",
+          },
     },
   }
 
@@ -190,6 +197,7 @@ export function ProductWorkflow() {
                       onClick={() =>
                         setActiveStep(activeStep === step.id ? null : step.id)
                       }
+                      reduceMotion={shouldReduceMotion ?? false}
                     />
                   </motion.div>
                 ))}
@@ -209,10 +217,12 @@ export function ProductWorkflow() {
               <motion.div
                 className="absolute left-8 top-16 bottom-16 w-0.5 bg-gradient-to-b from-emerald-500/30 via-emerald-500 to-emerald-500/30"
                 variants={{
-                  hidden: { scaleY: 0 },
+                  hidden: { scaleY: shouldReduceMotion ? 1 : 0 },
                   visible: {
                     scaleY: 1,
-                    transition: { duration: 0.8, ease: "easeOut" },
+                    transition: shouldReduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.8, ease: "easeOut" },
                   },
                 }}
                 style={{ originY: 0 }}
@@ -238,6 +248,7 @@ export function ProductWorkflow() {
                       setActiveStep(activeStep === step.id ? null : step.id)
                     }
                     variant="mobile"
+                    reduceMotion={shouldReduceMotion ?? false}
                   />
                 </motion.div>
               ))}
@@ -256,6 +267,7 @@ interface WorkflowStepCardProps {
   isActive: boolean
   onClick: () => void
   variant?: "desktop" | "mobile"
+  reduceMotion?: boolean
 }
 
 function WorkflowStepCard({
@@ -265,6 +277,7 @@ function WorkflowStepCard({
   isActive,
   onClick,
   variant = "desktop",
+  reduceMotion = false,
 }: WorkflowStepCardProps) {
   // Use audience-specific icon if available, otherwise default icon
   const Icon =
@@ -288,9 +301,9 @@ function WorkflowStepCard({
           ? "border-emerald-500/50 bg-emerald-50/50 dark:bg-emerald-950/20 shadow-lg shadow-emerald-500/10"
           : "hover:border-emerald-500/30 hover:shadow-md"
       )}
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      whileHover={reduceMotion ? undefined : { y: -4 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 25 }}
     >
       {/* Step Number Badge - Desktop only */}
       {variant === "desktop" && (
@@ -324,10 +337,10 @@ function WorkflowStepCard({
       <AnimatePresence mode="wait">
         <motion.h3
           key={`${step.id}-${audience}-title`}
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 5 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          transition={{ duration: 0.2 }}
+          exit={{ opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : -5 }}
+          transition={{ duration: reduceMotion ? 0 : 0.2 }}
           className={cn(
             "text-lg font-semibold text-center mb-2 transition-colors duration-300",
             isActive
@@ -344,10 +357,10 @@ function WorkflowStepCard({
         <AnimatePresence mode="wait">
           <motion.div
             key={`${step.id}-${audience}`}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: reduceMotion ? 1 : 0, scale: reduceMotion ? 1 : 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: reduceMotion ? 1 : 0, scale: reduceMotion ? 1 : 0.95 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
             className="flex justify-center mb-3"
           >
             <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
@@ -361,17 +374,17 @@ function WorkflowStepCard({
       <AnimatePresence mode="wait">
         <motion.p
           key={`${step.id}-${audience}-desc`}
-          initial={{ opacity: 0 }}
+          initial={{ opacity: reduceMotion ? 1 : 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          exit={{ opacity: reduceMotion ? 1 : 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.2 }}
           className="text-sm text-muted-foreground text-center leading-relaxed"
         >
           {description}
         </motion.p>
       </AnimatePresence>
 
-      {/* Expand indicator */}
+      {/* Expand indicator - pauses when reduced motion is enabled */}
       <div className="mt-4 flex justify-center">
         <motion.div
           className={cn(
@@ -379,13 +392,17 @@ function WorkflowStepCard({
             isActive ? "bg-emerald-500" : "bg-muted-foreground/30"
           )}
           animate={{
-            scale: isActive ? [1, 1.2, 1] : 1,
+            scale: isActive && !reduceMotion ? [1, 1.2, 1] : 1,
           }}
-          transition={{
-            duration: 1,
-            repeat: isActive ? Infinity : 0,
-            repeatType: "loop",
-          }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : {
+                  duration: 1,
+                  repeat: isActive ? Infinity : 0,
+                  repeatType: "loop",
+                }
+          }
         />
       </div>
 
