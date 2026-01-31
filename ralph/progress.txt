@@ -10,6 +10,8 @@
 - TypeScript types should be exported alongside the context for reuse
 - For scroll-based animations: use Framer Motion's `useScroll()` + `useTransform()` instead of manual scroll listeners
 - Brand colors: emerald-500/600/700 for primary CTAs and accents (healthcare-appropriate)
+- For content switching with animations: use AnimatePresence with mode="wait" and unique key props on motion.div
+- SVG icons: Place in components/icons/[category]/ with barrel export (index.ts), accept className prop, use aria-hidden="true"
 
 ---
 
@@ -140,6 +142,105 @@
 - Stagger pattern: baseDelay + (staggerDelay * index) for clean sequential animations
 - isMobile check allows faster/simpler animations on mobile for performance
 - Hero buttons follow: primary (filled emerald) + secondary (bg-secondary with border)
+
+---
+
+## 2026-01-31 - US-007
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created PatientHero component in app/(marketing)/hero-patient.tsx
+- Headline: "Your Health Records. Finally In One Place." (with emerald accent)
+- Subheadline: "Access, understand, and share your complete medical history—free."
+- Primary CTA: "Request Access" button with emerald GlowEffect (same as ProviderHero)
+- Secondary CTA: "Learn How It Works" button with BookOpen icon
+- Same staggered entrance animations as ProviderHero (baseDelay + staggerDelay pattern)
+- Uses same components: Framer Motion, GlowEffect, Magnetic, useIsMobile hook
+
+**Files changed:**
+- app/(marketing)/hero-patient.tsx (new)
+
+**Learnings for future iterations:**
+- Patient-focused messaging emphasizes simplicity: "free", "understand", "share"
+- Provider vs Patient hero differentiation: Provider emphasizes EMR sync/clinical workflow, Patient emphasizes access and understanding
+- Secondary CTA icons: Play for video demos (ProviderHero), BookOpen for learning/how-it-works (PatientHero)
+- The GlowEffect colors array should be consistent across both heroes for brand cohesion
+
+---
+
+## 2026-01-31 - US-008
+**Status:** ✅ PASSED
+**What was implemented:**
+- Rewrote marketing-hero.tsx to use AudienceContext for audience-aware rendering
+- Renders ProviderHero when audience is 'provider', PatientHero when 'patient'
+- Added AudienceToggle component centered at top of hero section
+- Implemented smooth crossfade animation (300ms) between hero variants using AnimatePresence
+- Used AnimatePresence mode="wait" for clean exit/enter transitions
+- Added min-height container to prevent layout shift during transitions
+- Removed old "Vibe Marketing" content and HeroProductImage component
+
+**Files changed:**
+- app/(marketing)/marketing-hero.tsx (rewritten)
+
+**Learnings for future iterations:**
+- AnimatePresence with mode="wait" ensures exit animation completes before enter animation starts
+- Use key prop on motion.div to trigger animation on content change (key="provider-hero" vs key="patient-hero")
+- min-h-[400px] prevents layout shift when content height varies between hero variants
+- Duration 0.3s (300ms) is ideal for crossfade transitions - fast enough to feel responsive, slow enough to be smooth
+- aria-labelledby on hero containers connects to ARIA controls in AudienceToggle for accessibility
+
+---
+
+## 2026-01-31 - US-009
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created 4 SVG icon components in components/icons/workflow/
+- FragmentedRecordsIcon: Scattered documents with various tilts representing disorganized medical records
+- AiAggregationIcon: Neural network visualization with central brain node and incoming data points
+- TimelineIcon: Horizontal timeline with connected events and data cards
+- EmrSyncIcon: Two database cylinders (Lyfe AI + EMR) with bidirectional arrows
+- All icons use healthcare-appropriate color scheme (emerald-500, sky-500, emerald-600)
+- Created index.ts barrel export for easy importing
+- All icons accept className prop for sizing flexibility
+
+**Files changed:**
+- components/icons/workflow/fragmented-records-icon.tsx (new)
+- components/icons/workflow/ai-aggregation-icon.tsx (new)
+- components/icons/workflow/timeline-icon.tsx (new)
+- components/icons/workflow/emr-sync-icon.tsx (new)
+- components/icons/workflow/index.ts (new)
+
+**Learnings for future iterations:**
+- SVG icons should use aria-hidden="true" since they're decorative
+- Use linearGradient and radialGradient defs for richer icon visuals
+- Healthcare color palette: emerald (primary), sky/cyan (secondary), teal (accent)
+- Icon components should accept className for flexible sizing (default w-16 h-16)
+- Use barrel exports (index.ts) for easy importing: `import { X, Y } from "@/components/icons/workflow"`
+- SVG transforms can create scattered/tilted effects for visual interest
+
+---
+
+## 2026-01-31 - US-010
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created WorkflowStep component in components/workflow-step.tsx
+- Props interface: icon (ReactNode), title, description, stepNumber, isActive, className
+- Step number badge positioned absolutely at top-center with -top-3 offset
+- Icon container with rounded-full background, adaptive styling based on isActive
+- Active state: emerald-50/500 highlights for border, background, and text
+- Inactive state: standard card styling with border-border
+- Hover effect: subtle scale transform (1.02) using Framer Motion spring animation
+- Tap effect: scale down (0.98) for tactile feedback
+- Max-width constraint on description (max-w-[200px]) for consistent card sizing
+
+**Files changed:**
+- components/workflow-step.tsx (new)
+
+**Learnings for future iterations:**
+- Use motion.div with whileHover/whileTap for interactive card effects
+- Spring animation with stiffness: 400, damping: 25 feels snappy but natural
+- Absolute positioning with -top-3 and -translate-x-1/2 centers badge above card
+- Conditional dark mode classes (dark:bg-emerald-950/20) for theme consistency
+- Export both component and types for reuse: `export type { WorkflowStepProps }`
 
 ---
 
