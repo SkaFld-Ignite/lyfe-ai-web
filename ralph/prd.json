@@ -1,0 +1,529 @@
+{
+  "project": "Lyfe AI Marketing Website",
+  "branchName": "ralph/website-redesign",
+  "description": "Redesign marketing website with dual-audience messaging (providers/patients), interactive product visualization, and modern animations",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Update metadata and remove starter template references",
+      "description": "As a developer, I need to update all SEO metadata to reflect Lyfe AI branding.",
+      "acceptanceCriteria": [
+        "Update page title to 'Lyfe AI - Complete Patient Stories Before They Walk In'",
+        "Update meta description to focus on provider pain point",
+        "Remove all 'Cult Polar Starter' and 'Vibe Marketing' references from page.tsx",
+        "Update OG image title in getURL call",
+        "Update keywords array to healthcare/medical records terms",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": "Updated page.tsx and layout.tsx metadata"
+    },
+    {
+      "id": "US-002",
+      "title": "Create audience context provider for toggle state",
+      "description": "As a developer, I need shared state to track which audience (provider/patient) is selected.",
+      "acceptanceCriteria": [
+        "Create AudienceContext in lib/context/audience-context.tsx",
+        "Provider wraps marketing layout",
+        "Exposes audience state: 'provider' | 'patient'",
+        "Exposes setAudience function",
+        "Default value is 'provider'",
+        "Syncs with URL hash (#providers / #patients) on change",
+        "Reads hash on initial load to set state",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Created lib/context/audience-context.tsx with AudienceProvider wrapping marketing layout"
+    },
+    {
+      "id": "US-003",
+      "title": "Create audience toggle component",
+      "description": "As a visitor, I want to switch between provider and patient views.",
+      "acceptanceCriteria": [
+        "Create AudienceToggle component in components/audience-toggle.tsx",
+        "Tab-style toggle with 'For Providers' and 'For Patients' buttons",
+        "Uses AudienceContext to read/set audience",
+        "Active tab has distinct visual style (filled background)",
+        "Smooth transition animation on switch (150ms)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "Created components/audience-toggle.tsx with tab-style toggle, 150ms transition, accessible ARIA attributes"
+    },
+    {
+      "id": "US-004",
+      "title": "Redesign navigation header",
+      "description": "As a visitor, I want clear navigation with Lyfe AI branding.",
+      "acceptanceCriteria": [
+        "Update marketing-navbar.tsx with Lyfe AI logo/text",
+        "Nav links: How It Works, For Providers, For Patients, About",
+        "Login link (text style) pointing to /auth/login",
+        "Request Access CTA button (primary style)",
+        "Sticky header with backdrop blur on scroll",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "Created LyfeLogo component, updated marketing-navbar.tsx with new nav links, sticky header with backdrop blur"
+    },
+    {
+      "id": "US-005",
+      "title": "Redesign footer with Lyfe AI info",
+      "description": "As a visitor, I want standard footer information for credibility.",
+      "acceptanceCriteria": [
+        "Update marketing-footer.tsx with company info: Lyfe AI, Nashville TN",
+        "Quick links: Home, How It Works, Providers, Patients, About",
+        "Legal links: Privacy Policy, Terms of Service, HIPAA Notice",
+        "Contact email link placeholder",
+        "Copyright with dynamic current year",
+        "Clean minimal design matching existing style",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "Updated marketing-footer.tsx with Lyfe AI branding, company location, quick links, legal links, contact email"
+    },
+    {
+      "id": "US-006",
+      "title": "Create provider hero section content",
+      "description": "As a healthcare provider, I want to immediately understand what Lyfe AI does.",
+      "acceptanceCriteria": [
+        "Create ProviderHero component in app/(marketing)/hero-provider.tsx",
+        "Headline: 'Complete Patient Stories. Before They Walk In.'",
+        "Subheadline: 'AI-powered platform that aggregates scattered medical records into one searchable timeline—and syncs back to your EMR.'",
+        "Primary CTA: 'Request Access' button with existing GlowEffect",
+        "Secondary CTA: 'Watch Demo' button (can link to # for now)",
+        "Staggered entrance animations using Framer Motion",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Created ProviderHero component with headline, subheadline, GlowEffect on Request Access button, Watch Demo secondary CTA, staggered Framer Motion animations"
+    },
+    {
+      "id": "US-007",
+      "title": "Create patient hero section content",
+      "description": "As a patient, I want to understand how Lyfe AI helps me.",
+      "acceptanceCriteria": [
+        "Create PatientHero component in app/(marketing)/hero-patient.tsx",
+        "Headline: 'Your Health Records. Finally In One Place.'",
+        "Subheadline: 'Access, understand, and share your complete medical history—free.'",
+        "Primary CTA: 'Request Access' button",
+        "Secondary CTA: 'Learn How It Works' button",
+        "Same animation style as ProviderHero",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Update hero section with audience-aware rendering",
+      "description": "As a visitor, I want the hero to show content relevant to my selected audience.",
+      "acceptanceCriteria": [
+        "Update marketing-hero.tsx to use AudienceContext",
+        "Render ProviderHero when audience is 'provider'",
+        "Render PatientHero when audience is 'patient'",
+        "Include AudienceToggle component in hero section",
+        "Smooth crossfade animation between hero variants (300ms)",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-009",
+      "title": "Create product workflow SVG assets",
+      "description": "As a developer, I need SVG icons for the product workflow visualization.",
+      "acceptanceCriteria": [
+        "Create 4 SVG components in components/icons/workflow/",
+        "FragmentedRecordsIcon - scattered documents visual",
+        "AiAggregationIcon - AI/brain processing visual",
+        "TimelineIcon - unified timeline visual",
+        "EmrSyncIcon - bidirectional sync arrows visual",
+        "Each icon accepts className prop for sizing",
+        "Healthcare-appropriate color scheme (blues/greens)",
+        "Typecheck passes"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-010",
+      "title": "Create workflow step component",
+      "description": "As a developer, I need a reusable component for each workflow step.",
+      "acceptanceCriteria": [
+        "Create WorkflowStep component in components/workflow-step.tsx",
+        "Props: icon, title, description, stepNumber, isActive",
+        "Displays icon, step number badge, title, and description",
+        "Active state has highlighted border/background",
+        "Hover effect with subtle scale transform",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-011",
+      "title": "Create animated connector component",
+      "description": "As a developer, I need animated lines connecting workflow steps.",
+      "acceptanceCriteria": [
+        "Create WorkflowConnector component in components/workflow-connector.tsx",
+        "SVG-based line with animated dash pattern",
+        "Props: isAnimating (controls animation state)",
+        "Horizontal on desktop, vertical on mobile",
+        "Animation: dashes flow in direction of data flow",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-012",
+      "title": "Build product workflow visualization section",
+      "description": "As a visitor, I want to see how Lyfe AI works through an animated visualization.",
+      "acceptanceCriteria": [
+        "Create ProductWorkflow component in app/(marketing)/marketing-workflow.tsx",
+        "4 steps: Fragmented Records → AI Aggregation → Clinical Timeline → EMR Sync",
+        "Scroll-triggered animations using Intersection Observer",
+        "Each step animates in sequence as user scrolls",
+        "Horizontal layout on desktop, vertical on mobile",
+        "Uses WorkflowStep and WorkflowConnector components",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-013",
+      "title": "Add audience-specific workflow descriptions",
+      "description": "As a visitor, I want workflow descriptions relevant to my role.",
+      "acceptanceCriteria": [
+        "Update ProductWorkflow to use AudienceContext",
+        "Provider descriptions emphasize: '95% of US providers', 'bi-directional EMR sync'",
+        "Patient descriptions emphasize: 'one place for all records', 'easy sharing'",
+        "Step 4 (EMR Sync) only shows for providers, patients see 'Share with Doctors'",
+        "Smooth text transition when audience changes",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 13,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-014",
+      "title": "Create provider value proposition cards",
+      "description": "As a provider, I want to see specific benefits of Lyfe AI.",
+      "acceptanceCriteria": [
+        "Create ProviderFeatures component in app/(marketing)/features-provider.tsx",
+        "4 benefit cards with icons and concise copy",
+        "Card 1: 'Stop Chasing Records' - Aggregate from 95% of US healthcare providers",
+        "Card 2: 'Complete Context' - ER visits, med changes, lab results",
+        "Card 3: 'Bi-directional Sync' - Write curated data back to your EMR",
+        "Card 4: 'HIPAA Certified' - Enterprise-grade security, FHIR R4",
+        "Hover animation: subtle lift and shadow",
+        "Staggered entrance on scroll",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 14,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-015",
+      "title": "Create patient value proposition cards",
+      "description": "As a patient, I want to understand what I get for free.",
+      "acceptanceCriteria": [
+        "Create PatientFeatures component in app/(marketing)/features-patient.tsx",
+        "4 benefit cards matching provider card style",
+        "Card 1: 'All Your Records' - Every doctor, hospital, lab",
+        "Card 2: 'Understand Your Health' - AI summaries in plain language",
+        "Card 3: 'Share Easily' - Send records to any provider instantly",
+        "Card 4: 'Always Free' - No cost, no catch",
+        "Same animation style as provider cards",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 15,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-016",
+      "title": "Update features section with audience-aware rendering",
+      "description": "As a visitor, I want features relevant to my selected audience.",
+      "acceptanceCriteria": [
+        "Update marketing-features.tsx to use AudienceContext",
+        "Render ProviderFeatures when audience is 'provider'",
+        "Render PatientFeatures when audience is 'patient'",
+        "Crossfade animation between feature sets",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 16,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-017",
+      "title": "Create provider pricing section",
+      "description": "As a provider evaluating Lyfe AI, I want to see pricing information.",
+      "acceptanceCriteria": [
+        "Create ProviderPricing component in app/(marketing)/pricing-provider.tsx",
+        "Display: '$1,500/month per 10 providers'",
+        "Feature list: Unlimited records, EMR sync, Timeline View, HIPAA, Dedicated onboarding",
+        "CTA button: 'Request Access' or 'Start 90-Day Pilot'",
+        "Note: 'Custom pricing for larger practices'",
+        "Clean card-based design",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 17,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-018",
+      "title": "Update pricing section with audience-aware visibility",
+      "description": "As a visitor, I want pricing shown only when relevant.",
+      "acceptanceCriteria": [
+        "Update marketing-pricing.tsx to use AudienceContext",
+        "Render ProviderPricing only when audience is 'provider'",
+        "Hide entire pricing section when audience is 'patient'",
+        "Smooth height transition when section appears/disappears",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 18,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-019",
+      "title": "Create social proof section",
+      "description": "As a visitor, I want to see that others trust Lyfe AI.",
+      "acceptanceCriteria": [
+        "Update marketing-partners.tsx or create marketing-social-proof.tsx",
+        "Header: 'Trusted by specialty practices'",
+        "Placeholder area for practice logos (use generic medical icons)",
+        "Trust badges row: HIPAA Certified, FHIR R4 Compliant",
+        "Quote section with founder/doctor testimonial placeholder",
+        "Subtle background gradient",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 19,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-020",
+      "title": "Create access request table in Supabase",
+      "description": "As a developer, I need to store access request form submissions.",
+      "acceptanceCriteria": [
+        "Create migration file for access_requests table",
+        "Columns: id (uuid), name (text), email (text), role ('provider'|'patient'), practice_name (text nullable), practice_size (text nullable), created_at (timestamptz)",
+        "Enable RLS on table",
+        "Add policy allowing inserts from anon role",
+        "Run migration successfully",
+        "Regenerate types with pnpm generate-types",
+        "Typecheck passes"
+      ],
+      "priority": 20,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-021",
+      "title": "Create request access form component",
+      "description": "As an interested visitor, I want to submit my information to request access.",
+      "acceptanceCriteria": [
+        "Create RequestAccessForm component in components/request-access-form.tsx",
+        "Fields: Name (required), Email (required), Role dropdown (Provider/Patient)",
+        "Conditional fields for providers: Practice Name, Practice Size dropdown",
+        "Email validation with clear error message",
+        "Submit button with loading spinner state",
+        "Uses Supabase client to insert into access_requests table",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 21,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-022",
+      "title": "Create request access modal",
+      "description": "As a visitor, I want the access form in a modal triggered by CTA buttons.",
+      "acceptanceCriteria": [
+        "Create RequestAccessModal component in components/request-access-modal.tsx",
+        "Uses shadcn Dialog component",
+        "Contains RequestAccessForm",
+        "Success state shows confirmation message with checkmark",
+        "Close button and click-outside to dismiss",
+        "Exposed via context or simple state prop",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 22,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-023",
+      "title": "Wire up Request Access CTAs to modal",
+      "description": "As a visitor, I want CTA buttons to open the request access modal.",
+      "acceptanceCriteria": [
+        "Add RequestAccessModal to marketing layout",
+        "Create context or state to control modal open state",
+        "Update all 'Request Access' buttons in hero sections to open modal",
+        "Update CTA buttons in pricing section to open modal",
+        "Modal pre-selects role based on current audience toggle",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 23,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-024",
+      "title": "Create How It Works detailed section",
+      "description": "As a visitor wanting more detail, I want a comprehensive product explanation.",
+      "acceptanceCriteria": [
+        "Create HowItWorks component in app/(marketing)/marketing-how-it-works.tsx",
+        "4 steps with icons, headlines, 1-2 sentence descriptions",
+        "Step 1: Connect - Link EMR or create patient account",
+        "Step 2: Aggregate - Pull records from healthcare system",
+        "Step 3: Unify - AI creates searchable Clinical Timeline",
+        "Step 4: Sync (providers) / Share (patients) - audience-aware",
+        "Alternating left/right layout on desktop",
+        "Animated connectors between steps",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 24,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-025",
+      "title": "Update main page component order",
+      "description": "As a developer, I need to assemble the redesigned sections in correct order.",
+      "acceptanceCriteria": [
+        "Update app/(marketing)/page.tsx with new section order",
+        "Order: Hero → Social Proof → Workflow → How It Works → Features → Pricing → FAQ → CTA",
+        "Remove or update MarketingQuote and MarketingTestimonial as needed",
+        "All sections wrapped in FadeIn for scroll animations",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 25,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-026",
+      "title": "Update CTA section with Lyfe AI messaging",
+      "description": "As a visitor at page bottom, I want a final call to action.",
+      "acceptanceCriteria": [
+        "Update marketing-cta.tsx with Lyfe AI messaging",
+        "Provider headline: 'Ready to stop chasing records?'",
+        "Patient headline: 'Ready to own your health data?'",
+        "Uses AudienceContext for audience-aware content",
+        "CTA button opens Request Access modal",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 26,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-027",
+      "title": "Add smooth scroll and anchor navigation",
+      "description": "As a visitor, I want smooth scrolling when clicking nav links.",
+      "acceptanceCriteria": [
+        "Add id attributes to main sections (how-it-works, providers, patients, pricing)",
+        "Update nav links to use anchor hrefs (#how-it-works, etc.)",
+        "Add scroll-behavior: smooth to html element in globals.css",
+        "For Providers/Patients links: scroll to hero and set audience toggle",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 27,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-028",
+      "title": "Add reduced motion support",
+      "description": "As a user with motion sensitivity, I want animations to respect my preferences.",
+      "acceptanceCriteria": [
+        "Add prefers-reduced-motion media query checks",
+        "Disable or reduce animations when user prefers reduced motion",
+        "Update Framer Motion animations to check for reduced motion",
+        "Workflow auto-animation pauses when reduced motion enabled",
+        "Typecheck passes"
+      ],
+      "priority": 28,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-029",
+      "title": "Mobile responsiveness audit and fixes",
+      "description": "As a mobile visitor, I want the site to work perfectly on my device.",
+      "acceptanceCriteria": [
+        "Test all sections at 320px, 375px, 768px, 1024px, 1440px widths",
+        "Audience toggle is touch-friendly (min 44px tap targets)",
+        "Workflow visualization uses vertical layout on mobile",
+        "No horizontal scroll issues at any breakpoint",
+        "Navigation hamburger menu works on mobile",
+        "All text is readable without zooming",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill at mobile viewport"
+      ],
+      "priority": 29,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-030",
+      "title": "Final visual polish and animation timing",
+      "description": "As a visitor, I want a polished, cohesive visual experience.",
+      "acceptanceCriteria": [
+        "Consistent animation durations: entrances 300-500ms, hovers 150-200ms",
+        "Consistent easing: ease-out for entrances, ease-in-out for interactions",
+        "No janky transitions or layout shifts",
+        "Loading states for any async operations",
+        "Test full page scroll experience for flow",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 30,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

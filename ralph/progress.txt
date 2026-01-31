@@ -1,0 +1,145 @@
+# Ralph Progress Log
+# Project: Lyfe AI Marketing Website Redesign
+# Branch: ralph/website-redesign
+# Started: 2026-01-31
+
+## Codebase Patterns
+- Use `"use client"` directive for all React context files
+- Context pattern: createContext → useX hook with null check → XProvider component
+- Marketing layout wraps children, contexts should wrap the entire layout structure
+- TypeScript types should be exported alongside the context for reuse
+- For scroll-based animations: use Framer Motion's `useScroll()` + `useTransform()` instead of manual scroll listeners
+- Brand colors: emerald-500/600/700 for primary CTAs and accents (healthcare-appropriate)
+
+---
+
+## US-001: Update metadata and remove starter template references
+**Status:** ✅ PASSED
+**Changes:**
+- Updated app/(marketing)/page.tsx metadata: title, description, keywords, OG tags
+- Updated app/(marketing)/layout.tsx metadata
+- Removed all "Cult Pro Polar Starter" references
+- Added healthcare-focused keywords
+**Verified:** Typecheck passes
+
+---
+
+## 2026-01-31 - US-002
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created AudienceContext in lib/context/audience-context.tsx
+- Implemented AudienceProvider with 'provider' | 'patient' state
+- Added URL hash sync (#providers / #patients)
+- Added hashchange listener for browser back/forward navigation
+- Implemented hydration mismatch prevention with isInitialized state
+- Wrapped marketing layout with AudienceProvider
+
+**Files changed:**
+- lib/context/audience-context.tsx (new)
+- app/(marketing)/layout.tsx (modified)
+
+**Learnings for future iterations:**
+- Context providers using browser APIs (window.location) need hydration protection
+- Use isInitialized state pattern to prevent SSR/client mismatch
+- URL hash changes can be listened to with 'hashchange' event
+- Sidebar component in components/ui/sidebar.tsx is a good reference for context patterns
+
+---
+
+## 2026-01-31 - US-003
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created AudienceToggle component in components/audience-toggle.tsx
+- Tab-style toggle with 'For Providers' and 'For Patients' buttons
+- Uses AudienceContext to read/set audience state
+- Active tab has filled background (bg-background), inactive has muted text
+- Smooth 150ms transition animation on state change
+- Accessible with ARIA attributes (role="tablist", aria-selected)
+- Focus-visible styles for keyboard navigation
+
+**Files changed:**
+- components/audience-toggle.tsx (new)
+
+**Learnings for future iterations:**
+- The existing tabs.tsx component uses data-[state=active] pattern from Radix; for custom toggles, use isActive prop with conditional classes
+- Match tab styling to existing muted background/foreground color scheme for consistency
+- Always include ARIA attributes for accessibility (role, aria-selected, aria-controls)
+- Focus-visible styles with ring-2 ring-ring pattern matches existing design system
+
+---
+
+## 2026-01-31 - US-004
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created LyfeLogo component in components/lyfe-logo.tsx
+- Emerald gradient logo mark with healthcare-themed SVG icon (lifeline/pulse design)
+- Text branding: "Lyfe" in foreground + "AI" in emerald accent color
+- Updated marketing-navbar.tsx with new branding and design
+- Nav links: How It Works, For Providers, For Patients, About (using hash anchors for future sections)
+- Login text link with muted styling pointing to /auth/login
+- Request Access CTA button with emerald-600 background
+- Sticky header with backdrop blur on scroll using Framer Motion useScroll/useTransform
+- Updated mobile menu with LyfeLogo and new CTA buttons
+- Changed desktop nav breakpoint from md to lg for better spacing
+
+**Files changed:**
+- components/lyfe-logo.tsx (new)
+- app/(marketing)/marketing-navbar.tsx (modified)
+
+**Learnings for future iterations:**
+- Framer Motion's useScroll() and useTransform() are great for scroll-based animations without listeners
+- Fixed header needs z-50 to be above other content
+- Backdrop blur requires bg-background/80 (semi-transparent) to work properly
+- Use lg: breakpoint for nav when you have 4+ items to avoid cramping on tablets
+- Emerald-500/600/700 is a good healthcare-appropriate color scheme
+
+---
+
+## 2026-01-31 - US-005
+**Status:** ✅ PASSED
+**What was implemented:**
+- Redesigned marketing-footer.tsx with Lyfe AI branding
+- Updated brand section: Lyfe AI name, tagline, Nashville TN location
+- Used LyfeLogo component for consistent branding
+- Quick links: Home, How It Works, For Providers, For Patients, About
+- Legal links: Privacy Policy, Terms of Service, HIPAA Notice
+- Contact section with email link (hello@lyfe.ai) using Mail icon
+- Dynamic copyright year using new Date().getFullYear()
+- Updated hover colors to emerald-500 for brand consistency
+- Improved responsive grid: sm:col-span-2 lg:col-span-1 for brand section
+
+**Files changed:**
+- app/(marketing)/marketing-footer.tsx (modified)
+
+**Learnings for future iterations:**
+- Reuse LyfeLogo component across all branding touchpoints (header, footer)
+- Footer sections use uppercase tracking-wider headers for visual hierarchy
+- Use motion.a for subtle hover animations on interactive elements (scale: 1.02)
+- HIPAA Notice is important legal link for healthcare-focused products
+
+---
+
+## 2026-01-31 - US-006
+**Status:** ✅ PASSED
+**What was implemented:**
+- Created ProviderHero component in app/(marketing)/hero-provider.tsx
+- Headline: "Complete Patient Stories. Before They Walk In." (with emerald accent)
+- Subheadline about AI aggregating medical records into timeline
+- Primary CTA: "Request Access" button with emerald GlowEffect (rotating gradient)
+- Secondary CTA: "Watch Demo" button with Play icon
+- Staggered entrance animations using Framer Motion (baseDelay + staggerDelay pattern)
+- Mobile-aware animations using useIsMobile hook
+- Used Magnetic component for button hover effects
+
+**Files changed:**
+- app/(marketing)/hero-provider.tsx (new)
+
+**Learnings for future iterations:**
+- GlowEffect accepts custom colors array for brand-specific gradients
+- Use emerald palette for healthcare: ["#10b981", "#059669", "#047857", "#34d399", "#10b981"]
+- Stagger pattern: baseDelay + (staggerDelay * index) for clean sequential animations
+- isMobile check allows faster/simpler animations on mobile for performance
+- Hero buttons follow: primary (filled emerald) + secondary (bg-secondary with border)
+
+---
+
