@@ -2,7 +2,7 @@ import { Metadata } from "next"
 
 import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
-import FeaturesSection from "@/app/(marketing)/marketing-features"
+import { ProductWorkflow } from "@/components/product-workflow"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 
 import { MarketingCTA } from "./marketing-cta"
@@ -13,25 +13,28 @@ import { MarketingQuote } from "./marketing-quote"
 import { MarketingTestimonial } from "./marketing-testimonial"
 
 const ogImage = `${getURL()}og?title=${encodeURIComponent(
-  "Cult Pro Polar Starter"
+  "Lyfe AI - Complete Patient Stories"
 )}`
 
 export const metadata: Metadata = {
-  title: "Cult Pro Polar Starter - Modern Web Development Template",
+  title: "Lyfe AI - Complete Patient Stories Before They Walk In",
   description:
-    "Build scalable web applications faster with Cult Pro Polar Starter. Features Next.js, Supabase, Tailwind CSS, and modern authentication out of the box.",
+    "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
   keywords: [
-    "Next.js",
-    "Supabase",
-    "Web Development",
-    "Starter Template",
-    "React",
-    "Tailwind CSS",
+    "medical records",
+    "patient history",
+    "EMR integration",
+    "healthcare AI",
+    "clinical timeline",
+    "health data aggregation",
+    "HIPAA compliant",
+    "FHIR",
+    "health information exchange",
   ],
   openGraph: {
-    title: "Cult Pro Polar Starter - Modern Web Development Template",
+    title: "Lyfe AI - Complete Patient Stories Before They Walk In",
     description:
-      "Build scalable web applications faster with Cult Pro Polar Starter. Features Next.js, Supabase, Tailwind CSS, and modern authentication out of the box.",
+      "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
     type: "website",
     locale: "en_US",
     images: [
@@ -39,15 +42,15 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: "Cult Pro Polar Starter Template",
+        alt: "Lyfe AI - Complete Patient Stories",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cult Pro Polar Starter - Modern Web Development Template",
+    title: "Lyfe AI - Complete Patient Stories Before They Walk In",
     description:
-      "Build scalable web applications faster with Cult Pro Polar Starter. Features Next.js, Supabase, Tailwind CSS, and modern authentication out of the box.",
+      "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
     images: [ogImage],
   },
   robots: {
@@ -64,7 +67,7 @@ export default async function LandingPage() {
         <MarketingPartners />
       </FadeIn>
       <FadeIn>
-        <FeaturesSection />
+        <ProductWorkflow />
       </FadeIn>
       <FadeIn>
         <MarketingQuote />
