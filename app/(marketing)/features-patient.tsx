@@ -108,17 +108,17 @@ export function PatientFeatures() {
                     damping: 17,
                   },
                 }}
-                className="group relative bg-card border border-border/50 p-6 shadow-sm hover:shadow-lg hover:shadow-emerald-500/10 transition-shadow duration-300"
+                className="group relative bg-card border border-border/50 p-6 shadow-sm hover:shadow-lg hover:shadow-emerald-500/10 transition-shadow duration-200"
               >
                 {/* Icon Container */}
                 <div className="mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 group-hover:bg-emerald-500/20 transition-colors duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 group-hover:bg-emerald-500/20 transition-colors duration-200">
                     <feature.icon className="size-6" strokeWidth={1.5} />
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors duration-200">
                   {feature.title}
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -126,7 +126,7 @@ export function PatientFeatures() {
                 </p>
 
                 {/* Subtle bottom accent line on hover */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
               </motion.div>
             ))}
           </motion.div>

@@ -211,7 +211,7 @@ function HowItWorksStepRow({
             >
               <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center relative overflow-hidden group">
                 {/* Background gradient animation */}
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/40 dark:to-emerald-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/40 dark:to-emerald-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
 
                 {/* Icon */}
                 <AnimatePresence mode="wait">

@@ -100,7 +100,7 @@ export default function MarketingFAQ() {
                       damping: 17,
                     }}
                   >
-                    <div className="h-full p-6 shadow-elevation-light dark:shadow-elevation-dark hover:shadow-elevation-medium dark:hover:shadow-elevation-dark-two transition-all duration-300 bg-muted/50">
+                    <div className="h-full p-6 shadow-elevation-light dark:shadow-elevation-dark hover:shadow-elevation-medium dark:hover:shadow-elevation-dark-two transition-all duration-200 bg-muted/50">
                       <h3 className="text-2xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
                         {item.question}
                       </h3>
@@ -136,7 +136,7 @@ export default function MarketingFAQ() {
                       damping: 17,
                     }}
                   >
-                    <div className="h-full bg-muted/50 p-6 shadow-elevation-light dark:shadow-elevation-dark dark:hover:shadow-elevation-dark-two transition-all duration-300">
+                    <div className="h-full bg-muted/50 p-6 shadow-elevation-light dark:shadow-elevation-dark dark:hover:shadow-elevation-dark-two transition-all duration-200">
                       <h3 className="text-2xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
                         {item.question}
                       </h3>

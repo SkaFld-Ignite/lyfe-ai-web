@@ -63,7 +63,7 @@ export function ProviderPricing() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
           >
-            <div className="relative bg-card border border-border/50 p-8 md:p-10 shadow-sm hover:shadow-lg hover:shadow-emerald-500/10 transition-shadow duration-300 overflow-hidden">
+            <div className="relative bg-card border border-border/50 p-8 md:p-10 shadow-sm hover:shadow-lg hover:shadow-emerald-500/10 transition-shadow duration-200 overflow-hidden">
               {/* Popular badge */}
               <div className="absolute top-6 right-6">
                 <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 px-3 py-1 text-xs font-medium">

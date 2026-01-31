@@ -125,16 +125,16 @@ export function MarketingSocialProof() {
             {practicePlaceholders.map((practice, index) => (
               <motion.div
                 key={index}
-                className="flex flex-col items-center justify-center gap-3 p-6 bg-card/50 border border-border/30 hover:border-emerald-500/30 hover:bg-card/80 transition-all duration-300 group"
+                className="flex flex-col items-center justify-center gap-3 p-6 bg-card/50 border border-border/30 hover:border-emerald-500/30 hover:bg-card/80 transition-all duration-200 group"
                 whileHover={{
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 400, damping: 25 },
                 }}
               >
-                <div className="w-14 h-14 bg-muted/50 group-hover:bg-emerald-500/10 flex items-center justify-center transition-colors duration-300">
-                  <practice.icon className="size-7 text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors duration-300" />
+                <div className="w-14 h-14 bg-muted/50 group-hover:bg-emerald-500/10 flex items-center justify-center transition-colors duration-200">
+                  <practice.icon className="size-7 text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors duration-200" />
                 </div>
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300 text-center">
+                <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200 text-center">
                   {practice.name}
                 </span>
               </motion.div>
@@ -149,7 +149,7 @@ export function MarketingSocialProof() {
             {trustBadges.map((badge, index) => (
               <motion.div
                 key={index}
-                className="flex items-center gap-4 p-4 px-6 bg-emerald-500/5 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors duration-300"
+                className="flex items-center gap-4 p-4 px-6 bg-emerald-500/5 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors duration-200"
                 whileHover={{
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 400, damping: 25 },
