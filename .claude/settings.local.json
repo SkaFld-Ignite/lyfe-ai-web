@@ -25,7 +25,10 @@
       "Bash(git push:*)",
       "Bash(git pull:*)",
       "Bash(git merge:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(vercel env add:*)",
+      "Bash(vercel env rm:*)",
+      "Bash(pnpm update:*)"
     ]
   }
 }
