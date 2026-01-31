@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 import { MarketingFooter } from "@/app/(marketing)/marketing-footer"
 import { SiteHeader } from "@/app/(marketing)/marketing-header"
-import { AudienceProvider } from "@/lib/context/audience-context"
+import { MarketingProviders } from "@/app/(marketing)/marketing-providers"
 
 export const metadata: Metadata = {
   title: "Lyfe AI",
@@ -15,7 +15,7 @@ export default function MarketingLayout({
   children: React.ReactNode
 }>) {
   return (
-    <AudienceProvider>
+    <MarketingProviders>
       <main className="bg-black md:bg-background ">
         <SiteHeader />
         <div className="container mx-auto max-w-7xl pt-1 md:pt-1 px-1">
@@ -23,6 +23,6 @@ export default function MarketingLayout({
           <MarketingFooter />
         </div>
       </main>
-    </AudienceProvider>
+    </MarketingProviders>
   )
 }

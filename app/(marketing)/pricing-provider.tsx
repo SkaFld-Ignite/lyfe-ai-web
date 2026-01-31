@@ -14,6 +14,7 @@ import { motion, useInView } from "motion/react"
 import { GradientHeading } from "@/components/gradient-heading"
 import { SectionCard } from "@/components/section-card"
 import { Button } from "@/components/ui/button"
+import { useRequestAccessModal } from "@/lib/context/request-access-modal-context"
 
 const pricingFeatures = [
   { text: "Unlimited record aggregation", icon: Check },
@@ -27,6 +28,7 @@ const pricingFeatures = [
 export function ProviderPricing() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+  const { openModal } = useRequestAccessModal()
 
   return (
     <section ref={containerRef} id="pricing">
@@ -106,6 +108,7 @@ export function ProviderPricing() {
               <div className="space-y-3">
                 <Button
                   size="lg"
+                  onClick={() => openModal("provider")}
                   className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
                 >
                   Request Access
@@ -113,6 +116,7 @@ export function ProviderPricing() {
                 <Button
                   size="lg"
                   variant="outline"
+                  onClick={() => openModal("provider")}
                   className="w-full border-emerald-600/30 text-emerald-600 dark:text-emerald-500 hover:bg-emerald-500/10"
                 >
                   Start 90-Day Pilot

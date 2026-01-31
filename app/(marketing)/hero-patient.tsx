@@ -6,9 +6,11 @@ import { motion } from "motion/react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { GlowEffect } from "@/components/bg-glow"
 import { Magnetic } from "@/components/magnetic"
+import { useRequestAccessModal } from "@/lib/context/request-access-modal-context"
 
 export function PatientHero() {
   const isMobile = useIsMobile()
+  const { openModal } = useRequestAccessModal()
 
   // Stagger animation values - same as ProviderHero
   const baseDelay = isMobile ? 0.1 : 0.2
@@ -70,6 +72,7 @@ export function PatientHero() {
           <Magnetic>
             <button
               type="button"
+              onClick={() => openModal("patient")}
               className="relative z-10 inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200 shadow-lg shadow-emerald-500/25"
             >
               Request Access
