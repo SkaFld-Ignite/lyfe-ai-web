@@ -4,14 +4,14 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { User } from "@supabase/supabase-js"
 import { LogIn, Menu } from "lucide-react"
-import { motion } from "motion/react"
+import { motion, useScroll, useTransform } from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { HeaderAccountDropdown } from "@/components/account-dropdown"
-import { VibeLogo } from "@/components/logo"
+import { LyfeLogo } from "@/components/lyfe-logo"
 
 type MainNavProps = {
   session: User | null
@@ -19,6 +19,10 @@ type MainNavProps = {
 
 export function MainNav({ session }: MainNavProps) {
   const pathname = usePathname()
+  const { scrollY } = useScroll()
+
+  // Transform scroll position to backdrop blur and shadow
+  const headerOpacity = useTransform(scrollY, [0, 50], [0, 1])
 
   // Check if current path matches the link
   const isActive = (path: string) => {
@@ -29,31 +33,37 @@ export function MainNav({ session }: MainNavProps) {
   }
 
   const navItems = [
-    { href: "/blog", label: "Blog" },
+    { href: "#how-it-works", label: "How It Works" },
+    { href: "#providers", label: "For Providers" },
+    { href: "#patients", label: "For Patients" },
     { href: "/about", label: "About" },
-    { href: "/pricing", label: "Pricing" },
   ]
 
   return (
     <header
-      className="w-full z-40 shadow-elevation-light dark:shadow-elevation-dark bg-card max-w-sm mx-auto md:max-w-7xl p-1"
+      className="fixed top-0 left-0 right-0 w-full z-50"
       role="banner"
     >
-      <div className="container  shadow-elevation-light dark:shadow-elevation-dark bg-card p-1">
-        <div className="flex h-14 items-center justify-between pl-4">
-          <div className="flex items-center space-x-6">
+      {/* Backdrop blur layer that fades in on scroll */}
+      <motion.div
+        className="absolute inset-0 bg-background/80 backdrop-blur-md border-b border-border/50"
+        style={{ opacity: headerOpacity }}
+      />
+
+      <div className="relative container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          {/* Left section - Logo and Nav */}
+          <div className="flex items-center space-x-8">
             <Link
               href="/"
-              className="flex items-center space-x-3"
-              aria-label="Cult Pro Home"
+              className="flex items-center"
+              aria-label="Lyfe AI Home"
             >
-              <VibeLogo />
-
-              <p className="font-medium text-sm text-foreground">Vibe </p>
+              <LyfeLogo />
             </Link>
 
             {/* Primary navigation - desktop */}
-            <nav className="hidden md:flex items-center space-x-6">
+            <nav className="hidden lg:flex items-center space-x-6">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -83,20 +93,18 @@ export function MainNav({ session }: MainNavProps) {
             {session ? (
               <HeaderAccountDropdown user={session} />
             ) : (
-              <div className=" hidden md:flex items-center space-x-2">
-                <Button variant="outline" asChild>
-                  <Link
-                    href="/auth/login"
-                    className={cn(
-                      "hidden md:flex items-center space-x-1.5 text-xs",
-                      "h-8 px-3 rounded-md",
-                      "border border-border",
-                      "text-foreground",
-                      "hover:bg-accent transition-colors"
-                    )}
-                  >
-                    <span>Login</span>
-                    <LogIn className="h-3 w-3 ml-1" />
+              <div className="hidden md:flex items-center space-x-4">
+                <Link
+                  href="/auth/login"
+                  className={cn(
+                    "text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  )}
+                >
+                  Login
+                </Link>
+                <Button asChild className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                  <Link href="#request-access">
+                    Request Access
                   </Link>
                 </Button>
                 <ModeToggle />
@@ -109,21 +117,24 @@ export function MainNav({ session }: MainNavProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="md:hidden p-0 h-8 w-8"
+                  className="lg:hidden p-0 h-9 w-9"
                   aria-label="Open mobile menu"
                 >
-                  <Menu className="h-4 w-4" />
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] p-6">
+              <SheetContent side="right" className="w-[300px] p-6">
                 <div className="flex flex-col space-y-6 mt-6">
-                  <nav className="flex flex-col space-y-3">
+                  {/* Logo in mobile menu */}
+                  <LyfeLogo />
+
+                  <nav className="flex flex-col space-y-4">
                     {navItems.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
                         className={cn(
-                          "text-sm py-1.5 transition-colors",
+                          "text-sm py-2 transition-colors",
                           isActive(item.href)
                             ? "text-foreground font-medium"
                             : "text-muted-foreground hover:text-foreground"
@@ -135,18 +146,25 @@ export function MainNav({ session }: MainNavProps) {
                   </nav>
 
                   {!session && (
-                    <div className="pt-4">
+                    <div className="pt-4 space-y-3 border-t border-border">
                       <Link
                         href="/auth/login"
                         className={cn(
                           "flex items-center justify-center",
-                          "h-9 w-full rounded-md",
-                          "bg-primary",
-                          "text-primary-foreground text-sm font-medium"
+                          "h-10 w-full rounded-md",
+                          "border border-border",
+                          "text-foreground text-sm font-medium",
+                          "hover:bg-accent transition-colors"
                         )}
                       >
+                        <LogIn className="h-4 w-4 mr-2" />
                         Login
                       </Link>
+                      <Button asChild className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
+                        <Link href="#request-access">
+                          Request Access
+                        </Link>
+                      </Button>
                       <div className="flex justify-end mt-4">
                         <ModeToggle />
                       </div>
