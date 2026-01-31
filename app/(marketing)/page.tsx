@@ -2,15 +2,14 @@ import { Metadata } from "next"
 
 import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
-import { ProductWorkflow } from "./marketing-workflow"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
-
-import { MarketingCTA } from "./marketing-cta"
-import MarketingFAQ from "./marketing-faq"
 import { MarketingSocialProof } from "./marketing-social-proof"
+import { ProductWorkflow } from "./marketing-workflow"
+import { HowItWorks } from "./marketing-how-it-works"
+import FeaturesSection from "./marketing-features"
 import { MarketingPricing } from "./marketing-pricing"
-import { MarketingQuote } from "./marketing-quote"
-import { MarketingTestimonial } from "./marketing-testimonial"
+import MarketingFAQ from "./marketing-faq"
+import { MarketingCTA } from "./marketing-cta"
 
 const ogImage = `${getURL()}og?title=${encodeURIComponent(
   "Lyfe AI - Complete Patient Stories"
@@ -61,26 +60,41 @@ export const metadata: Metadata = {
 
 export default async function LandingPage() {
   return (
-    <div className="space-y-1 md:space-y-4 ">
+    <div className="space-y-1 md:space-y-4">
+      {/* Hero Section with Audience Toggle */}
       <LandingHeroSection />
+
+      {/* Social Proof - Trust badges and testimonials */}
       <FadeIn>
         <MarketingSocialProof />
       </FadeIn>
+
+      {/* Workflow - Visual product explanation */}
       <FadeIn>
         <ProductWorkflow />
       </FadeIn>
+
+      {/* How It Works - Detailed 4-step guide */}
       <FadeIn>
-        <MarketingQuote />
+        <HowItWorks />
       </FadeIn>
+
+      {/* Features - Audience-specific value propositions */}
+      <FadeIn>
+        <FeaturesSection />
+      </FadeIn>
+
+      {/* Pricing - Provider only (conditionally shown) */}
       <FadeIn>
         <MarketingPricing />
       </FadeIn>
+
+      {/* FAQ Section */}
       <FadeIn>
         <MarketingFAQ />
       </FadeIn>
-      <FadeIn>
-        <MarketingTestimonial />
-      </FadeIn>
+
+      {/* Final CTA */}
       <FadeIn>
         <MarketingCTA />
       </FadeIn>
