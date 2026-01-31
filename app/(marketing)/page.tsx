@@ -2,7 +2,7 @@ import { Metadata } from "next"
 
 import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
-import { ProductWorkflow } from "@/components/product-workflow"
+import { ProductWorkflow } from "./marketing-workflow"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 
 import { MarketingCTA } from "./marketing-cta"
