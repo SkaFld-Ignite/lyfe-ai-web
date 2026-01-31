@@ -1,0 +1,31 @@
+## Codebase Patterns
+- Use `motion/react` for imports (not `framer-motion`) - Framer Motion v12 change
+- Audience context lives in `lib/context/audience-context.tsx` - use `useAudience()` hook
+- Workflow icons are in `components/icons/workflow/` as SVG components
+- `SectionCard` and `GradientHeading` are standard section wrappers
+- Animations use `useInView` for scroll triggers with `{ once: true, amount: 0.2 }`
+- Standard emerald color theme for healthcare (emerald-500, emerald-600)
+
+---
+
+## 2026-01-31 - US-004
+- **What was implemented**: Interactive Product Workflow Visualization
+  - Created `components/product-workflow.tsx` with 4-step animated infographic
+  - Steps: Fragmented Records → AI Aggregation → Clinical Timeline → EMR Sync
+  - Audience-aware content that changes based on provider/patient toggle
+  - Scroll-triggered staggered animations
+  - Click-to-expand step details with active state
+  - Horizontal layout on desktop (4-column grid), vertical on mobile
+  - Animated connector lines between steps
+
+- **Files changed**:
+  - `components/product-workflow.tsx` (new)
+  - `app/(marketing)/page.tsx` (replaced FeaturesSection with ProductWorkflow, updated metadata)
+
+- **Learnings for future iterations**:
+  - The existing workflow SVG icons in `components/icons/workflow/` are well-designed and ready to use
+  - `WorkflowStep` component in `components/workflow-step.tsx` exists but ProductWorkflow uses inline card component for tighter control
+  - Marketing page metadata was still showing "Cult Polar Starter" - updated to Lyfe AI branding as part of this story
+  - Build fails without POLAR_WEBHOOK_SECRET env var, but TypeScript and lint checks pass fine
+
+---

@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 
 import { GlowEffect } from "@/components/bg-glow"
 import { GradientHeading } from "@/components/gradient-heading"
