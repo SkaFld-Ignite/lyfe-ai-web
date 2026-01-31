@@ -12,16 +12,20 @@ import {
   AiAggregationIcon,
   TimelineIcon,
   EmrSyncIcon,
+  ShareWithDoctorsIcon,
 } from "@/components/icons/workflow"
 
 interface WorkflowStepData {
   id: string
   title: string
+  providerTitle?: string // Override title for providers
+  patientTitle?: string // Override title for patients
   providerDescription: string
   patientDescription: string
   providerHighlight?: string
   patientHighlight?: string
   icon: React.ComponentType<{ className?: string }>
+  patientIcon?: React.ComponentType<{ className?: string }> // Alternative icon for patients
 }
 
 const workflowSteps: WorkflowStepData[] = [
@@ -42,9 +46,9 @@ const workflowSteps: WorkflowStepData[] = [
     providerDescription:
       "Lyfe AI connects to 95% of US healthcare providers. One request pulls complete patient history automatically.",
     patientDescription:
-      "We connect to your doctors, hospitals, and labs automatically. No paperwork, no phone calls.",
+      "We pull records from all your doctors, hospitals, and labs—bringing everything into one place automatically.",
     providerHighlight: "95% of US providers",
-    patientHighlight: "Automatic & easy",
+    patientHighlight: "One place for all records",
     icon: AiAggregationIcon,
   },
   {
@@ -53,7 +57,7 @@ const workflowSteps: WorkflowStepData[] = [
     providerDescription:
       "AI-organized timeline shows ER visits, medication changes, lab trends, and diagnoses—searchable and summarized.",
     patientDescription:
-      "All your records in one searchable timeline. AI summaries help you understand your health in plain language.",
+      "All your records organized in one searchable timeline. AI summaries help you understand your health in plain language.",
     providerHighlight: "Complete context at point of care",
     patientHighlight: "Understand your health",
     icon: TimelineIcon,
@@ -61,13 +65,16 @@ const workflowSteps: WorkflowStepData[] = [
   {
     id: "sync",
     title: "EMR Sync",
+    providerTitle: "EMR Sync",
+    patientTitle: "Share with Doctors",
     providerDescription:
-      "Write curated data directly back to your EMR. No copy-paste, no duplicate entry. Bi-directional integration.",
+      "Write curated data directly back to your EMR. No copy-paste, no duplicate entry. Bi-directional EMR sync keeps records current.",
     patientDescription:
-      "Share your complete history with any doctor instantly. They get what they need, you save time.",
-    providerHighlight: "Bi-directional integration",
-    patientHighlight: "Share instantly",
+      "Easy sharing with any doctor—send your complete history instantly. They get what they need, you save time.",
+    providerHighlight: "Bi-directional EMR sync",
+    patientHighlight: "Easy sharing",
     icon: EmrSyncIcon,
+    patientIcon: ShareWithDoctorsIcon,
   },
 ]
 
@@ -259,7 +266,14 @@ function WorkflowStepCard({
   onClick,
   variant = "desktop",
 }: WorkflowStepCardProps) {
-  const Icon = step.icon
+  // Use audience-specific icon if available, otherwise default icon
+  const Icon =
+    audience === "patient" && step.patientIcon ? step.patientIcon : step.icon
+  // Use audience-specific title if available, otherwise default title
+  const title =
+    audience === "provider"
+      ? step.providerTitle || step.title
+      : step.patientTitle || step.title
   const description =
     audience === "provider" ? step.providerDescription : step.patientDescription
   const highlight =
@@ -306,17 +320,24 @@ function WorkflowStepCard({
         </div>
       </div>
 
-      {/* Title */}
-      <h3
-        className={cn(
-          "text-lg font-semibold text-center mb-2 transition-colors duration-300",
-          isActive
-            ? "text-emerald-700 dark:text-emerald-300"
-            : "text-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
-        )}
-      >
-        {step.title}
-      </h3>
+      {/* Title - with animation for audience changes */}
+      <AnimatePresence mode="wait">
+        <motion.h3
+          key={`${step.id}-${audience}-title`}
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -5 }}
+          transition={{ duration: 0.2 }}
+          className={cn(
+            "text-lg font-semibold text-center mb-2 transition-colors duration-300",
+            isActive
+              ? "text-emerald-700 dark:text-emerald-300"
+              : "text-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
+          )}
+        >
+          {title}
+        </motion.h3>
+      </AnimatePresence>
 
       {/* Highlight Badge */}
       {highlight && (
