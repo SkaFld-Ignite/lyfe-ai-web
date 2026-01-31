@@ -14,7 +14,7 @@ export function AudienceToggle({ className }: AudienceToggleProps) {
   return (
     <div
       className={cn(
-        "bg-muted inline-flex h-10 w-fit items-center justify-center rounded-lg p-1",
+        "bg-muted inline-flex h-12 sm:h-14 w-fit items-center justify-center rounded-lg p-1",
         className
       )}
       role="tablist"
@@ -59,7 +59,7 @@ function AudienceToggleButton({
       aria-controls={`${value}-content`}
       onClick={onClick}
       className={cn(
-        "inline-flex h-8 items-center justify-center rounded-md px-4 text-sm font-medium transition-all duration-150",
+        "inline-flex h-10 sm:h-12 min-w-[88px] sm:min-w-[100px] items-center justify-center rounded-md px-3 sm:px-4 text-sm font-medium transition-all duration-150",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         isActive
           ? "bg-background text-foreground shadow-sm"

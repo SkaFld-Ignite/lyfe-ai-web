@@ -159,7 +159,7 @@ export function MainNav({ session }: MainNavProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="lg:hidden p-0 h-9 w-9"
+                  className="lg:hidden p-0 h-11 w-11 min-h-[44px] min-w-[44px]"
                   aria-label="Open mobile menu"
                 >
                   <Menu className="h-5 w-5" />
@@ -170,17 +170,17 @@ export function MainNav({ session }: MainNavProps) {
                   {/* Logo in mobile menu */}
                   <LyfeLogo />
 
-                  <nav className="flex flex-col space-y-4">
+                  <nav className="flex flex-col space-y-1">
                     {navItems.map((item) =>
                       item.audienceAction ? (
                         <button
                           key={item.href}
                           onClick={() => handleAudienceNavClick(item.audienceAction!)}
                           className={cn(
-                            "text-sm py-2 transition-colors text-left cursor-pointer",
+                            "text-base min-h-[44px] py-3 px-2 transition-colors text-left cursor-pointer rounded-md",
                             audience === item.audienceAction
-                              ? "text-foreground font-medium"
-                              : "text-muted-foreground hover:text-foreground"
+                              ? "text-foreground font-medium bg-accent"
+                              : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                           )}
                         >
                           {item.label}
@@ -190,10 +190,10 @@ export function MainNav({ session }: MainNavProps) {
                           key={item.href}
                           href={item.href}
                           className={cn(
-                            "text-sm py-2 transition-colors",
+                            "text-base min-h-[44px] py-3 px-2 transition-colors rounded-md flex items-center",
                             isActive(item.href)
-                              ? "text-foreground font-medium"
-                              : "text-muted-foreground hover:text-foreground"
+                              ? "text-foreground font-medium bg-accent"
+                              : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                           )}
                         >
                           {item.label}
@@ -208,18 +208,18 @@ export function MainNav({ session }: MainNavProps) {
                         href="/auth/login"
                         className={cn(
                           "flex items-center justify-center",
-                          "h-10 w-full rounded-md",
+                          "h-12 min-h-[48px] w-full rounded-md",
                           "border border-border",
-                          "text-foreground text-sm font-medium",
+                          "text-foreground text-base font-medium",
                           "hover:bg-accent transition-colors"
                         )}
                       >
-                        <LogIn className="h-4 w-4 mr-2" />
+                        <LogIn className="h-5 w-5 mr-2" />
                         Login
                       </Link>
                       <Button
                         onClick={handleRequestAccess}
-                        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                        className="w-full h-12 min-h-[48px] text-base bg-emerald-600 hover:bg-emerald-700 text-white"
                       >
                         Request Access
                       </Button>
