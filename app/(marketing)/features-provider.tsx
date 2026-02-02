@@ -32,7 +32,7 @@ const providerFeatures = [
     icon: RefreshCw,
   },
   {
-    title: "HIPAA Certified",
+    title: "HIPAA Compliant",
     description:
       "Enterprise-grade security with FHIR R4 compliance. Your data stays protected.",
     icon: ShieldCheck,

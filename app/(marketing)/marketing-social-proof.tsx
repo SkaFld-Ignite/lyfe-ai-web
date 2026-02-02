@@ -37,10 +37,10 @@ const practicePlaceholders = [
 
 const trustBadges = [
   {
-    title: "HIPAA Certified",
+    title: "HIPAA Compliant",
     description: "Enterprise-grade security and privacy compliance",
     icon: null,
-    image: "/images/brand/hipaa-logo.webp",
+    image: "/images/brand/hipaa-logo.svg",
   },
   {
     title: "FHIR R4 Compliant",
