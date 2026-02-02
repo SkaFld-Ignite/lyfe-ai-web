@@ -5,7 +5,7 @@ import { getBlogPosts } from "@/lib/blog"
 // const HIDDEN_PAGES = ["/pricing", "/about"]
 
 // Active routes (excluding hidden pages)
-const activeRoutes = ["/blog", "/terms", "/privacy"]
+const activeRoutes = ["/patients", "/blog", "/terms", "/privacy"]
 
 export async function GET() {
   const today = new Date().toISOString().split("T")[0]

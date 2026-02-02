@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 export type Audience = "provider" | "patient"
 
@@ -24,41 +25,29 @@ export function AudienceProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [audience, setAudienceState] = React.useState<Audience>("provider")
-  const [isInitialized, setIsInitialized] = React.useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
-  // Read hash on initial load
+  // Determine audience from route: /patients = patient, everything else = provider
+  // This works on both server and client with Next.js App Router
+  const audienceFromRoute: Audience = pathname === "/patients" ? "patient" : "provider"
+
+  // Initialize state from route for correct SSR
+  const [audience, setAudienceState] = React.useState<Audience>(audienceFromRoute)
+
+  // Sync state with route on route changes (for client-side navigation)
   React.useEffect(() => {
-    const hash = window.location.hash
-    if (hash === "#patients") {
-      setAudienceState("patient")
-    } else if (hash === "#providers") {
-      setAudienceState("provider")
-    }
-    setIsInitialized(true)
-  }, [])
+    setAudienceState(audienceFromRoute)
+  }, [audienceFromRoute])
 
-  // Sync with URL hash on change
+  // Navigate to the appropriate route when audience changes
   const setAudience = React.useCallback((newAudience: Audience) => {
-    setAudienceState(newAudience)
-    const newHash = newAudience === "patient" ? "#patients" : "#providers"
-    window.history.replaceState(null, "", newHash)
-  }, [])
-
-  // Listen for hash changes (e.g., browser back/forward)
-  React.useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash
-      if (hash === "#patients") {
-        setAudienceState("patient")
-      } else if (hash === "#providers") {
-        setAudienceState("provider")
-      }
+    const targetPath = newAudience === "patient" ? "/patients" : "/"
+    if (pathname !== targetPath) {
+      router.push(targetPath)
     }
-
-    window.addEventListener("hashchange", handleHashChange)
-    return () => window.removeEventListener("hashchange", handleHashChange)
-  }, [])
+    setAudienceState(newAudience)
+  }, [pathname, router])
 
   const value = React.useMemo(
     () => ({
@@ -67,15 +56,6 @@ export function AudienceProvider({
     }),
     [audience, setAudience]
   )
-
-  // Prevent hydration mismatch by rendering consistent content until initialized
-  if (!isInitialized) {
-    return (
-      <AudienceContext.Provider value={{ audience: "provider", setAudience }}>
-        {children}
-      </AudienceContext.Provider>
-    )
-  }
 
   return (
     <AudienceContext.Provider value={value}>
