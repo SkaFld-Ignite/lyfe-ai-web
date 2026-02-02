@@ -23,8 +23,8 @@ export function LandingHeroSection() {
   const duration = shouldReduceMotion ? 0 : 0.3
 
   // Animation config: SSR renders visible, client enables animations
-  const getInitial = () => (isClient ? { opacity: 0, y: -yOffset } : false)
-  const getAnimate = () => ({ opacity: 1, y: 0 })
+  // Using key to force re-mount and trigger animation when client hydrates
+  const animationKey = isClient ? "animated" : "static"
 
   return (
     <section
@@ -36,8 +36,9 @@ export function LandingHeroSection() {
       <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12">
         {/* Audience Toggle */}
         <motion.div
-          initial={getInitial()}
-          animate={getAnimate()}
+          key={`toggle-${animationKey}`}
+          initial={isClient ? { opacity: 0, y: -yOffset } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration, ease: "easeOut" }}
           className="flex justify-center mb-8 md:mb-12"
         >
@@ -50,8 +51,8 @@ export function LandingHeroSection() {
             {audience === "provider" ? (
               <motion.div
                 key="provider-hero"
-                initial={getInitial()}
-                animate={getAnimate()}
+                initial={isClient ? { opacity: 0, y: yOffset } : false}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -yOffset }}
                 transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="provider-content"
@@ -61,8 +62,8 @@ export function LandingHeroSection() {
             ) : (
               <motion.div
                 key="patient-hero"
-                initial={getInitial()}
-                animate={getAnimate()}
+                initial={isClient ? { opacity: 0, y: yOffset } : false}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -yOffset }}
                 transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="patient-content"

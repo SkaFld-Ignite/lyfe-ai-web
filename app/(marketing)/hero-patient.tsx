@@ -28,9 +28,8 @@ export function PatientHero() {
   const yOffset = shouldReduceMotion ? 0 : 20
 
   // Animation config: SSR renders visible, client enables animations
-  const getInitial = (axis: "y" | "x" = "y") =>
-    isClient ? { opacity: 0, [axis]: axis === "y" ? yOffset : 30 } : false
-  const getAnimate = () => ({ opacity: 1, y: 0, x: 0 })
+  // Using key to force re-mount and trigger animation when client hydrates
+  const animationKey = isClient ? "animated" : "static"
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -38,8 +37,9 @@ export function PatientHero() {
       <div className="flex flex-col space-y-6 text-center lg:text-left">
         {/* Headline */}
         <motion.h1
-          initial={getInitial("y")}
-          animate={getAnimate()}
+          key={`headline-${animationKey}`}
+          initial={isClient ? { opacity: 0, y: yOffset } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration,
             delay: baseDelay,
@@ -55,8 +55,9 @@ export function PatientHero() {
 
         {/* Subheadline */}
         <motion.p
-          initial={getInitial("y")}
-          animate={getAnimate()}
+          key={`subheadline-${animationKey}`}
+          initial={isClient ? { opacity: 0, y: yOffset } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration,
             delay: baseDelay + staggerDelay,
@@ -69,8 +70,9 @@ export function PatientHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={getInitial("y")}
-          animate={getAnimate()}
+          key={`cta-${animationKey}`}
+          initial={isClient ? { opacity: 0, y: yOffset } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration,
             delay: baseDelay + staggerDelay * 2,
@@ -118,8 +120,9 @@ export function PatientHero() {
 
       {/* Right Column - Mobile App Mockup */}
       <motion.div
-        initial={getInitial("x")}
-        animate={getAnimate()}
+        key={`mockup-${animationKey}`}
+        initial={isClient ? { opacity: 0, x: 30 } : false}
+        animate={{ opacity: 1, x: 0 }}
         transition={{
           duration: duration * 1.2,
           delay: baseDelay + staggerDelay,
