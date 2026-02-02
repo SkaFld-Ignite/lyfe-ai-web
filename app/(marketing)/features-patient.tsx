@@ -66,12 +66,12 @@ export function PatientFeatures() {
     <section ref={containerRef}>
       <SectionCard
         className="md:container mx-auto max-w-7xl"
-        innerClassName="py-12 md:py-20"
+        innerClassName="py-24 md:py-32"
       >
-        <div className="space-y-12">
+        <div className="space-y-16">
           {/* Section Header */}
           <motion.div
-            className="text-center space-y-4"
+            className="text-center space-y-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -83,7 +83,7 @@ export function PatientFeatures() {
             >
               Your Health, Your Way
             </GradientHeading>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
               Take control of your medical history with tools built for real
               people.
             </p>
@@ -91,7 +91,7 @@ export function PatientFeatures() {
 
           {/* Feature Cards Grid */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -108,7 +108,7 @@ export function PatientFeatures() {
                     damping: 17,
                   },
                 }}
-                className="group relative bg-card border border-border/50 p-6 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 transition-shadow duration-200"
+                className="group relative bg-card border border-border/50 p-8 md:p-10 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 transition-shadow duration-200"
               >
                 {/* Icon Container */}
                 <div className="mb-4">

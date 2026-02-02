@@ -50,7 +50,7 @@ export function PatientHero() {
             delay: baseDelay + staggerDelay,
             ease: "easeOut"
           }}
-          className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl lg:max-w-none"
+          className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none"
         >
           Access, understand, and share your complete medical history—free.
         </motion.p>
@@ -64,7 +64,7 @@ export function PatientHero() {
             delay: baseDelay + staggerDelay * 2,
             ease: "easeOut"
           }}
-          className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-2"
+          className="flex flex-col sm:flex-row items-center justify-center lg:justify-start lg:items-start gap-4 pt-2"
         >
           {/* Primary CTA - Request Access */}
           <div className="relative">

@@ -18,8 +18,10 @@ export function LandingHeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full pt-24 md:pt-28"
+      className="relative w-full min-h-screen flex flex-col justify-start pb-12"
+      style={{ minHeight: '100vh' }}
     >
+      <div className="w-full h-32 md:h-32 lg:h-[130px] shrink-0" aria-hidden="true" />
       <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12">
         {/* Audience Toggle */}
         <motion.div
