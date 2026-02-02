@@ -45,15 +45,15 @@ const faqItemsForSchema = [
 ]
 
 const ogImage = `${getURL()}og?title=${encodeURIComponent(
-  "Lyfe AI - Complete Patient Stories"
+  "Lyfe AI - Turn Scattered Records Into Complete Patient Stories"
 )}`
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Lyfe AI - Complete Patient Stories Before They Walk In",
+    absolute: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
   },
   description:
-    "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
+    "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
   keywords: [
     "medical records",
     "patient history",
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     "health information exchange",
   ],
   openGraph: {
-    title: "Lyfe AI - Complete Patient Stories Before They Walk In",
+    title: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
     description:
-      "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
+      "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
     type: "website",
     locale: "en_US",
     images: [
@@ -82,9 +82,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lyfe AI - Complete Patient Stories Before They Walk In",
+    title: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
     description:
-      "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
+      "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
     images: [ogImage],
   },
   robots: {
