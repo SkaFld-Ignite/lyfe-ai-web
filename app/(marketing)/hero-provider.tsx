@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ArrowRight, Play } from "lucide-react"
-import { motion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 
+import { useIsMobile } from "@/hooks/use-mobile"
 import { GlowEffect } from "@/components/bg-glow"
 import { Magnetic } from "@/components/magnetic"
 import { VideoModal } from "@/components/video-modal"
@@ -14,18 +15,35 @@ import { useRequestAccessModal } from "@/lib/context/request-access-modal-contex
 const DEMO_VIDEO_URL = process.env.NEXT_PUBLIC_DEMO_VIDEO_URL || ""
 
 export function ProviderHero() {
+  const isMobile = useIsMobile()
   const { openModal } = useRequestAccessModal()
+  const shouldReduceMotion = useReducedMotion()
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const [shouldAnimate, setShouldAnimate] = useState(false)
 
+  // Delay animation start to ensure Googlebot captures visible content first
+  // SSR renders content visible, then client triggers animation after delay
+  useEffect(() => {
+    if (shouldReduceMotion) return
+    const timer = setTimeout(() => setShouldAnimate(true), 150)
+    return () => clearTimeout(timer)
+  }, [shouldReduceMotion])
+
+  // Animation values - only used when shouldAnimate is true
+  const duration = isMobile ? 0.3 : 0.5
+  const yOffset = 20
+  const staggerDelay = 0.15
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       {/* Left Column - Text Content */}
       <div className="flex flex-col space-y-6 text-center lg:text-left">
-        {/* Headline - no animation on initial load for SEO, content always visible */}
+        {/* Headline - visible on SSR, animates after hydration */}
         <motion.h1
-          initial={false}
+          key={shouldAnimate ? "animate" : "static"}
+          initial={shouldAnimate ? { opacity: 0, y: yOffset } : false}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration, ease: "easeOut" }}
           className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground"
         >
           Complete Patient Stories.{" "}
@@ -36,8 +54,10 @@ export function ProviderHero() {
 
         {/* Subheadline */}
         <motion.p
-          initial={false}
+          key={shouldAnimate ? "animate-p" : "static-p"}
+          initial={shouldAnimate ? { opacity: 0, y: yOffset } : false}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration, delay: shouldAnimate ? staggerDelay : 0, ease: "easeOut" }}
           className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none"
         >
           AI-powered platform that aggregates scattered medical records into one searchable timeline—and syncs back to your EMR.
@@ -45,8 +65,10 @@ export function ProviderHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={false}
+          key={shouldAnimate ? "animate-cta" : "static-cta"}
+          initial={shouldAnimate ? { opacity: 0, y: yOffset } : false}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration, delay: shouldAnimate ? staggerDelay * 2 : 0, ease: "easeOut" }}
           className="flex flex-col sm:flex-row items-center justify-center lg:justify-start lg:items-start gap-4 pt-2"
         >
           {/* Primary CTA - Request Access */}
@@ -94,8 +116,10 @@ export function ProviderHero() {
 
       {/* Right Column - Device Mockup */}
       <motion.div
-        initial={false}
+        key={shouldAnimate ? "animate-mockup" : "static-mockup"}
+        initial={shouldAnimate ? { opacity: 0, x: 30 } : false}
         animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: duration * 1.2, delay: shouldAnimate ? staggerDelay : 0, ease: "easeOut" }}
         className="relative"
       >
         {/* Glow effect behind the mockup - hidden on mobile to prevent dark overlay */}
