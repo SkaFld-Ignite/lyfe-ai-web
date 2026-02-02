@@ -1,11 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import { ArrowRight, Play } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 
-import { useIsMobile } from "@/hooks/use-mobile"
 import { GlowEffect } from "@/components/bg-glow"
 import { Magnetic } from "@/components/magnetic"
 import { VideoModal } from "@/components/video-modal"
@@ -15,41 +14,18 @@ import { useRequestAccessModal } from "@/lib/context/request-access-modal-contex
 const DEMO_VIDEO_URL = process.env.NEXT_PUBLIC_DEMO_VIDEO_URL || ""
 
 export function ProviderHero() {
-  const isMobile = useIsMobile()
   const { openModal } = useRequestAccessModal()
-  const shouldReduceMotion = useReducedMotion()
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-  const [isClient, setIsClient] = useState(false)
 
-  // Detect client-side hydration for animations
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  // Stagger animation values - disabled when reduced motion preferred
-  const baseDelay = shouldReduceMotion ? 0 : isMobile ? 0.1 : 0.2
-  const staggerDelay = shouldReduceMotion ? 0 : 0.15
-  const duration = shouldReduceMotion ? 0 : isMobile ? 0.3 : 0.5
-  const yOffset = shouldReduceMotion ? 0 : 20
-
-  // Animation config: SSR renders visible, client enables animations
-  // Using key to force re-mount and trigger animation when client hydrates
-  const animationKey = isClient ? "animated" : "static"
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       {/* Left Column - Text Content */}
       <div className="flex flex-col space-y-6 text-center lg:text-left">
-        {/* Headline */}
+        {/* Headline - no animation on initial load for SEO, content always visible */}
         <motion.h1
-          key={`headline-${animationKey}`}
-          initial={isClient ? { opacity: 0, y: yOffset } : false}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration,
-            delay: baseDelay,
-            ease: "easeOut"
-          }}
           className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground"
         >
           Complete Patient Stories.{" "}
@@ -60,14 +36,8 @@ export function ProviderHero() {
 
         {/* Subheadline */}
         <motion.p
-          key={`subheadline-${animationKey}`}
-          initial={isClient ? { opacity: 0, y: yOffset } : false}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration,
-            delay: baseDelay + staggerDelay,
-            ease: "easeOut"
-          }}
           className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none"
         >
           AI-powered platform that aggregates scattered medical records into one searchable timeline—and syncs back to your EMR.
@@ -75,14 +45,8 @@ export function ProviderHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          key={`cta-${animationKey}`}
-          initial={isClient ? { opacity: 0, y: yOffset } : false}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration,
-            delay: baseDelay + staggerDelay * 2,
-            ease: "easeOut"
-          }}
           className="flex flex-col sm:flex-row items-center justify-center lg:justify-start lg:items-start gap-4 pt-2"
         >
           {/* Primary CTA - Request Access */}
@@ -130,14 +94,8 @@ export function ProviderHero() {
 
       {/* Right Column - Device Mockup */}
       <motion.div
-        key={`mockup-${animationKey}`}
-        initial={isClient ? { opacity: 0, x: 30 } : false}
+        initial={false}
         animate={{ opacity: 1, x: 0 }}
-        transition={{
-          duration: duration * 1.2,
-          delay: baseDelay + staggerDelay,
-          ease: "easeOut"
-        }}
         className="relative"
       >
         {/* Glow effect behind the mockup - hidden on mobile to prevent dark overlay */}
