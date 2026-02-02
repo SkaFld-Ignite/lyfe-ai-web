@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Mail } from "lucide-react"
 import { motion } from "motion/react"
 
@@ -15,9 +16,9 @@ const footerConfig = {
   quickLinks: {
     title: "Quick Links",
     links: [
-      { text: "For Providers", href: "/" },
-      { text: "For Patients", href: "/patients" },
-      { text: "Blog", href: "/blog" },
+      { text: "For Providers", href: "/", scrollToTop: true },
+      { text: "For Patients", href: "/patients", scrollToTop: true },
+      { text: "Blog", href: "/blog", scrollToTop: false },
     ],
   },
   legal: {
@@ -35,6 +36,18 @@ const footerConfig = {
 
 export function MarketingFooter() {
   const currentYear = new Date().getFullYear()
+  const router = useRouter()
+
+  // Handle navigation with scroll to top
+  const handleNavClick = (href: string, scrollToTop: boolean) => {
+    router.push(href)
+    if (scrollToTop) {
+      // Scroll to top after navigation
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }, 100)
+    }
+  }
 
   return (
     <footer className="py-1 md:pt-4">
@@ -56,12 +69,21 @@ export function MarketingFooter() {
             <ul className="space-y-2">
               {footerConfig.quickLinks.links.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-foreground/70 hover:text-blue-500 transition-colors text-sm"
-                  >
-                    {link.text}
-                  </Link>
+                  {link.scrollToTop ? (
+                    <button
+                      onClick={() => handleNavClick(link.href, true)}
+                      className="text-foreground/70 hover:text-blue-500 transition-colors text-sm cursor-pointer"
+                    >
+                      {link.text}
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-foreground/70 hover:text-blue-500 transition-colors text-sm"
+                    >
+                      {link.text}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
