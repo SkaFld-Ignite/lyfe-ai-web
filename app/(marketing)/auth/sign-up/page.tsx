@@ -11,7 +11,7 @@ export default async function Page({
   const { returnUrl } = await searchParams
 
   return (
-    <div className="w-full space-y-2 md:space-y-4">
+    <div className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-16 space-y-4 md:space-y-8">
       <FadeIn key="sign-up">
         <SectionCard>
           <GradientHeading size="xxxl" weight="base">

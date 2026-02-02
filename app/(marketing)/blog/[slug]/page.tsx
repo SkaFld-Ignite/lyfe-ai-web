@@ -76,9 +76,8 @@ export default async function Blog({
   }
 
   return (
-    <div className="space-y-1 md:space-y-4">
-      <section className="container mx-auto ">
-        <div className="max-w-7xl mx-auto">
+    <div className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-16 space-y-8 md:space-y-12">
+      <section>
           <script
             type="application/ld+json"
             suppressHydrationWarning
@@ -104,7 +103,6 @@ export default async function Blog({
           <FadeIn>
             <BlogPostHero post={post} />
           </FadeIn>
-        </div>
       </section>
 
       <SectionCard className="">

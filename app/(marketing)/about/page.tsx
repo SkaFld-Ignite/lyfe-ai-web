@@ -10,6 +10,9 @@ import { SectionCard } from "@/components/section-card"
 
 import { MarketingCTA } from "../marketing-cta"
 
+// Note: Metadata must be in a separate file for client components
+// See app/(marketing)/about/metadata.ts
+
 export default function AboutPage() {
   const teamMembers = [
     {
@@ -45,7 +48,7 @@ export default function AboutPage() {
   ]
 
   return (
-    <div className="space-y-1 md:space-y-4 md:pb-2">
+    <div className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-16 space-y-8 md:space-y-12">
       <FadeIn key="about">
         {/* <SectionCard innerClassName="py-0 md:py-0 pt-16 md:pt-24 pb-8 md:pb-6"> */}
         <div className="space-y-1 md:space-y-4">

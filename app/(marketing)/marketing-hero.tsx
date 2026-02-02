@@ -16,8 +16,11 @@ export function LandingHeroSection() {
   const duration = shouldReduceMotion ? 0 : 0.3
 
   return (
-    <section id="hero" className="relative w-full py-16 md:py-24 lg:py-32">
-      <div className="container mx-auto px-4">
+    <section
+      id="hero"
+      className="relative w-full min-h-screen flex flex-col justify-center pt-16"
+    >
+      <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12 lg:py-16">
         {/* Audience Toggle */}
         <motion.div
           initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -10 }}
@@ -29,7 +32,7 @@ export function LandingHeroSection() {
         </motion.div>
 
         {/* Hero Content with Crossfade Animation */}
-        <div className="relative min-h-[400px] md:min-h-[450px]">
+        <div className="relative">
           <AnimatePresence mode="wait">
             {audience === "provider" ? (
               <motion.div

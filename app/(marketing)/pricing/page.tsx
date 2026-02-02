@@ -23,7 +23,7 @@ export const revalidate = 3600
 
 export default async function PricingPage() {
   return (
-    <div className="space-y-4">
+    <div className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-16">
       <FadeIn key="pricing">
         <MarketingPricing />
       </FadeIn>
