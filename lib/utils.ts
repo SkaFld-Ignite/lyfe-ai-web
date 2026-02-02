@@ -99,7 +99,7 @@ export const getURL = () => {
       ? "http://localhost:3000"
       : process.env.NEXT_PUBLIC_VERCEL_ENV === "preview"
         ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-        : `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+        : "https://lyfeco.ai"
   // Make sure to include `https://` when not localhost.
   url = url.startsWith("http") ? url : `https://${url}`
   // Make sure to include a trailing `/`.
