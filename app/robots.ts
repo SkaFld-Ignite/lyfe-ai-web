@@ -18,9 +18,6 @@ export default function robots() {
         allow: "/",
       },
     ],
-    sitemap: [
-      "https://lyfeco.ai/sitemap.xml",
-      "https://lyfeco.ai/video-sitemap.xml",
-    ],
+    sitemap: "https://lyfeco.ai/sitemap.xml",
   }
 }
