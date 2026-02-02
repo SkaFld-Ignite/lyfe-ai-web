@@ -12,12 +12,14 @@ export default function robots() {
           "/dashboard/",
           "/_next/",
           "/checkout/",
+          "/pricing/",
+          "/about/",
         ],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/api/", "/auth/", "/dashboard/", "/checkout/"],
+        disallow: ["/api/", "/auth/", "/dashboard/", "/checkout/", "/pricing/", "/about/"],
       },
       {
         userAgent: "Googlebot-Video",

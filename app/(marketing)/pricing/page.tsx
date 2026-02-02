@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "Lyfe AI pricing for healthcare providers. Free for patients, flexible plans for practices. HIPAA compliant medical records aggregation and EMR integration.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   alternates: {
     canonical: "/pricing",
   },
