@@ -16,25 +16,25 @@ const providerFeatures = [
   {
     title: "Stop Chasing Records",
     description:
-      "Aggregate from 95% of US healthcare providers. One request, complete history.",
+      "Get complete histories instantly. No more calls to other offices, no more faxes.",
     icon: FileSearch,
   },
   {
-    title: "Complete Context",
+    title: "Know Before They Arrive",
     description:
-      "ER visits, medication changes, lab results—all in a searchable timeline before the appointment.",
+      "ER visits, medication changes, lab results—review complete histories and make informed decisions faster.",
     icon: History,
   },
   {
-    title: "Bi-directional Sync",
+    title: "Never Miss Critical Info",
     description:
-      "Write curated data back to your EMR. No copy-paste, no duplicate entry.",
+      "See all medications, allergies, and past procedures in one view. Syncs directly to your EMR.",
     icon: RefreshCw,
   },
   {
-    title: "HIPAA Compliant",
+    title: "Enterprise Security",
     description:
-      "Enterprise-grade security with FHIR R4 compliance. Your data stays protected.",
+      "HIPAA compliant with FHIR R4 integration. Military-grade encryption at rest and in transit.",
     icon: ShieldCheck,
   },
 ]
@@ -86,10 +86,10 @@ export function ProviderFeatures() {
               weight="bold"
               className="max-w-3xl mx-auto"
             >
-              Everything You Need for Better Patient Care
+              Focus on Patients, Not Paperwork
             </GradientHeading>
             <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
-              Purpose-built for healthcare providers who want the full picture.
+              Go live in less than one week. Complete patient histories before every visit.
             </p>
           </motion.div>
 

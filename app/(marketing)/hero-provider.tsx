@@ -69,9 +69,9 @@ export function ProviderHero() {
           animate={headlineControls}
           className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground"
         >
-          Complete Patient Stories.{" "}
+          Turn Scattered Records Into{" "}
           <span className="text-blue-600 dark:text-blue-500">
-            Before They Walk In.
+            Complete Patient Stories
           </span>
         </motion.h1>
 
@@ -80,7 +80,7 @@ export function ProviderHero() {
           animate={subheadlineControls}
           className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none"
         >
-          AI-powered platform that aggregates scattered medical records into one searchable timeline—and syncs back to your EMR.
+          Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.
         </motion.p>
 
         {/* CTA Buttons */}

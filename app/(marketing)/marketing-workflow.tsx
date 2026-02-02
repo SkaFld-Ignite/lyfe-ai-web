@@ -154,13 +154,13 @@ export function ProductWorkflow() {
                   className="max-w-3xl mx-auto"
                 >
                   {audience === "provider"
-                    ? "How Lyfe AI Works for Your Practice"
-                    : "How Lyfe AI Brings Your Records Together"}
+                    ? "From Scattered to Structured—In One Click"
+                    : "From Scattered to Complete—In Minutes"}
                 </GradientHeading>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
                   {audience === "provider"
-                    ? "From fragmented records to complete patient stories—automatically."
-                    : "From scattered health records to one complete picture—free."}
+                    ? "Complete patient records from 95% of US providers, organized and ready for care."
+                    : "All your health records from every provider, unified and always free."}
                 </p>
               </motion.div>
             </AnimatePresence>

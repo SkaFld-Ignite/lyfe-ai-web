@@ -64,9 +64,9 @@ export function PatientHero() {
           animate={headlineControls}
           className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground"
         >
-          Your Health Records.{" "}
+          Own Your Health Story.{" "}
           <span className="text-blue-600 dark:text-blue-500">
-            Finally In One Place.
+            Share It Anywhere.
           </span>
         </motion.h1>
 
@@ -75,7 +75,7 @@ export function PatientHero() {
           animate={subheadlineControls}
           className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none"
         >
-          Access, understand, and share your complete medical history—free.
+          Your complete medical history in one place—access it, understand it, share it with any doctor. Always free.
         </motion.p>
 
         {/* CTA Buttons */}

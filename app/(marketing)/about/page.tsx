@@ -14,36 +14,27 @@ import { MarketingCTA } from "../marketing-cta"
 // See app/(marketing)/about/metadata.ts
 
 export default function AboutPage() {
+  // TODO: Replace with actual team member photos and info
   const teamMembers = [
     {
-      name: "Sophia Chen",
-      role: "Chief Executive Officer",
-      image: "https://i.pravatar.cc/150?img=68",
+      name: "Mike Belloli",
+      role: "Founder & CEO",
+      image: "/images/team/placeholder.png",
     },
     {
-      name: "Marcus Rivera",
-      role: "Chief Technology Officer",
-      image: "https://i.pravatar.cc/150?img=62",
+      name: "Team Member",
+      role: "Engineering",
+      image: "/images/team/placeholder.png",
     },
     {
-      name: "Amara Okafor",
-      role: "Head of Product Design",
-      image: "https://i.pravatar.cc/150?img=25",
+      name: "Team Member",
+      role: "Product",
+      image: "/images/team/placeholder.png",
     },
     {
-      name: "Ethan Nakamura",
-      role: "Director of Engineering",
-      image: "https://i.pravatar.cc/150?img=11",
-    },
-    {
-      name: "Olivia Patel",
-      role: "Chief Marketing Officer",
-      image: "https://i.pravatar.cc/150?img=48",
-    },
-    {
-      name: "Noah Bergström",
-      role: "Head of Customer Experience",
-      image: "https://i.pravatar.cc/150?img=12",
+      name: "Team Member",
+      role: "Operations",
+      image: "/images/team/placeholder.png",
     },
   ]
 
@@ -68,11 +59,10 @@ export default function AboutPage() {
                       Our Vision
                     </GradientHeading>
                     <p className="text-muted-foreground leading-relaxed text-pretty text-lg lg:text-xl">
-                      We&apos;re on a mission to revolutionize web development
-                      by making beautiful, performant interfaces accessible to
-                      everyone. Our platform combines cutting-edge design with
-                      powerful functionality to help creators build the next
-                      generation of digital experiences.
+                      We believe every patient deserves providers who know their
+                      complete story. And every provider deserves instant access
+                      to the records they need. Lyfe AI is building the bridge
+                      between fragmented healthcare data and better care outcomes.
                     </p>
                   </div>
                 </FadeIn>
@@ -83,11 +73,11 @@ export default function AboutPage() {
                       Our Story
                     </GradientHeading>
                     <p className="text-muted-foreground leading-relaxed text-pretty text-lg lg:text-xl">
-                      Born from the frustration of complex development
-                      workflows, we set out to create a toolkit that empowers
-                      developers to focus on what matters most: creating
-                      exceptional user experiences. Today, we&apos;re proud to
-                      serve a growing community of creators.
+                      Born from firsthand experience with the broken state of
+                      medical records, we set out to solve the problem at its
+                      root. Healthcare providers waste hours chasing records
+                      while patients struggle to share their own health stories.
+                      We&apos;re changing that—one complete patient history at a time.
                     </p>
                   </div>
                 </FadeIn>
@@ -119,9 +109,8 @@ export default function AboutPage() {
                   className="h-[1px] bg-primary/20 mb-8"
                 />
                 <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl">
-                  Bringing together diverse perspectives and exceptional talent
-                  to create products that enrich lives and redefine what&apos;s
-                  possible.
+                  A team of healthcare innovators, engineers, and patient advocates
+                  working to make complete medical records accessible to everyone.
                 </p>
               </motion.div>
 
@@ -177,34 +166,34 @@ export default function AboutPage() {
               <AnimatedGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {[
                   {
-                    title: "Innovation",
+                    title: "Patient First",
                     description:
-                      "Pushing boundaries and exploring new possibilities in web development.",
+                      "Every decision starts with what's best for patients. Their data, their control, their care.",
+                  },
+                  {
+                    title: "Provider Partnership",
+                    description:
+                      "We build tools that fit into real healthcare workflows, not the other way around.",
+                  },
+                  {
+                    title: "Security & Trust",
+                    description:
+                      "HIPAA compliance is just the start. We exceed standards to earn and keep trust.",
+                  },
+                  {
+                    title: "Simplicity",
+                    description:
+                      "Complex problems deserve elegant solutions. One click should be enough.",
+                  },
+                  {
+                    title: "Interoperability",
+                    description:
+                      "Healthcare data should flow freely—between providers, systems, and to patients themselves.",
                   },
                   {
                     title: "Accessibility",
                     description:
-                      "Making advanced design and development tools available to everyone.",
-                  },
-                  {
-                    title: "Community",
-                    description:
-                      "Building a supportive ecosystem where creators can thrive and grow.",
-                  },
-                  {
-                    title: "Excellence",
-                    description:
-                      "Delivering exceptional quality in every line of code and pixel we create.",
-                  },
-                  {
-                    title: "Sustainability",
-                    description:
-                      "Building solutions that are efficient, maintainable, and future-proof.",
-                  },
-                  {
-                    title: "Empowerment",
-                    description:
-                      "Enabling developers to bring their boldest ideas to life with confidence.",
+                      "Free for patients, always. Everyone deserves access to their own health information.",
                   },
                 ].map((value, index) => (
                   <div key={index}>

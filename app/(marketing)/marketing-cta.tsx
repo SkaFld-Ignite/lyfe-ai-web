@@ -12,15 +12,15 @@ import { useRequestAccessModal } from "@/lib/context/request-access-modal-contex
 
 const contentByAudience = {
   provider: {
-    headline: "Ready to stop chasing records?",
+    headline: "Stop Wasting Time. Start Delivering Better Care.",
     subheadline:
-      "Join the specialty practices that have transformed their patient intake with complete medical histories.",
+      "Join innovative practices getting complete patient records with one click. Go live in less than a week.",
     cta: "Request Access",
   },
   patient: {
-    headline: "Ready to own your health data?",
+    headline: "Your Health Story Belongs to You",
     subheadline:
-      "Get your complete medical history in one place—free. Share it with any doctor, anytime.",
+      "Get your complete medical history in one place—free forever. Share it with any doctor, anytime.",
     cta: "Get Started Free",
   },
 }

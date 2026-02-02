@@ -118,13 +118,13 @@ export function HowItWorks() {
                   className="max-w-3xl mx-auto"
                 >
                   {audience === "provider"
-                    ? "Get Started in Four Simple Steps"
-                    : "Your Health Records in Four Easy Steps"}
+                    ? "Live in Less Than One Week"
+                    : "Your Complete Health Story in Minutes"}
                 </GradientHeading>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
                   {audience === "provider"
-                    ? "From setup to complete patient stories—we make it seamless."
-                    : "From signup to total health clarity—it's easier than you think."}
+                    ? "We handle the heavy lifting—patient onboarding, technical setup, ongoing support."
+                    : "Simple, secure, and always free. Connect once and access your records forever."}
                 </p>
               </motion.div>
             </AnimatePresence>

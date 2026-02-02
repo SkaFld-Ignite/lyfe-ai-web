@@ -9,27 +9,27 @@ import { SectionCard } from "@/components/section-card"
 
 const patientFeatures = [
   {
-    title: "All Your Records",
+    title: "Records From Everywhere",
     description:
-      "Every doctor, hospital, and lab in one place. No more hunting through filing cabinets or patient portals.",
+      "Every doctor, hospital, lab, and pharmacy in one place. No more hunting through patient portals or filing cabinets.",
     icon: FolderOpen,
   },
   {
-    title: "Understand Your Health",
+    title: "AI-Powered Summaries",
     description:
-      "AI-powered summaries explain your records in plain language. Know what matters without medical jargon.",
+      "Understand your health in plain language. AI extracts what matters from complex medical records.",
     icon: Brain,
   },
   {
-    title: "Share Easily",
+    title: "Share With Any Doctor",
     description:
-      "Send your complete history to any provider instantly. No faxes, no paperwork, no waiting.",
+      "Send your complete history instantly. No faxes, no forms, no repeating your story at every visit.",
     icon: Share2,
   },
   {
-    title: "Always Free",
+    title: "Free Forever",
     description:
-      "No cost, no catch. Your health data belongs to you—we just make it accessible.",
+      "No cost, no catch, no premium tier. Your health data belongs to you—period.",
     icon: Gift,
   },
 ]
@@ -81,11 +81,10 @@ export function PatientFeatures() {
               weight="bold"
               className="max-w-3xl mx-auto"
             >
-              Your Health, Your Way
+              Control Your Health Story
             </GradientHeading>
             <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
-              Take control of your medical history with tools built for real
-              people.
+              Your health data belongs to you. We just make it accessible—always free, always yours.
             </p>
           </motion.div>
 
