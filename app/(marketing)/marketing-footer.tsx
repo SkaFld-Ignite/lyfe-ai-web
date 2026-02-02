@@ -15,7 +15,8 @@ const footerConfig = {
   quickLinks: {
     title: "Quick Links",
     links: [
-      { text: "Home", href: "/" },
+      { text: "For Providers", href: "/" },
+      { text: "For Patients", href: "/patients" },
       { text: "Blog", href: "/blog" },
     ],
   },
