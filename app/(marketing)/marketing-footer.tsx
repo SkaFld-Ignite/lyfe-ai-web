@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Mail } from "lucide-react"
 import { motion } from "motion/react"
 
@@ -16,9 +16,9 @@ const footerConfig = {
   quickLinks: {
     title: "Quick Links",
     links: [
-      { text: "For Providers", href: "/", scrollToTop: true },
-      { text: "For Patients", href: "/patients", scrollToTop: true },
-      { text: "Blog", href: "/blog", scrollToTop: false },
+      { text: "For Providers", href: "/" },
+      { text: "For Patients", href: "/patients" },
+      { text: "Blog", href: "/blog" },
     ],
   },
   legal: {
@@ -36,18 +36,23 @@ const footerConfig = {
 
 export function MarketingFooter() {
   const currentYear = new Date().getFullYear()
+  const pathname = usePathname()
   const router = useRouter()
 
-  // Handle navigation with scroll to top
-  const handleNavClick = (href: string, scrollToTop: boolean) => {
-    router.push(href)
-    if (scrollToTop) {
-      // Scroll to top after navigation
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      }, 100)
+  // Handle navigation with scroll to top for audience pages
+  const handleAudienceNavClick = (href: string) => {
+    if (pathname === href) {
+      // Already on the page, just scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      // Navigate to new page - scroll immediately to top, then navigate
+      window.scrollTo({ top: 0, behavior: "instant" })
+      router.push(href)
     }
   }
+
+  // Check if link is an audience page that needs special handling
+  const isAudiencePage = (href: string) => href === "/" || href === "/patients"
 
   return (
     <footer className="py-1 md:pt-4">
@@ -69,9 +74,9 @@ export function MarketingFooter() {
             <ul className="space-y-2">
               {footerConfig.quickLinks.links.map((link) => (
                 <li key={link.href}>
-                  {link.scrollToTop ? (
+                  {isAudiencePage(link.href) ? (
                     <button
-                      onClick={() => handleNavClick(link.href, true)}
+                      onClick={() => handleAudienceNavClick(link.href)}
                       className="text-foreground/70 hover:text-blue-500 transition-colors text-sm cursor-pointer"
                     >
                       {link.text}
