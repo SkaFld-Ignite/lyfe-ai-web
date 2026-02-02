@@ -39,15 +39,22 @@ export function MarketingFooter() {
   const pathname = usePathname()
   const router = useRouter()
 
-  // Handle navigation with scroll to top for audience pages
+  // Handle navigation with smooth scroll to top for audience pages
   const handleAudienceNavClick = (href: string) => {
     if (pathname === href) {
       // Already on the page, just scroll to top smoothly
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
-      // Navigate to new page - scroll immediately to top, then navigate
-      window.scrollTo({ top: 0, behavior: "instant" })
+      // Navigate to new page, then scroll to top smoothly
       router.push(href)
+      // Wait for navigation to complete, then smooth scroll
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }, 50)
+      // Backup scroll in case first one fires too early
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }, 300)
     }
   }
 
