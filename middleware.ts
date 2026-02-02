@@ -1,19 +1,8 @@
-import { type NextRequest, NextResponse } from "next/server"
+import { type NextRequest } from "next/server"
 
 import { updateSession } from "@/lib/db/middleware"
 
-// Hidden pages - set to empty array [] to re-enable access
-// These pages are also excluded from sitemap.ts and blocked in robots.ts
-const HIDDEN_PAGES = ["/pricing", "/about"]
-
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
-
-  // Block access to hidden pages - redirect to home
-  if (HIDDEN_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`))) {
-    return NextResponse.redirect(new URL("/", request.url))
-  }
-
   return await updateSession(request)
 }
 
