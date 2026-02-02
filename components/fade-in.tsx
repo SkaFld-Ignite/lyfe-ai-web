@@ -8,7 +8,6 @@ export function FadeIn(
   props: React.ComponentPropsWithoutRef<typeof motion.div>
 ) {
   const shouldReduceMotion = useReducedMotion()
-  // const isInStaggerGroup = useContext(FadeInStaggerContext)
   const isMobile = useIsMobile()
 
   const viewport = {
@@ -16,6 +15,8 @@ export function FadeIn(
     margin: isMobile ? "0px 0px -100px" : "0px 0px -200px",
   }
 
+  // Use initial={false} so content is visible on first render for SEO (Googlebot).
+  // The whileInView animation will still work for users who scroll.
   return (
     <motion.div
       variants={{
@@ -26,11 +27,9 @@ export function FadeIn(
         visible: { opacity: 1, y: 0 },
       }}
       transition={{ duration: isMobile ? 0.35 : 0.5 }}
-      {...{
-        initial: "hidden",
-        whileInView: "visible",
-        viewport,
-      }}
+      initial={false}
+      whileInView="visible"
+      viewport={viewport}
       {...props}
     />
   )
