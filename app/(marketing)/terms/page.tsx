@@ -6,7 +6,8 @@ import { SectionCard } from "@/components/section-card"
 
 export default function TermsOfUsePage() {
   return (
-    <div className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-16">
+    <div className="container mx-auto max-w-7xl px-4 pb-16">
+      <div className="w-full h-24 md:h-28 lg:h-[120px]" aria-hidden="true" />
       <FadeIn key="terms">
         <SectionCard>
           <div className="space-y-6">

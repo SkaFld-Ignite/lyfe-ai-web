@@ -21,7 +21,8 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="container mx-auto max-w-7xl px-4 pt-24 md:pt-28 pb-16 space-y-4 md:space-y-8">
+    <div className="container mx-auto max-w-7xl px-4 pb-16 space-y-4 md:space-y-8">
+      <div className="w-full h-24 md:h-28 lg:h-[120px]" aria-hidden="true" />
       <FadeIn key="blog">
         <SectionCard>
           <GradientHeading size="xxl" weight="base" className="">

@@ -1,4 +1,6 @@
-import { baseUrl } from "@/app/sitemap"
+import { getURL } from "@/lib/utils"
+
+const baseUrl = getURL()
 
 export default function robots() {
   return {
@@ -26,6 +28,6 @@ export default function robots() {
         allow: "/",
       },
     ],
-    sitemap: [`${baseUrl}sitemap.xml`, `${baseUrl}video-sitemap.xml`],
+    sitemap: `${baseUrl}sitemap.xml`,
   }
 }
