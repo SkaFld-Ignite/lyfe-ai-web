@@ -1,7 +1,3 @@
-import { getURL } from "@/lib/utils"
-
-const baseUrl = getURL()
-
 export default function robots() {
   return {
     rules: [
@@ -12,22 +8,19 @@ export default function robots() {
           "/api/",
           "/auth/",
           "/dashboard/",
-          "/_next/",
           "/checkout/",
           "/pricing/",
           "/about/",
         ],
       },
       {
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/api/", "/auth/", "/dashboard/", "/checkout/", "/pricing/", "/about/"],
-      },
-      {
         userAgent: "Googlebot-Video",
         allow: "/",
       },
     ],
-    sitemap: `${baseUrl}sitemap.xml`,
+    sitemap: [
+      "https://lyfeco.ai/sitemap.xml",
+      "https://lyfeco.ai/video-sitemap.xml",
+    ],
   }
 }
