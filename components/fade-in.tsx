@@ -1,13 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { motion, useReducedMotion } from "motion/react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 
-export function FadeIn(
-  props: React.ComponentPropsWithoutRef<typeof motion.div>
-) {
+interface FadeInProps extends React.ComponentPropsWithoutRef<typeof motion.div> {
+  children?: ReactNode
+}
+
+export function FadeIn({
+  children,
+  className,
+  ...motionProps
+}: FadeInProps) {
   const shouldReduceMotion = useReducedMotion()
   const isMobile = useIsMobile()
   const [isClient, setIsClient] = useState(false)
@@ -27,7 +33,7 @@ export function FadeIn(
   // This ensures Googlebot sees all content while users get the animation.
   if (!isClient) {
     // SSR: Render visible content, no animation
-    return <div {...props} />
+    return <div className={className}>{children}</div>
   }
 
   // Client: Enable scroll-triggered animation
@@ -44,7 +50,10 @@ export function FadeIn(
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
-      {...props}
-    />
+      className={className}
+      {...motionProps}
+    >
+      {children}
+    </motion.div>
   )
 }
