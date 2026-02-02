@@ -52,10 +52,10 @@ const trustBadges = [
 
 const testimonialQuote = {
   quote:
-    "Lyfe AI has transformed how we prepare for patient visits. Having the complete picture before they walk in has improved both efficiency and quality of care.",
-  author: "Dr. Sarah Chen",
-  title: "Medical Director",
-  practice: "Nashville Specialty Associates",
+    "Every patient deserves a healthcare provider who knows their full story. We're building the platform that makes this possible—connecting the dots across every doctor, hospital, and lab visit so providers can focus on what matters: better care.",
+  author: "Lyfe AI",
+  title: "Our Mission",
+  practice: "",
 }
 
 export function MarketingSocialProof() {
@@ -111,11 +111,10 @@ export function MarketingSocialProof() {
               weight="bold"
               className="max-w-3xl mx-auto"
             >
-              Trusted by Specialty Practices
+              Designed for Modern Practices
             </GradientHeading>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Healthcare providers across the country rely on Lyfe AI to deliver
-              better patient care.
+              Built from the ground up for healthcare providers who need the complete patient picture.
             </p>
           </motion.div>
 
@@ -212,7 +211,7 @@ export function MarketingSocialProof() {
                         {testimonialQuote.author}
                       </span>
                       <span className="text-sm text-muted-foreground">
-                        {testimonialQuote.title}, {testimonialQuote.practice}
+                        {testimonialQuote.title}{testimonialQuote.practice && `, ${testimonialQuote.practice}`}
                       </span>
                     </cite>
                   </div>

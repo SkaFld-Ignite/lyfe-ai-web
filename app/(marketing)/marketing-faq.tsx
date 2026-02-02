@@ -163,87 +163,87 @@ export default function MarketingFAQ() {
 // Provider-specific FAQ items
 const providerFaqItems = [
   {
-    question: "How does Lyfe AI collect patient information?",
+    question: "How does Lyfe AI aggregate patient records?",
     answer:
-      "Lyfe AI uses a secure, HIPAA-compliant AI assistant that engages patients via text message before their appointment. Patients answer questions about their symptoms, medical history, and current medications in a conversational format.",
+      "We connect to 95% of US healthcare providers through our FHIR R4 integration with Zus Health. When you request a patient's records, we pull from hospitals, labs, specialists, and pharmacies—all in one request, no faxes required.",
   },
   {
-    question: "Is the patient data secure and HIPAA compliant?",
+    question: "Is patient data secure and HIPAA compliant?",
     answer:
-      "Absolutely. Lyfe AI is fully HIPAA compliant with end-to-end encryption, secure data storage, and strict access controls. We follow industry best practices for healthcare data security and undergo regular security audits.",
+      "Yes. We maintain enterprise-grade security with row-level data isolation, PHI filtering, complete audit logging, encryption at rest and in transit, and role-based access controls. Our architecture is built for HIPAA compliance from day one.",
   },
   {
-    question: "How does this integrate with my existing EHR system?",
+    question: "Which EHR systems do you integrate with?",
     answer:
-      "Lyfe AI integrates seamlessly with major EHR systems including Epic, Cerner, and Athenahealth. Patient intake data is automatically formatted and can be imported directly into your existing workflow.",
+      "Lyfe AI offers FHIR R4 integrations with major EHRs through SMART on FHIR (Epic, Cerner, and others) and direct integrations with DrChrono. We support bi-directional sync so you can write curated data back to your EMR.",
   },
   {
-    question: "How much time does this actually save per patient?",
+    question: "How does the AI-powered timeline work?",
     answer:
-      "On average, providers save 5-10 minutes per patient visit by having comprehensive intake information ready before the appointment. This translates to seeing more patients or spending more quality time with each one.",
+      "Our AI organizes fragmented records from multiple sources into a single, searchable Clinical Timeline. Filter by date, condition, provider, or procedure—find any piece of patient history in seconds, not hours.",
   },
   {
-    question: "What if a patient doesn't complete the intake?",
+    question: "What clinical intelligence features are available?",
     answer:
-      "Lyfe AI sends gentle reminders and can pause and resume conversations. If a patient doesn't complete intake, you'll still have partial information, and traditional intake methods remain available as a backup.",
+      "Lyfe AI provides drug interaction checking, risk assessment scoring, care gap detection, and clinical insights generation. These tools help you identify potential issues and opportunities for preventive care before the visit.",
   },
   {
-    question: "Can I customize the questions asked to patients?",
+    question: "Can I control which staff members access what data?",
     answer:
-      "Yes! You can customize intake questions based on specialty, visit type, or specific conditions. Our AI adapts follow-up questions based on patient responses to gather the most relevant information.",
+      "Absolutely. We provide 20+ granular permissions across Admin, Doctor, Nurse, and Staff roles. Multi-tenant isolation ensures complete organizational separation between clinics, with row-level security enforced at the database level.",
   },
   {
-    question: "What's the pricing structure for providers?",
+    question: "What's the pricing for practices?",
     answer:
-      "We offer flexible pricing based on practice size and volume. Contact us for a customized quote. Most practices see ROI within the first month through improved efficiency and reduced no-shows.",
+      "We're currently piloting with select specialty practices. Contact us to discuss joining our pilot program and help shape the platform as we prepare for broader launch.",
   },
   {
-    question: "How do patients typically respond to AI-assisted intake?",
+    question: "How quickly can we get started?",
     answer:
-      "Patient satisfaction scores are consistently high. Many patients prefer the convenience of completing intake from their phone at their own pace, rather than filling out clipboards in the waiting room.",
+      "Most practices can be up and running within a week. Our FHIR R4 integration connects with your EMR in a few clicks, and patient records start flowing immediately. We provide guided onboarding and demo data to get your team comfortable.",
   },
 ]
 
 // Patient-specific FAQ items
 const patientFaqItems = [
   {
-    question: "How do I use Lyfe AI before my appointment?",
+    question: "What does Lyfe AI do for me?",
     answer:
-      "After scheduling your appointment, you'll receive a text message from Lyfe AI. Simply respond to the questions about your health, symptoms, and medical history. It's like texting with a helpful assistant.",
+      "Lyfe AI brings all your medical records together in one place—every doctor visit, lab result, medication, and procedure from any provider you've seen. You can finally see your complete health story without hunting through filing cabinets or multiple patient portals.",
+  },
+  {
+    question: "Is Lyfe AI really free for patients?",
+    answer:
+      "Yes, completely free. Your health data belongs to you—we're just making it accessible. There's no cost, no catch, and no premium tier. We believe everyone deserves easy access to their own health information.",
   },
   {
     question: "Is my health information kept private?",
     answer:
-      "Yes, your privacy is our top priority. Lyfe AI is fully HIPAA compliant, meaning your health information is encrypted and protected by the same strict standards as your doctor's office.",
+      "Absolutely. Lyfe AI is built to HIPAA standards with bank-level encryption, secure data storage, and strict access controls. Your data is never sold or shared without your explicit consent.",
   },
   {
-    question: "Do I have to use this instead of talking to my doctor?",
+    question: "How do I share my records with a new doctor?",
     answer:
-      "Not at all! Lyfe AI helps your doctor prepare for your visit by gathering information beforehand. You'll still have your full appointment time to discuss concerns directly with your healthcare provider.",
+      "With one click, you can share your complete health history with any healthcare provider. No more faxing records, filling out the same forms repeatedly, or trying to remember every medication and procedure from your past.",
   },
   {
-    question: "What if I don't want to answer a question?",
+    question: "What's the AI health summary feature?",
     answer:
-      "You can skip any question you're not comfortable answering. Your participation is voluntary, and you can always discuss sensitive topics directly with your doctor during your appointment.",
+      "Our AI reads through your medical records and creates plain-language summaries of your health history. You'll understand what's in your records without needing to decode medical jargon or complex lab results.",
   },
   {
-    question: "How long does the intake process take?",
+    question: "Does Lyfe AI replace my doctor?",
     answer:
-      "Most patients complete the intake in 5-10 minutes. You can do it anytime before your appointment - on your couch, during your commute, or whenever is convenient for you.",
+      "Not at all. Lyfe AI helps you and your doctors by making your health information more accessible and understandable. You'll still work with your healthcare providers for all medical decisions and treatment.",
   },
   {
-    question: "What happens to my information after my visit?",
+    question: "Can I get medication reminders?",
     answer:
-      "Your information becomes part of your medical record at your healthcare provider's office, just like any other intake form. It's stored securely and used only for your care.",
+      "Yes! Once your records are connected, you can set up personalized medication reminders to help you stay on track with your prescriptions and never miss a dose.",
   },
   {
-    question: "Can I update my information if something changes?",
+    question: "How do I get started?",
     answer:
-      "Yes! If your symptoms change or you remember something important before your appointment, you can text Lyfe AI to update your information. Your doctor will see the latest version.",
-  },
-  {
-    question: "What if I have trouble using the text system?",
-    answer:
-      "Our AI is designed to be simple and conversational. If you have any issues, you can always complete traditional paperwork at your appointment, or contact your provider's office for assistance.",
+      "Patient features are coming soon—request access now to be notified when we launch. Once available, you'll verify your identity securely, and we'll pull your records from hospitals, labs, and doctors across the country. Most patients will see their complete timeline within minutes.",
   },
 ]

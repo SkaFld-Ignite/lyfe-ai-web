@@ -26,7 +26,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ModeToggle } from "@/components/ui/mode-toggle"
 
 export function NavUser({
   subscription,
@@ -139,7 +138,6 @@ export function NavUser({
               >
                 {isSubscriptionActive ? "Pro Subscription" : "Free Plan"}
               </Badge>
-              <ModeToggle />
             </div>
           </div>
 

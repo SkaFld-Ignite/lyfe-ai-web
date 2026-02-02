@@ -91,6 +91,10 @@ export function PatientHero() {
           <Magnetic>
             <button
               type="button"
+              onClick={() => {
+                const section = document.getElementById("how-it-works-detail")
+                section?.scrollIntoView({ behavior: "smooth" })
+              }}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-foreground bg-secondary hover:bg-secondary/80 transition-colors duration-200 border border-border"
             >
               <BookOpen className="size-5" />

@@ -14,7 +14,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
-import { ModeToggle } from "./ui/mode-toggle"
 import { Separator } from "./ui/separator"
 
 export function HeaderAccountDropdown({ user }: { user: User }) {
@@ -102,7 +101,6 @@ export function HeaderAccountDropdown({ user }: { user: User }) {
           </div>
         </div>
       </DropdownMenuContent>
-      <ModeToggle />
     </DropdownMenu>
   )
 }
