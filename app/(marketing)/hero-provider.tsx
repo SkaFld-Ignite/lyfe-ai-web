@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useLayoutEffect } from "react"
 import Image from "next/image"
 import { ArrowRight, Play } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
+import { motion, useReducedMotion, useAnimation } from "motion/react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { GlowEffect } from "@/components/bg-glow"
@@ -19,31 +19,54 @@ export function ProviderHero() {
   const { openModal } = useRequestAccessModal()
   const shouldReduceMotion = useReducedMotion()
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-  const [shouldAnimate, setShouldAnimate] = useState(false)
 
-  // Delay animation start to ensure Googlebot captures visible content first
-  // SSR renders content visible, then client triggers animation after delay
-  useEffect(() => {
-    if (shouldReduceMotion) return
-    const timer = setTimeout(() => setShouldAnimate(true), 150)
-    return () => clearTimeout(timer)
-  }, [shouldReduceMotion])
+  // Animation controls for each element
+  const headlineControls = useAnimation()
+  const subheadlineControls = useAnimation()
+  const ctaControls = useAnimation()
+  const mockupControls = useAnimation()
 
-  // Animation values - only used when shouldAnimate is true
+  // Animation values
   const duration = isMobile ? 0.3 : 0.5
   const yOffset = 20
   const staggerDelay = 0.15
+
+  // useLayoutEffect runs synchronously before paint, avoiding the flash
+  useLayoutEffect(() => {
+    if (shouldReduceMotion) return
+
+    // Set initial hidden state and animate in sequence
+    const animate = async () => {
+      // Set all to hidden state (happens before paint)
+      headlineControls.set({ opacity: 0, y: yOffset })
+      subheadlineControls.set({ opacity: 0, y: yOffset })
+      ctaControls.set({ opacity: 0, y: yOffset })
+      mockupControls.set({ opacity: 0, x: 30 })
+
+      // Small delay to ensure Googlebot can capture (they get SSR HTML first)
+      await new Promise(resolve => setTimeout(resolve, 50))
+
+      // Animate in with stagger
+      headlineControls.start({ opacity: 1, y: 0, transition: { duration, ease: "easeOut" } })
+
+      await new Promise(resolve => setTimeout(resolve, staggerDelay * 1000))
+      subheadlineControls.start({ opacity: 1, y: 0, transition: { duration, ease: "easeOut" } })
+      mockupControls.start({ opacity: 1, x: 0, transition: { duration: duration * 1.2, ease: "easeOut" } })
+
+      await new Promise(resolve => setTimeout(resolve, staggerDelay * 1000))
+      ctaControls.start({ opacity: 1, y: 0, transition: { duration, ease: "easeOut" } })
+    }
+
+    animate()
+  }, [shouldReduceMotion, headlineControls, subheadlineControls, ctaControls, mockupControls, duration, yOffset, staggerDelay])
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       {/* Left Column - Text Content */}
       <div className="flex flex-col space-y-6 text-center lg:text-left">
-        {/* Headline - visible on SSR, animates after hydration */}
+        {/* Headline */}
         <motion.h1
-          key={shouldAnimate ? "animate" : "static"}
-          initial={shouldAnimate ? { opacity: 0, y: yOffset } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration, ease: "easeOut" }}
+          animate={headlineControls}
           className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground"
         >
           Complete Patient Stories.{" "}
@@ -54,10 +77,7 @@ export function ProviderHero() {
 
         {/* Subheadline */}
         <motion.p
-          key={shouldAnimate ? "animate-p" : "static-p"}
-          initial={shouldAnimate ? { opacity: 0, y: yOffset } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration, delay: shouldAnimate ? staggerDelay : 0, ease: "easeOut" }}
+          animate={subheadlineControls}
           className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none"
         >
           AI-powered platform that aggregates scattered medical records into one searchable timeline—and syncs back to your EMR.
@@ -65,10 +85,7 @@ export function ProviderHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          key={shouldAnimate ? "animate-cta" : "static-cta"}
-          initial={shouldAnimate ? { opacity: 0, y: yOffset } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration, delay: shouldAnimate ? staggerDelay * 2 : 0, ease: "easeOut" }}
+          animate={ctaControls}
           className="flex flex-col sm:flex-row items-center justify-center lg:justify-start lg:items-start gap-4 pt-2"
         >
           {/* Primary CTA - Request Access */}
@@ -116,10 +133,7 @@ export function ProviderHero() {
 
       {/* Right Column - Device Mockup */}
       <motion.div
-        key={shouldAnimate ? "animate-mockup" : "static-mockup"}
-        initial={shouldAnimate ? { opacity: 0, x: 30 } : false}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: duration * 1.2, delay: shouldAnimate ? staggerDelay : 0, ease: "easeOut" }}
+        animate={mockupControls}
         className="relative"
       >
         {/* Glow effect behind the mockup - hidden on mobile to prevent dark overlay */}
