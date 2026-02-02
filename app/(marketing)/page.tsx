@@ -2,12 +2,17 @@ import { Metadata } from "next"
 
 import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
-import { VideoSchema, FAQSchema } from "@/components/structured-data"
+import {
+  VideoSchema,
+  FAQSchema,
+  ROICalculatorSchema,
+} from "@/components/structured-data"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 import { MarketingSocialProof } from "./marketing-social-proof"
 import { ProductWorkflow } from "./marketing-workflow"
 import { HowItWorks } from "./marketing-how-it-works"
 import FeaturesSection from "./marketing-features"
+import { ROICalculator } from "./roi-calculator"
 import { MarketingPricing } from "./marketing-pricing"
 import MarketingFAQ from "./marketing-faq"
 import { MarketingCTA } from "./marketing-cta"
@@ -45,15 +50,15 @@ const faqItemsForSchema = [
 ]
 
 const ogImage = `${getURL()}og?title=${encodeURIComponent(
-  "Lyfe AI - Complete Patient Stories"
+  "Lyfe AI - Turn Scattered Records Into Complete Patient Stories"
 )}`
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Lyfe AI - Complete Patient Stories Before They Walk In",
+    absolute: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
   },
   description:
-    "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
+    "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
   keywords: [
     "medical records",
     "patient history",
@@ -66,9 +71,9 @@ export const metadata: Metadata = {
     "health information exchange",
   ],
   openGraph: {
-    title: "Lyfe AI - Complete Patient Stories Before They Walk In",
+    title: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
     description:
-      "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
+      "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
     type: "website",
     locale: "en_US",
     images: [
@@ -82,9 +87,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lyfe AI - Complete Patient Stories Before They Walk In",
+    title: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
     description:
-      "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. Stop chasing records.",
+      "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
     images: [ogImage],
   },
   robots: {
@@ -104,6 +109,7 @@ export default async function LandingPage() {
         thumbnailUrl={`${getURL()}images/brand/macbook-display.png`}
       />
       <FAQSchema items={faqItemsForSchema} />
+      <ROICalculatorSchema />
 
       {/* Hero Section - Full viewport, extends behind header */}
       <LandingHeroSection />
@@ -128,6 +134,11 @@ export default async function LandingPage() {
         {/* Features - Audience-specific value propositions */}
         <FadeIn>
           <FeaturesSection />
+        </FadeIn>
+
+        {/* ROI Calculator - Help providers understand value before pricing */}
+        <FadeIn>
+          <ROICalculator />
         </FadeIn>
 
         {/* Pricing - Provider only (conditionally shown) */}

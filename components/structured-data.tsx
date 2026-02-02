@@ -206,6 +206,45 @@ export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   )
 }
 
+// ROI Calculator schema for SEO - helps Google understand the interactive tool
+export function ROICalculatorSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Healthcare ROI Calculator",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description:
+      "Calculate your healthcare practice's potential savings with AI-powered documentation. Estimate time saved, cost reduction, and ROI from implementing LyfeAI.",
+    url: `${baseUrl}#roi-calculator`,
+    provider: {
+      "@type": "Organization",
+      name: "Lyfe AI",
+      url: baseUrl,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Free ROI calculator for healthcare providers",
+    },
+    featureList: [
+      "Real-time ROI calculations",
+      "Documentation time savings estimation",
+      "Cost reduction projections",
+      "Payback period calculator",
+      "Provider-specific customization",
+    ],
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
 // Combined schema for the homepage
 export function HomePageSchema() {
   return (
