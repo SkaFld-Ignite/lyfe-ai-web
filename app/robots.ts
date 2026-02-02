@@ -3,7 +3,7 @@ export default function robots() {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/watch"],
+        allow: "/",
         disallow: [
           "/api/",
           "/auth/",
@@ -14,9 +14,8 @@ export default function robots() {
         ],
       },
       {
-        // Googlebot-Video specific rules for video indexing
         userAgent: "Googlebot-Video",
-        allow: ["/", "/watch"],
+        allow: "/",
       },
     ],
     sitemap: "https://lyfeco.ai/sitemap.xml",
