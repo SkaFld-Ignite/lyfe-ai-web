@@ -1,13 +1,10 @@
-import type { Metadata } from "next"
-
 import { MarketingFooter } from "@/app/(marketing)/marketing-footer"
 import { SiteHeader } from "@/app/(marketing)/marketing-header"
 import { MarketingProviders } from "@/app/(marketing)/marketing-providers"
+import { HomePageSchema } from "@/components/structured-data"
 
-export const metadata: Metadata = {
-  title: "Lyfe AI",
-  description: "Complete Patient Stories Before They Walk In",
-}
+// Metadata is handled by root layout and individual pages
+// Removed duplicate title to allow template to work correctly
 
 export default function MarketingLayout({
   children,
@@ -16,11 +13,11 @@ export default function MarketingLayout({
 }>) {
   return (
     <MarketingProviders>
-      <main className="bg-background">
+      <HomePageSchema />
+      <main className="bg-background min-h-screen">
         <SiteHeader />
-        {/* pt-20 accounts for fixed header (h-16 = 64px) + small buffer */}
-        <div className="container mx-auto max-w-7xl pt-20 md:pt-24 px-1">
-          {children}
+        {children}
+        <div className="container mx-auto max-w-7xl px-4">
           <MarketingFooter />
         </div>
       </main>

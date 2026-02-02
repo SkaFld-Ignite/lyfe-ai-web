@@ -1,11 +1,22 @@
+import { Metadata } from "next"
+
 import { FadeIn } from "@/components/fade-in"
 import { GradientHeading } from "@/components/gradient-heading"
 import { SectionCard } from "@/components/section-card"
 import { BlogPosts } from "@/app/(marketing)/blog/blog-posts"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog",
-  description: "Read my latest thoughts and insights.",
+  description:
+    "Lyfe AI blog - Insights on healthcare technology, medical records management, EMR integration, and AI in healthcare.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog | Lyfe AI",
+    description:
+      "Insights on healthcare technology, medical records management, and AI in healthcare.",
+  },
 }
 
 export default function BlogPage() {
