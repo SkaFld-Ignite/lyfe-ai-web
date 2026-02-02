@@ -36,21 +36,18 @@ export function MainNav({ session }: MainNavProps) {
     return pathname.startsWith(path)
   }
 
-  // Handle audience-specific navigation (scrolls to hero and sets audience toggle)
+  // Handle audience-specific navigation (routes to / or /patients)
   const handleAudienceNavClick = (targetAudience: Audience) => {
+    // setAudience handles navigation to the correct route
     setAudience(targetAudience)
 
-    // If not on homepage, navigate home first then scroll
-    if (pathname !== "/") {
-      router.push(`/#${targetAudience}s`)
-      return
-    }
-
-    // Scroll to hero section
-    const heroElement = document.getElementById("hero")
-    if (heroElement) {
-      heroElement.scrollIntoView({ behavior: "smooth" })
-    }
+    // Scroll to hero section after a brief delay for route change
+    setTimeout(() => {
+      const heroElement = document.getElementById("hero")
+      if (heroElement) {
+        heroElement.scrollIntoView({ behavior: "smooth" })
+      }
+    }, 100)
   }
 
   // Handle Request Access button click (opens modal with current audience)
@@ -59,8 +56,8 @@ export function MainNav({ session }: MainNavProps) {
   }
 
   const navItems = [
-    { href: "#providers", label: "For Providers", audienceAction: "provider" as Audience },
-    { href: "#patients", label: "For Patients", audienceAction: "patient" as Audience },
+    { href: "/", label: "For Providers", audienceAction: "provider" as Audience },
+    { href: "/patients", label: "For Patients", audienceAction: "patient" as Audience },
     // About page hidden temporarily
   ]
 
