@@ -90,6 +90,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 }
 
@@ -99,9 +106,10 @@ export default async function LandingPage() {
       {/* Structured Data for SEO */}
       <VideoSchema
         name="Lyfe AI Platform Demo - Complete Patient Stories"
-        description="See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch how providers can access complete patient histories before appointments."
+        description="See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch how providers can access complete patient histories before appointments. Click 'Watch Demo' to view."
         contentUrl={DEMO_VIDEO_URL}
         thumbnailUrl={`${getURL()}images/brand/macbook-display.png`}
+        watchUrl={getURL()}
       />
       <FAQSchema items={faqItemsForSchema} />
 

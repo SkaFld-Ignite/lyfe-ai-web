@@ -107,6 +107,8 @@ interface VideoSchemaProps {
   contentUrl?: string
   uploadDate?: string
   duration?: string
+  /** The URL of the page where the video can be watched */
+  watchUrl?: string
 }
 
 export function VideoSchema({
@@ -116,26 +118,47 @@ export function VideoSchema({
   contentUrl,
   uploadDate = "2026-02-01T00:00:00Z",
   duration = "PT3M30S",
+  watchUrl = baseUrl,
 }: VideoSchemaProps = {}) {
   if (!contentUrl) return null
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
+    "@id": `${watchUrl}#video`,
     name,
     description,
     thumbnailUrl,
     contentUrl,
+    // embedUrl tells Google where this video can be watched/embedded
+    embedUrl: watchUrl,
     uploadDate,
     duration,
+    // Tells Google this video is the main content of the specified page
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": watchUrl,
+    },
+    // Indicates how users can watch the video (clicking the demo button)
+    potentialAction: {
+      "@type": "WatchAction",
+      target: watchUrl,
+    },
     publisher: {
       "@type": "Organization",
       name: "Lyfe AI",
       logo: {
         "@type": "ImageObject",
         url: `${baseUrl}images/brand/lyfe-logo.png`,
+        width: 512,
+        height: 512,
       },
     },
+    // Additional fields for Google video indexing
+    inLanguage: "en-US",
+    isFamilyFriendly: true,
+    isAccessibleForFree: true,
+    requiresSubscription: false,
   }
 
   return (
