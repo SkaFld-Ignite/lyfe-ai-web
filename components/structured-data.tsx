@@ -114,7 +114,7 @@ export function VideoSchema({
   description = "See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch the complete platform walkthrough.",
   thumbnailUrl = `${baseUrl}images/brand/macbook-display.png`,
   contentUrl,
-  uploadDate = "2024-01-15",
+  uploadDate = "2026-02-01T00:00:00Z",
   duration = "PT3M30S",
 }: VideoSchemaProps = {}) {
   if (!contentUrl) return null
