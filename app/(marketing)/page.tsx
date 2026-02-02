@@ -2,11 +2,7 @@ import { Metadata } from "next"
 
 import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
-import {
-  VideoSchema,
-  FAQSchema,
-  SEOVideoElement,
-} from "@/components/structured-data"
+import { VideoSchema, FAQSchema } from "@/components/structured-data"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 import { MarketingSocialProof } from "./marketing-social-proof"
 import { ProductWorkflow } from "./marketing-workflow"
@@ -18,7 +14,6 @@ import { MarketingCTA } from "./marketing-cta"
 
 // Demo video URL for SEO
 const DEMO_VIDEO_URL = process.env.NEXT_PUBLIC_DEMO_VIDEO_URL || ""
-const VIDEO_THUMBNAIL = `${getURL()}images/brand/macbook-display.png`
 
 // FAQ items for structured data (provider-focused for SEO)
 const faqItemsForSchema = [
@@ -74,26 +69,9 @@ export const metadata: Metadata = {
     title: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
     description:
       "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
-    type: "video.other",
+    type: "website",
     locale: "en_US",
-    url: getURL(),
-    videos: DEMO_VIDEO_URL
-      ? [
-          {
-            url: DEMO_VIDEO_URL,
-            width: 1920,
-            height: 1080,
-            type: "video/mp4",
-          },
-        ]
-      : undefined,
     images: [
-      {
-        url: VIDEO_THUMBNAIL,
-        width: 1631,
-        height: 1076,
-        alt: "Lyfe AI Platform Demo",
-      },
       {
         url: ogImage,
         width: 1200,
@@ -107,21 +85,11 @@ export const metadata: Metadata = {
     title: "Lyfe AI - Turn Scattered Records Into Complete Patient Stories",
     description:
       "Stop chasing records. One request pulls complete patient histories from 95% of US providers—organized, analyzed, and synced to your EMR.",
-    images: [VIDEO_THUMBNAIL],
+    images: [ogImage],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-    },
-  },
-  other: {
-    "video:duration": "210",
-    "video:release_date": "2026-02-01T00:00:00Z",
   },
 }
 
@@ -133,17 +101,9 @@ export default async function LandingPage() {
         name="Lyfe AI Platform Demo - Complete Patient Stories"
         description="See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch how providers can access complete patient histories before appointments."
         contentUrl={DEMO_VIDEO_URL}
-        thumbnailUrl={VIDEO_THUMBNAIL}
-        embedUrl={getURL()}
+        thumbnailUrl={`${getURL()}images/brand/macbook-display.png`}
       />
       <FAQSchema items={faqItemsForSchema} />
-
-      {/* Hidden video element for Google video indexing - makes this a "watch page" */}
-      <SEOVideoElement
-        src={DEMO_VIDEO_URL}
-        poster={VIDEO_THUMBNAIL}
-        title="Lyfe AI Platform Demo - Complete Patient Stories"
-      />
 
       {/* Hero Section - Full viewport, extends behind header */}
       <LandingHeroSection />

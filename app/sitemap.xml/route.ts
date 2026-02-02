@@ -21,14 +21,11 @@ export async function GET() {
     <video:video>
       <video:thumbnail_loc>https://lyfeco.ai/images/brand/macbook-display.png</video:thumbnail_loc>
       <video:title>Lyfe AI Platform Demo - Complete Patient Stories</video:title>
-      <video:description>See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch how providers can access complete patient histories before appointments, eliminate duplicate tests, and make better-informed clinical decisions.</video:description>
+      <video:description>See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch how providers can access complete patient histories before appointments.</video:description>
       <video:content_loc>https://bzbtfrlvgxhkrxlwwhu.supabase.co/storage/v1/object/public/demo-video/Lyfe%20AI%20Demo%20Video.mov</video:content_loc>
-      <video:player_loc>https://lyfeco.ai/</video:player_loc>
-      <video:duration>210</video:duration>
       <video:publication_date>2026-02-01T00:00:00Z</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
-      <video:requires_subscription>no</video:requires_subscription>
     </video:video>
   </url>
 ${activeRoutes
