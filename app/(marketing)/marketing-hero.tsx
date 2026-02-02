@@ -18,9 +18,9 @@ export function LandingHeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen flex flex-col justify-center pt-16"
+      className="relative w-full pt-24 md:pt-28"
     >
-      <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12 lg:py-16">
+      <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12">
         {/* Audience Toggle */}
         <motion.div
           initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -10 }}
