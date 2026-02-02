@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation"
 
 import { getBlogPosts } from "@/lib/blog"
+import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
 import { SectionCard } from "@/components/section-card"
 import { CustomMDX } from "@/app/(marketing)/blog/blog-mdx"
 import { BlogPostContent } from "@/app/(marketing)/blog/blog-post-content"
 import { BlogPostHero } from "@/app/(marketing)/blog/blog-post-hero"
-import { baseUrl } from "@/app/sitemap"
+
+const baseUrl = getURL()
 
 import { MarketingCTA } from "../../marketing-cta"
 
