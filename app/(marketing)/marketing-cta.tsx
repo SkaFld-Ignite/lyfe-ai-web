@@ -65,18 +65,18 @@ export function MarketingCTA() {
               scale={0.8}
               blur="strongest"
               colors={[
-                "#10b981",
-                "#059669",
-                "#047857",
-                "#34d399",
-                "#10b981",
+                "#2563eb",
+                "#1d4ed8",
+                "#1e40af",
+                "#3b82f6",
+                "#2563eb",
               ]}
               className="absolute inset-0 px-6 py-3.5 md:py-4.5 md:px-9"
             />
             <Magnetic>
               <button
                 onClick={() => openModal(audience)}
-                className="w-full relative z-10 sm:w-auto inline-flex items-center justify-center px-6 py-3.5 md:py-4.5 md:px-9 text-xl md:text-2xl tracking-tight text-white shadow-elevation-light dark:shadow-elevation-dark bg-emerald-600 hover:bg-emerald-700 transition-all duration-200 rounded-md"
+                className="w-full relative z-10 sm:w-auto inline-flex items-center justify-center px-6 py-3.5 md:py-4.5 md:px-9 text-xl md:text-2xl tracking-tight text-white shadow-elevation-light dark:shadow-elevation-dark bg-blue-600 hover:bg-blue-700 transition-all duration-200 rounded-md"
               >
                 <span className="flex items-center gap-2">
                   {content.cta} <ArrowRight className="size-5 md:size-6" />

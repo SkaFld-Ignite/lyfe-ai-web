@@ -176,7 +176,7 @@ export function ProductWorkflow() {
             <div className="relative">
               {/* Connector Line */}
               <motion.div
-                className="absolute top-16 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-emerald-500/30 via-emerald-500 to-emerald-500/30"
+                className="absolute top-16 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-blue-500/30 via-blue-500 to-blue-500/30"
                 variants={connectorVariants}
                 style={{ originX: 0 }}
               />
@@ -215,7 +215,7 @@ export function ProductWorkflow() {
             <div className="relative space-y-6">
               {/* Vertical Connector Line */}
               <motion.div
-                className="absolute left-8 top-16 bottom-16 w-0.5 bg-gradient-to-b from-emerald-500/30 via-emerald-500 to-emerald-500/30"
+                className="absolute left-8 top-16 bottom-16 w-0.5 bg-gradient-to-b from-blue-500/30 via-blue-500 to-blue-500/30"
                 variants={{
                   hidden: { scaleY: shouldReduceMotion ? 1 : 0 },
                   visible: {
@@ -235,7 +235,7 @@ export function ProductWorkflow() {
                   className="relative pl-20"
                 >
                   {/* Step Number Circle */}
-                  <div className="absolute left-4 top-4 w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm font-semibold z-10">
+                  <div className="absolute left-4 top-4 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-semibold z-10">
                     {index + 1}
                   </div>
 
@@ -298,8 +298,8 @@ function WorkflowStepCard({
       className={cn(
         "w-full text-left relative bg-card border border-border/50 p-6 shadow-sm transition-all duration-300 cursor-pointer group",
         isActive
-          ? "border-emerald-500/50 bg-emerald-50/50 dark:bg-emerald-950/20 shadow-lg shadow-emerald-500/10"
-          : "hover:border-emerald-500/30 hover:shadow-md"
+          ? "border-blue-500/50 bg-blue-50/50 dark:bg-blue-950/20 shadow-lg shadow-blue-500/10"
+          : "hover:border-blue-500/30 hover:shadow-md"
       )}
       whileHover={reduceMotion ? undefined : { y: -4 }}
       whileTap={reduceMotion ? undefined : { scale: 0.98 }}
@@ -311,8 +311,8 @@ function WorkflowStepCard({
           className={cn(
             "absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold transition-colors duration-300",
             isActive
-              ? "bg-emerald-500 text-white"
-              : "bg-muted text-muted-foreground group-hover:bg-emerald-500/20"
+              ? "bg-blue-500 text-white"
+              : "bg-muted text-muted-foreground group-hover:bg-blue-500/20"
           )}
         >
           {index + 1}
@@ -325,8 +325,8 @@ function WorkflowStepCard({
           className={cn(
             "p-3 rounded-xl transition-colors duration-300",
             isActive
-              ? "bg-emerald-100 dark:bg-emerald-900/30"
-              : "bg-muted/50 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-900/20"
+              ? "bg-blue-100 dark:bg-blue-900/30"
+              : "bg-muted/50 group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20"
           )}
         >
           <Icon className="w-12 h-12" />
@@ -344,8 +344,8 @@ function WorkflowStepCard({
           className={cn(
             "text-lg font-semibold text-center mb-2 transition-colors duration-300",
             isActive
-              ? "text-emerald-700 dark:text-emerald-300"
-              : "text-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
+              ? "text-blue-700 dark:text-blue-300"
+              : "text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400"
           )}
         >
           {title}
@@ -363,7 +363,7 @@ function WorkflowStepCard({
             transition={{ duration: reduceMotion ? 0 : 0.2 }}
             className="flex justify-center mb-3"
           >
-            <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+            <span className="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-400">
               {highlight}
             </span>
           </motion.div>
@@ -389,7 +389,7 @@ function WorkflowStepCard({
         <motion.div
           className={cn(
             "w-1.5 h-1.5 rounded-full transition-colors duration-300",
-            isActive ? "bg-emerald-500" : "bg-muted-foreground/30"
+            isActive ? "bg-blue-500" : "bg-muted-foreground/30"
           )}
           animate={{
             scale: isActive && !reduceMotion ? [1, 1.2, 1] : 1,
@@ -409,7 +409,7 @@ function WorkflowStepCard({
       {/* Bottom accent line */}
       <div
         className={cn(
-          "absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-500 transition-transform duration-300 origin-left",
+          "absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 transition-transform duration-300 origin-left",
           isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
         )}
       />

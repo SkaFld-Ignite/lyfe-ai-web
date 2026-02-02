@@ -26,7 +26,7 @@ interface WorkflowStepProps {
  * Features:
  * - Active state with highlighted border/background
  * - Hover effect with subtle scale transform
- * - Healthcare-appropriate styling with emerald accents
+ * - Healthcare-appropriate styling with blue accents
  */
 export function WorkflowStep({
   icon,
@@ -41,8 +41,8 @@ export function WorkflowStep({
       className={cn(
         "relative flex flex-col items-center text-center p-6 rounded-xl border transition-colors duration-200",
         isActive
-          ? "bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-500/50 shadow-lg shadow-emerald-500/10"
-          : "bg-card border-border hover:border-emerald-500/30",
+          ? "bg-blue-50/50 dark:bg-blue-950/20 border-blue-500/50 shadow-lg shadow-blue-500/10"
+          : "bg-card border-border hover:border-blue-500/30",
         className
       )}
       whileHover={{ scale: 1.02 }}
@@ -55,7 +55,7 @@ export function WorkflowStep({
           "absolute -top-3 left-1/2 -translate-x-1/2 flex items-center justify-center",
           "w-6 h-6 rounded-full text-xs font-semibold",
           isActive
-            ? "bg-emerald-500 text-white"
+            ? "bg-blue-500 text-white"
             : "bg-muted text-muted-foreground"
         )}
       >
@@ -67,7 +67,7 @@ export function WorkflowStep({
         className={cn(
           "mt-4 mb-4 p-4 rounded-full",
           isActive
-            ? "bg-emerald-100 dark:bg-emerald-900/30"
+            ? "bg-blue-100 dark:bg-blue-900/30"
             : "bg-muted/50"
         )}
       >
@@ -78,7 +78,7 @@ export function WorkflowStep({
       <h3
         className={cn(
           "text-lg font-semibold mb-2",
-          isActive ? "text-emerald-700 dark:text-emerald-300" : "text-foreground"
+          isActive ? "text-blue-700 dark:text-blue-300" : "text-foreground"
         )}
       >
         {title}

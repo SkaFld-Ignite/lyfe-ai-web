@@ -52,10 +52,9 @@ export function MainNav({ session }: MainNavProps) {
   }
 
   const navItems = [
-    { href: "#how-it-works", label: "How It Works" },
     { href: "#providers", label: "For Providers", audienceAction: "provider" as Audience },
     { href: "#patients", label: "For Patients", audienceAction: "patient" as Audience },
-    { href: "/about", label: "About" },
+    // About page hidden temporarily
   ]
 
   return (
@@ -135,17 +134,17 @@ export function MainNav({ session }: MainNavProps) {
               <HeaderAccountDropdown user={session} />
             ) : (
               <div className="hidden md:flex items-center space-x-4">
-                <Link
-                  href="/auth/login"
+                <a
+                  href="https://app.lyfeco.ai/login"
                   className={cn(
                     "text-sm text-muted-foreground hover:text-foreground transition-colors"
                   )}
                 >
                   Login
-                </Link>
+                </a>
                 <Button
                   onClick={handleRequestAccess}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   Request Access
                 </Button>
@@ -204,8 +203,8 @@ export function MainNav({ session }: MainNavProps) {
 
                   {!session && (
                     <div className="pt-4 space-y-3 border-t border-border">
-                      <Link
-                        href="/auth/login"
+                      <a
+                        href="https://app.lyfeco.ai/login"
                         className={cn(
                           "flex items-center justify-center",
                           "h-12 min-h-[48px] w-full rounded-md",
@@ -216,10 +215,10 @@ export function MainNav({ session }: MainNavProps) {
                       >
                         <LogIn className="h-5 w-5 mr-2" />
                         Login
-                      </Link>
+                      </a>
                       <Button
                         onClick={handleRequestAccess}
-                        className="w-full h-12 min-h-[48px] text-base bg-emerald-600 hover:bg-emerald-700 text-white"
+                        className="w-full h-12 min-h-[48px] text-base bg-blue-600 hover:bg-blue-700 text-white"
                       >
                         Request Access
                       </Button>

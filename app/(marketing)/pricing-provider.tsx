@@ -63,10 +63,10 @@ export function ProviderPricing() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
           >
-            <div className="relative bg-card border border-border/50 p-8 md:p-10 shadow-sm hover:shadow-lg hover:shadow-emerald-500/10 transition-shadow duration-200 overflow-hidden">
+            <div className="relative bg-card border border-border/50 p-8 md:p-10 shadow-sm hover:shadow-lg hover:shadow-blue-500/10 transition-shadow duration-200 overflow-hidden">
               {/* Popular badge */}
               <div className="absolute top-6 right-6">
-                <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 px-3 py-1 text-xs font-medium">
+                <div className="bg-blue-500/10 text-blue-600 dark:text-blue-500 px-3 py-1 text-xs font-medium">
                   Most Popular
                 </div>
               </div>
@@ -96,7 +96,7 @@ export function ProviderPricing() {
                     }
                     transition={{ delay: 0.3 + index * 0.05 }}
                   >
-                    <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-emerald-600 dark:text-emerald-500">
+                    <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-blue-600 dark:text-blue-500">
                       <feature.icon className="size-4" strokeWidth={2} />
                     </div>
                     <span className="text-foreground/80">{feature.text}</span>
@@ -109,7 +109,7 @@ export function ProviderPricing() {
                 <Button
                   size="lg"
                   onClick={() => openModal("provider")}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
                 >
                   Request Access
                 </Button>
@@ -117,14 +117,14 @@ export function ProviderPricing() {
                   size="lg"
                   variant="outline"
                   onClick={() => openModal("provider")}
-                  className="w-full border-emerald-600/30 text-emerald-600 dark:text-emerald-500 hover:bg-emerald-500/10"
+                  className="w-full border-blue-600/30 text-blue-600 dark:text-blue-500 hover:bg-blue-500/10"
                 >
                   Start 90-Day Pilot
                 </Button>
               </div>
 
               {/* Subtle bottom accent line */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600" />
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600" />
             </div>
 
             {/* Custom Pricing Note */}
@@ -137,7 +137,7 @@ export function ProviderPricing() {
               Need more than 10 providers?{" "}
               <a
                 href="mailto:hello@lyfe.ai"
-                className="text-emerald-600 dark:text-emerald-500 hover:underline font-medium"
+                className="text-blue-600 dark:text-blue-500 hover:underline font-medium"
               >
                 Contact us for custom pricing
               </a>

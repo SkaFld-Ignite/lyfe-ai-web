@@ -209,9 +209,9 @@ function HowItWorksStepRow({
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center relative overflow-hidden group">
+              <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center relative overflow-hidden group">
                 {/* Background gradient animation */}
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/40 dark:to-emerald-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/40 dark:to-blue-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
 
                 {/* Icon */}
                 <AnimatePresence mode="wait">
@@ -224,7 +224,7 @@ function HowItWorksStepRow({
                     className="relative z-10"
                   >
                     <Icon
-                      className="w-12 h-12 lg:w-16 lg:h-16 text-emerald-600 dark:text-emerald-500"
+                      className="w-12 h-12 lg:w-16 lg:h-16 text-blue-600 dark:text-blue-500"
                       strokeWidth={1.5}
                     />
                   </motion.div>
@@ -232,7 +232,7 @@ function HowItWorksStepRow({
               </div>
 
               {/* Step Number Badge */}
-              <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center text-lg font-bold shadow-lg">
+              <div className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center text-lg font-bold shadow-lg">
                 {step.number}
               </div>
             </motion.div>
@@ -273,11 +273,11 @@ function HowItWorksStepRow({
               transition={{ delay: 0.3 }}
             >
               {/* Static background line */}
-              <div className="absolute inset-0 bg-emerald-200 dark:bg-emerald-800/30" />
+              <div className="absolute inset-0 bg-blue-200 dark:bg-blue-800/30" />
 
               {/* Animated flowing line */}
               <motion.div
-                className="absolute inset-0 w-full bg-gradient-to-b from-emerald-500 via-emerald-500 to-transparent"
+                className="absolute inset-0 w-full bg-gradient-to-b from-blue-500 via-blue-500 to-transparent"
                 initial={{ y: "-100%" }}
                 animate={{ y: "100%" }}
                 transition={{
@@ -297,15 +297,15 @@ function HowItWorksStepRow({
           {/* Left side - Number and connector */}
           <div className="flex flex-col items-center">
             {/* Step Number */}
-            <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center text-lg font-bold flex-shrink-0">
+            <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center text-lg font-bold flex-shrink-0">
               {step.number}
             </div>
 
             {/* Connector Line */}
             {!isLast && (
-              <div className="flex-1 w-px bg-emerald-200 dark:bg-emerald-800/30 my-2 relative overflow-hidden min-h-[40px]">
+              <div className="flex-1 w-px bg-blue-200 dark:bg-blue-800/30 my-2 relative overflow-hidden min-h-[40px]">
                 <motion.div
-                  className="absolute inset-0 w-full bg-gradient-to-b from-emerald-500 via-emerald-500 to-transparent"
+                  className="absolute inset-0 w-full bg-gradient-to-b from-blue-500 via-blue-500 to-transparent"
                   initial={{ y: "-100%" }}
                   animate={{ y: "100%" }}
                   transition={{
@@ -322,7 +322,7 @@ function HowItWorksStepRow({
           <div className="flex-1 pb-6">
             <div className="flex items-start gap-4 mb-3">
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center flex-shrink-0">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`${step.id}-${audience}-mobile`}
@@ -332,7 +332,7 @@ function HowItWorksStepRow({
                     transition={{ duration: 0.2 }}
                   >
                     <Icon
-                      className="w-6 h-6 text-emerald-600 dark:text-emerald-500"
+                      className="w-6 h-6 text-blue-600 dark:text-blue-500"
                       strokeWidth={1.5}
                     />
                   </motion.div>

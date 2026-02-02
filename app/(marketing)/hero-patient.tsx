@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { ArrowRight, BookOpen } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
 
@@ -20,80 +21,106 @@ export function PatientHero() {
   const yOffset = shouldReduceMotion ? 0 : 20
 
   return (
-    <div className="flex flex-col items-center text-center space-y-6 md:space-y-8">
-      {/* Headline */}
-      <motion.h1
-        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration,
-          delay: baseDelay,
-          ease: "easeOut"
-        }}
-        className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-foreground max-w-4xl"
-      >
-        Your Health Records.{" "}
-        <span className="text-emerald-600 dark:text-emerald-500">
-          Finally In One Place.
-        </span>
-      </motion.h1>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      {/* Left Column - Text Content */}
+      <div className="flex flex-col space-y-6 text-center lg:text-left">
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration,
+            delay: baseDelay,
+            ease: "easeOut"
+          }}
+          className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground"
+        >
+          Your Health Records.{" "}
+          <span className="text-blue-600 dark:text-blue-500">
+            Finally In One Place.
+          </span>
+        </motion.h1>
 
-      {/* Subheadline */}
-      <motion.p
-        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration,
-          delay: baseDelay + staggerDelay,
-          ease: "easeOut"
-        }}
-        className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl leading-relaxed"
-      >
-        Access, understand, and share your complete medical history—free.
-      </motion.p>
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration,
+            delay: baseDelay + staggerDelay,
+            ease: "easeOut"
+          }}
+          className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl lg:max-w-none"
+        >
+          Access, understand, and share your complete medical history—free.
+        </motion.p>
 
-      {/* CTA Buttons */}
-      <motion.div
-        initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration,
-          delay: baseDelay + staggerDelay * 2,
-          ease: "easeOut"
-        }}
-        className="flex flex-col sm:flex-row items-center gap-4 pt-4"
-      >
-        {/* Primary CTA - Request Access */}
-        <div className="relative">
-          <GlowEffect
-            scale={0.9}
-            mode="rotate"
-            blur="strongest"
-            colors={["#10b981", "#059669", "#047857", "#34d399", "#10b981"]}
-            className="absolute inset-0"
-          />
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration,
+            delay: baseDelay + staggerDelay * 2,
+            ease: "easeOut"
+          }}
+          className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-2"
+        >
+          {/* Primary CTA - Request Access */}
+          <div className="relative">
+            <GlowEffect
+              scale={0.9}
+              mode="rotate"
+              blur="strongest"
+              colors={["#2563eb", "#1d4ed8", "#1e40af", "#3b82f6", "#2563eb"]}
+              className="absolute inset-0"
+            />
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => openModal("patient")}
+                className="relative z-10 inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 shadow-lg shadow-blue-500/25"
+              >
+                Request Access
+                <ArrowRight className="size-5" />
+              </button>
+            </Magnetic>
+          </div>
+
+          {/* Secondary CTA - Learn How It Works */}
           <Magnetic>
             <button
               type="button"
-              onClick={() => openModal("patient")}
-              className="relative z-10 inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200 shadow-lg shadow-emerald-500/25"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-foreground bg-secondary hover:bg-secondary/80 transition-colors duration-200 border border-border"
             >
-              Request Access
-              <ArrowRight className="size-5" />
+              <BookOpen className="size-5" />
+              Learn How It Works
             </button>
           </Magnetic>
-        </div>
+        </motion.div>
+      </div>
 
-        {/* Secondary CTA - Learn How It Works */}
-        <Magnetic>
-          <button
-            type="button"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-foreground bg-secondary hover:bg-secondary/80 transition-colors duration-200 border border-border"
-          >
-            <BookOpen className="size-5" />
-            Learn How It Works
-          </button>
-        </Magnetic>
+      {/* Right Column - Mobile App Mockup */}
+      <motion.div
+        initial={{ opacity: shouldReduceMotion ? 1 : 0, x: shouldReduceMotion ? 0 : 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: duration * 1.2,
+          delay: baseDelay + staggerDelay,
+          ease: "easeOut"
+        }}
+        className="relative flex justify-center"
+      >
+        {/* Glow effect behind the mockup - hidden on mobile to prevent dark overlay */}
+        <div className="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full scale-75 hidden lg:block" />
+        <Image
+          src="/images/brand/mobile-app-display.png"
+          alt="Lyfe AI mobile app showing health timeline"
+          width={800}
+          height={715}
+          className="relative w-full max-w-md h-auto drop-shadow-2xl"
+          priority
+        />
       </motion.div>
     </div>
   )

@@ -20,7 +20,7 @@ const footerConfig = {
       { text: "How It Works", href: "#how-it-works" },
       { text: "For Providers", href: "#providers" },
       { text: "For Patients", href: "#patients" },
-      { text: "About", href: "#about" },
+      // About page hidden temporarily
     ],
   },
   legal: {
@@ -65,7 +65,7 @@ export function MarketingFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-foreground/70 hover:text-emerald-500 transition-colors text-sm"
+                    className="text-foreground/70 hover:text-blue-500 transition-colors text-sm"
                   >
                     {link.text}
                   </Link>
@@ -84,7 +84,7 @@ export function MarketingFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-foreground/70 hover:text-emerald-500 transition-colors text-sm"
+                    className="text-foreground/70 hover:text-blue-500 transition-colors text-sm"
                   >
                     {link.text}
                   </Link>
@@ -100,7 +100,7 @@ export function MarketingFooter() {
             </h3>
             <motion.a
               href={`mailto:${footerConfig.contact.email}`}
-              className="inline-flex items-center gap-2 text-foreground/70 hover:text-emerald-500 transition-colors text-sm"
+              className="inline-flex items-center gap-2 text-foreground/70 hover:text-blue-500 transition-colors text-sm"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

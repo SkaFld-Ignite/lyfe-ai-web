@@ -23,19 +23,19 @@ export function EmrSyncIcon({ className }: EmrSyncIconProps) {
       {/* Left EMR/Database icon - Lyfe AI */}
       <g transform="translate(6, 18)">
         {/* Database cylinder */}
-        <ellipse cx="12" cy="4" rx="10" ry="4" fill="url(#lyfe-gradient)" stroke="#10b981" strokeWidth="1.5" />
+        <ellipse cx="12" cy="4" rx="10" ry="4" fill="url(#lyfe-gradient)" stroke="#2563eb" strokeWidth="1.5" />
         <path
           d="M2 4 L2 24 A10 4 0 0 0 22 24 L22 4"
           fill="url(#lyfe-gradient)"
-          stroke="#10b981"
+          stroke="#2563eb"
           strokeWidth="1.5"
         />
-        <ellipse cx="12" cy="24" rx="10" ry="4" fill="none" stroke="#10b981" strokeWidth="1.5" />
+        <ellipse cx="12" cy="24" rx="10" ry="4" fill="none" stroke="#2563eb" strokeWidth="1.5" />
         {/* Middle divider lines */}
-        <ellipse cx="12" cy="11" rx="10" ry="3" fill="none" stroke="#10b981" strokeWidth="0.5" opacity="0.5" />
-        <ellipse cx="12" cy="17" rx="10" ry="3" fill="none" stroke="#10b981" strokeWidth="0.5" opacity="0.5" />
+        <ellipse cx="12" cy="11" rx="10" ry="3" fill="none" stroke="#2563eb" strokeWidth="0.5" opacity="0.5" />
+        <ellipse cx="12" cy="17" rx="10" ry="3" fill="none" stroke="#2563eb" strokeWidth="0.5" opacity="0.5" />
         {/* Lyfe AI label */}
-        <text x="12" y="28" fontSize="4" fill="#10b981" textAnchor="middle" fontWeight="bold">LYFE</text>
+        <text x="12" y="28" fontSize="4" fill="#2563eb" textAnchor="middle" fontWeight="bold">LYFE</text>
       </g>
 
       {/* Right EMR/Database icon - EMR System */}
@@ -59,25 +59,25 @@ export function EmrSyncIcon({ className }: EmrSyncIconProps) {
       {/* Bidirectional sync arrows */}
       {/* Top arrow - right to left (data coming in) */}
       <g>
-        <line x1="36" y1="28" x2="28" y2="28" stroke="#059669" strokeWidth="2" strokeLinecap="round" />
-        <polyline points="30,25 27,28 30,31" fill="none" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="36" y1="28" x2="28" y2="28" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" />
+        <polyline points="30,25 27,28 30,31" fill="none" stroke="#1d4ed8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </g>
 
       {/* Bottom arrow - left to right (data going out) */}
       <g>
-        <line x1="28" y1="36" x2="36" y2="36" stroke="#10b981" strokeWidth="2" strokeLinecap="round" />
-        <polyline points="34,33 37,36 34,39" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="28" y1="36" x2="36" y2="36" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" />
+        <polyline points="34,33 37,36 34,39" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </g>
 
       {/* Sync indicator dots */}
-      <circle cx="32" cy="28" r="1.5" fill="#059669" />
-      <circle cx="32" cy="36" r="1.5" fill="#10b981" />
+      <circle cx="32" cy="28" r="1.5" fill="#1d4ed8" />
+      <circle cx="32" cy="36" r="1.5" fill="#2563eb" />
 
       {/* Circular arrow suggesting continuous sync */}
       <path
         d="M32 22 A6 6 0 0 1 38 28"
         fill="none"
-        stroke="#059669"
+        stroke="#1d4ed8"
         strokeWidth="1"
         strokeLinecap="round"
         opacity="0.5"
@@ -85,7 +85,7 @@ export function EmrSyncIcon({ className }: EmrSyncIconProps) {
       <path
         d="M32 42 A6 6 0 0 1 26 36"
         fill="none"
-        stroke="#10b981"
+        stroke="#2563eb"
         strokeWidth="1"
         strokeLinecap="round"
         opacity="0.5"
@@ -93,7 +93,7 @@ export function EmrSyncIcon({ className }: EmrSyncIconProps) {
 
       <defs>
         <linearGradient id="sync-bg" x1="0" y1="0" x2="64" y2="64">
-          <stop offset="0%" stopColor="#10b981" />
+          <stop offset="0%" stopColor="#2563eb" />
           <stop offset="100%" stopColor="#0ea5e9" />
         </linearGradient>
         <linearGradient id="lyfe-gradient" x1="0" y1="0" x2="0" y2="28" gradientUnits="userSpaceOnUse">

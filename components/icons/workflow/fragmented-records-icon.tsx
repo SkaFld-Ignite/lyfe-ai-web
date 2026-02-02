@@ -29,12 +29,12 @@ export function FragmentedRecordsIcon({ className }: FragmentedRecordsIconProps)
           height="20"
           rx="2"
           fill="url(#doc-gradient-1)"
-          stroke="#10b981"
+          stroke="#2563eb"
           strokeWidth="1.5"
         />
-        <line x1="3" y1="5" x2="13" y2="5" stroke="#10b981" strokeWidth="1" strokeLinecap="round" />
-        <line x1="3" y1="9" x2="10" y2="9" stroke="#10b981" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
-        <line x1="3" y1="13" x2="11" y2="13" stroke="#10b981" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
+        <line x1="3" y1="5" x2="13" y2="5" stroke="#2563eb" strokeWidth="1" strokeLinecap="round" />
+        <line x1="3" y1="9" x2="10" y2="9" stroke="#2563eb" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+        <line x1="3" y1="13" x2="11" y2="13" stroke="#2563eb" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
       </g>
 
       {/* Scattered document 2 - top right, tilted opposite */}
@@ -63,22 +63,22 @@ export function FragmentedRecordsIcon({ className }: FragmentedRecordsIconProps)
           height="20"
           rx="2"
           fill="url(#doc-gradient-3)"
-          stroke="#059669"
+          stroke="#1d4ed8"
           strokeWidth="1.5"
         />
-        <line x1="3" y1="5" x2="13" y2="5" stroke="#059669" strokeWidth="1" strokeLinecap="round" />
-        <line x1="3" y1="9" x2="11" y2="9" stroke="#059669" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
-        <line x1="3" y1="13" x2="9" y2="13" stroke="#059669" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
+        <line x1="3" y1="5" x2="13" y2="5" stroke="#1d4ed8" strokeWidth="1" strokeLinecap="round" />
+        <line x1="3" y1="9" x2="11" y2="9" stroke="#1d4ed8" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+        <line x1="3" y1="13" x2="9" y2="13" stroke="#1d4ed8" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
       </g>
 
       {/* Connecting dots suggesting disconnection */}
-      <circle cx="32" cy="30" r="1.5" fill="#10b981" opacity="0.5" />
+      <circle cx="32" cy="30" r="1.5" fill="#2563eb" opacity="0.5" />
       <circle cx="28" cy="26" r="1" fill="#0ea5e9" opacity="0.4" />
-      <circle cx="36" cy="34" r="1" fill="#059669" opacity="0.4" />
+      <circle cx="36" cy="34" r="1" fill="#1d4ed8" opacity="0.4" />
 
       <defs>
         <linearGradient id="fragmented-bg" x1="0" y1="0" x2="64" y2="64">
-          <stop offset="0%" stopColor="#10b981" />
+          <stop offset="0%" stopColor="#2563eb" />
           <stop offset="100%" stopColor="#0ea5e9" />
         </linearGradient>
         <linearGradient id="doc-gradient-1" x1="0" y1="0" x2="16" y2="20">

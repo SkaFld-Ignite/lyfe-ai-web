@@ -17,12 +17,12 @@ export function ShareWithDoctorsIcon({ className }: ShareWithDoctorsIconProps) {
     >
       <defs>
         <linearGradient id="shareGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#10b981" />
+          <stop offset="0%" stopColor="#2563eb" />
           <stop offset="100%" stopColor="#0ea5e9" />
         </linearGradient>
         <linearGradient id="personGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#0ea5e9" />
-          <stop offset="100%" stopColor="#10b981" />
+          <stop offset="100%" stopColor="#2563eb" />
         </linearGradient>
       </defs>
 
@@ -76,10 +76,10 @@ export function ShareWithDoctorsIcon({ className }: ShareWithDoctorsIconProps) {
       </g>
 
       {/* Checkmark indicating success */}
-      <circle cx="32" cy="52" r="6" fill="#10b981" opacity="0.2" />
+      <circle cx="32" cy="52" r="6" fill="#2563eb" opacity="0.2" />
       <path
         d="M29 52 L31 54 L35 50"
-        stroke="#10b981"
+        stroke="#2563eb"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

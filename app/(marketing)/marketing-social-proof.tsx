@@ -1,12 +1,12 @@
 "use client"
 
 import { useRef } from "react"
+import Image from "next/image"
 import {
   Building2,
   Heart,
   Stethoscope,
   UserCheck,
-  ShieldCheck,
   FileCheck,
   Quote,
 } from "lucide-react"
@@ -39,12 +39,14 @@ const trustBadges = [
   {
     title: "HIPAA Certified",
     description: "Enterprise-grade security and privacy compliance",
-    icon: ShieldCheck,
+    icon: null,
+    image: "/images/brand/hipaa-logo.webp",
   },
   {
     title: "FHIR R4 Compliant",
     description: "Interoperable with modern healthcare systems",
     icon: FileCheck,
+    image: null,
   },
 ]
 
@@ -91,7 +93,7 @@ export function MarketingSocialProof() {
         innerClassName="py-12 md:py-20"
       >
         {/* Subtle background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/30 via-transparent to-sky-50/20 dark:from-emerald-950/20 dark:via-transparent dark:to-sky-950/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-sky-50/20 dark:from-blue-950/20 dark:via-transparent dark:to-sky-950/10 pointer-events-none" />
 
         <motion.div
           className="relative z-10 space-y-16"
@@ -125,14 +127,14 @@ export function MarketingSocialProof() {
             {practicePlaceholders.map((practice, index) => (
               <motion.div
                 key={index}
-                className="flex flex-col items-center justify-center gap-3 p-6 bg-card/50 border border-border/30 hover:border-emerald-500/30 hover:bg-card/80 transition-all duration-200 group"
+                className="flex flex-col items-center justify-center gap-3 p-6 bg-card/50 border border-border/30 hover:border-blue-500/30 hover:bg-card/80 transition-all duration-200 group"
                 whileHover={{
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 400, damping: 25 },
                 }}
               >
-                <div className="w-14 h-14 bg-muted/50 group-hover:bg-emerald-500/10 flex items-center justify-center transition-colors duration-200">
-                  <practice.icon className="size-7 text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-500 transition-colors duration-200" />
+                <div className="w-14 h-14 bg-muted/50 group-hover:bg-blue-500/10 flex items-center justify-center transition-colors duration-200">
+                  <practice.icon className="size-7 text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-200" />
                 </div>
                 <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200 text-center">
                   {practice.name}
@@ -149,14 +151,24 @@ export function MarketingSocialProof() {
             {trustBadges.map((badge, index) => (
               <motion.div
                 key={index}
-                className="flex items-center gap-4 p-4 px-6 bg-emerald-500/5 border border-emerald-500/20 hover:border-emerald-500/40 transition-colors duration-200"
+                className="flex items-center gap-4 p-4 px-6 bg-blue-500/5 border border-blue-500/20 hover:border-blue-500/40 transition-colors duration-200"
                 whileHover={{
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 400, damping: 25 },
                 }}
               >
-                <div className="w-12 h-12 bg-emerald-500/10 flex items-center justify-center">
-                  <badge.icon className="size-6 text-emerald-600 dark:text-emerald-500" />
+                <div className="w-12 h-12 bg-blue-500/10 flex items-center justify-center">
+                  {badge.image ? (
+                    <Image
+                      src={badge.image}
+                      alt={badge.title}
+                      width={40}
+                      height={40}
+                      className="object-contain"
+                    />
+                  ) : badge.icon ? (
+                    <badge.icon className="size-6 text-blue-600 dark:text-blue-500" />
+                  ) : null}
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">
@@ -177,7 +189,7 @@ export function MarketingSocialProof() {
           >
             <div className="relative bg-card/50 border border-border/50 p-8 md:p-12">
               {/* Quote Icon */}
-              <div className="absolute -top-4 left-8 w-8 h-8 bg-emerald-500 flex items-center justify-center">
+              <div className="absolute -top-4 left-8 w-8 h-8 bg-blue-500 flex items-center justify-center">
                 <Quote className="size-4 text-white" />
               </div>
 
@@ -188,7 +200,7 @@ export function MarketingSocialProof() {
                 </p>
                 <footer className="flex items-center gap-4">
                   {/* Avatar Placeholder */}
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-semibold">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold">
                     {testimonialQuote.author
                       .split(" ")
                       .map((n) => n[0])

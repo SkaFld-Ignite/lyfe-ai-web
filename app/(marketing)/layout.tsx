@@ -16,7 +16,7 @@ export default function MarketingLayout({
 }>) {
   return (
     <MarketingProviders>
-      <main className="bg-black md:bg-background ">
+      <main className="bg-background">
         <SiteHeader />
         <div className="container mx-auto max-w-7xl pt-1 md:pt-1 px-1">
           {children}

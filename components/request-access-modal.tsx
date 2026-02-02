@@ -70,9 +70,9 @@ export function RequestAccessModal({
                   damping: 20,
                   delay: 0.1,
                 }}
-                className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950/50"
+                className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-950/50"
               >
-                <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+                <CheckCircle2 className="h-8 w-8 text-blue-600" />
               </motion.div>
               <motion.h3
                 initial={{ opacity: 0, y: 10 }}

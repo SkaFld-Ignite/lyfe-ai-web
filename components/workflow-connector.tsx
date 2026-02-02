@@ -18,7 +18,7 @@ interface WorkflowConnectorProps {
  * Features:
  * - Animated dash pattern flowing in data flow direction
  * - Horizontal on desktop, vertical on mobile
- * - Healthcare-appropriate emerald color scheme
+ * - Healthcare-appropriate blue color scheme
  * - Respects reduced motion preferences
  */
 export function WorkflowConnector({
@@ -55,9 +55,9 @@ export function WorkflowConnector({
             x2="100%"
             y2="0%"
           >
-            <stop offset="0%" stopColor="rgb(16 185 129)" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="rgb(16 185 129)" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="rgb(16 185 129)" stopOpacity="0.3" />
+            <stop offset="0%" stopColor="rgb(37 99 235)" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="rgb(37 99 235)" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="rgb(37 99 235)" stopOpacity="0.3" />
           </linearGradient>
         </defs>
 
@@ -78,7 +78,7 @@ export function WorkflowConnector({
           y1="10"
           x2="100"
           y2="10"
-          stroke="rgb(16 185 129)"
+          stroke="rgb(37 99 235)"
           strokeWidth="2"
           strokeLinecap="round"
           strokeDasharray="8 12"
@@ -100,7 +100,7 @@ export function WorkflowConnector({
         {/* Arrow head */}
         <motion.polygon
           points="90,5 100,10 90,15"
-          fill="rgb(16 185 129)"
+          fill="rgb(37 99 235)"
           initial={{ opacity: 0.5 }}
           animate={isAnimating ? { opacity: [0.5, 1, 0.5] } : { opacity: 0.5 }}
           transition={{
@@ -127,9 +127,9 @@ export function WorkflowConnector({
             x2="0%"
             y2="100%"
           >
-            <stop offset="0%" stopColor="rgb(16 185 129)" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="rgb(16 185 129)" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="rgb(16 185 129)" stopOpacity="0.3" />
+            <stop offset="0%" stopColor="rgb(37 99 235)" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="rgb(37 99 235)" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="rgb(37 99 235)" stopOpacity="0.3" />
           </linearGradient>
         </defs>
 
@@ -150,7 +150,7 @@ export function WorkflowConnector({
           y1="0"
           x2="10"
           y2="40"
-          stroke="rgb(16 185 129)"
+          stroke="rgb(37 99 235)"
           strokeWidth="2"
           strokeLinecap="round"
           strokeDasharray="6 8"
@@ -172,7 +172,7 @@ export function WorkflowConnector({
         {/* Arrow head */}
         <motion.polygon
           points="5,32 10,40 15,32"
-          fill="rgb(16 185 129)"
+          fill="rgb(37 99 235)"
           initial={{ opacity: 0.5 }}
           animate={isAnimating ? { opacity: [0.5, 1, 0.5] } : { opacity: 0.5 }}
           transition={{

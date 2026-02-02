@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/accordion"
 import { GradientHeading } from "@/components/gradient-heading"
 import { SectionCard } from "@/components/section-card"
+import { useAudience } from "@/lib/context/audience-context"
 
 export default function MarketingFAQ() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+  const { audience } = useAudience()
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -39,6 +41,9 @@ export default function MarketingFAQ() {
       },
     },
   }
+
+  // Select FAQ items based on audience
+  const faqItems = audience === "provider" ? providerFaqItems : patientFaqItems
 
   return (
     <section>
@@ -155,45 +160,90 @@ export default function MarketingFAQ() {
   )
 }
 
-const faqItems = [
+// Provider-specific FAQ items
+const providerFaqItems = [
   {
-    question: "How does the AI content generation work?",
+    question: "How does Lyfe AI collect patient information?",
     answer:
-      "Our AI analyzes your brand's voice, target audience, and content goals to generate engaging social media posts, captions, and stories. You can customize the output and maintain full control over what gets published.",
+      "Lyfe AI uses a secure, HIPAA-compliant AI assistant that engages patients via text message before their appointment. Patients answer questions about their symptoms, medical history, and current medications in a conversational format.",
   },
   {
-    question: "What kind of analytics do you provide?",
+    question: "Is the patient data secure and HIPAA compliant?",
     answer:
-      "We provide comprehensive analytics including engagement rates, reach, impressions, and audience insights. Our platform also offers content performance predictions and optimization recommendations.",
+      "Absolutely. Lyfe AI is fully HIPAA compliant with end-to-end encryption, secure data storage, and strict access controls. We follow industry best practices for healthcare data security and undergo regular security audits.",
   },
   {
-    question: "Can I integrate with my existing social media accounts?",
+    question: "How does this integrate with my existing EHR system?",
     answer:
-      "Yes, we offer seamless integration with major social media platforms including Instagram, Twitter, LinkedIn, and Facebook. You can manage all your accounts from a single dashboard.",
+      "Lyfe AI integrates seamlessly with major EHR systems including Epic, Cerner, and Athenahealth. Patient intake data is automatically formatted and can be imported directly into your existing workflow.",
   },
   {
-    question: "How often is the trend analysis updated?",
+    question: "How much time does this actually save per patient?",
     answer:
-      "Our trend analysis is updated in real-time, providing you with the latest insights and opportunities. We monitor multiple data sources to ensure you never miss a trending topic relevant to your brand.",
+      "On average, providers save 5-10 minutes per patient visit by having comprehensive intake information ready before the appointment. This translates to seeing more patients or spending more quality time with each one.",
   },
   {
-    question: "What kind of support do you offer?",
+    question: "What if a patient doesn't complete the intake?",
     answer:
-      "We provide 24/7 email support for all users, with priority support and Slack access for Plus plan subscribers. Our team is always ready to help you maximize your content strategy.",
+      "Lyfe AI sends gentle reminders and can pause and resume conversations. If a patient doesn't complete intake, you'll still have partial information, and traditional intake methods remain available as a backup.",
   },
   {
-    question: "Is there a limit to how much content I can generate?",
+    question: "Can I customize the questions asked to patients?",
     answer:
-      "No, there are no limits on content generation. You can create as much content as you need to maintain an active and engaging social media presence.",
+      "Yes! You can customize intake questions based on specialty, visit type, or specific conditions. Our AI adapts follow-up questions based on patient responses to gather the most relevant information.",
   },
   {
-    question: "Can I schedule posts in advance?",
+    question: "What's the pricing structure for providers?",
     answer:
-      "Yes, our platform includes a powerful scheduling feature that allows you to plan and schedule your content weeks or months in advance. You can also set up automated posting at optimal times for maximum engagement.",
+      "We offer flexible pricing based on practice size and volume. Contact us for a customized quote. Most practices see ROI within the first month through improved efficiency and reduced no-shows.",
   },
   {
-    question: "How do you ensure content quality and brand consistency?",
+    question: "How do patients typically respond to AI-assisted intake?",
     answer:
-      "Our AI is trained to maintain your brand's voice and style while generating content. You can set brand guidelines, tone preferences, and content parameters to ensure all generated content aligns with your brand identity.",
+      "Patient satisfaction scores are consistently high. Many patients prefer the convenience of completing intake from their phone at their own pace, rather than filling out clipboards in the waiting room.",
+  },
+]
+
+// Patient-specific FAQ items
+const patientFaqItems = [
+  {
+    question: "How do I use Lyfe AI before my appointment?",
+    answer:
+      "After scheduling your appointment, you'll receive a text message from Lyfe AI. Simply respond to the questions about your health, symptoms, and medical history. It's like texting with a helpful assistant.",
+  },
+  {
+    question: "Is my health information kept private?",
+    answer:
+      "Yes, your privacy is our top priority. Lyfe AI is fully HIPAA compliant, meaning your health information is encrypted and protected by the same strict standards as your doctor's office.",
+  },
+  {
+    question: "Do I have to use this instead of talking to my doctor?",
+    answer:
+      "Not at all! Lyfe AI helps your doctor prepare for your visit by gathering information beforehand. You'll still have your full appointment time to discuss concerns directly with your healthcare provider.",
+  },
+  {
+    question: "What if I don't want to answer a question?",
+    answer:
+      "You can skip any question you're not comfortable answering. Your participation is voluntary, and you can always discuss sensitive topics directly with your doctor during your appointment.",
+  },
+  {
+    question: "How long does the intake process take?",
+    answer:
+      "Most patients complete the intake in 5-10 minutes. You can do it anytime before your appointment - on your couch, during your commute, or whenever is convenient for you.",
+  },
+  {
+    question: "What happens to my information after my visit?",
+    answer:
+      "Your information becomes part of your medical record at your healthcare provider's office, just like any other intake form. It's stored securely and used only for your care.",
+  },
+  {
+    question: "Can I update my information if something changes?",
+    answer:
+      "Yes! If your symptoms change or you remember something important before your appointment, you can text Lyfe AI to update your information. Your doctor will see the latest version.",
+  },
+  {
+    question: "What if I have trouble using the text system?",
+    answer:
+      "Our AI is designed to be simple and conversational. If you have any issues, you can always complete traditional paperwork at your appointment, or contact your provider's office for assistance.",
   },
 ]
