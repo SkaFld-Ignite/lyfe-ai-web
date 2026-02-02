@@ -11,29 +11,25 @@ const footerConfig = {
   brand: {
     name: "Lyfe AI",
     description: "Complete patient stories. Before they walk in.",
-    location: "Nashville, TN",
   },
   quickLinks: {
     title: "Quick Links",
     links: [
       { text: "Home", href: "/" },
-      { text: "How It Works", href: "#how-it-works" },
       { text: "For Providers", href: "#providers" },
       { text: "For Patients", href: "#patients" },
-      // About page hidden temporarily
     ],
   },
   legal: {
     title: "Legal",
     links: [
       { text: "Privacy Policy", href: "/privacy" },
-      { text: "Terms of Service", href: "/terms" },
-      { text: "HIPAA Notice", href: "/hipaa" },
+      { text: "Terms of Use", href: "/terms" },
     ],
   },
   contact: {
     title: "Contact",
-    email: "hello@lyfe.ai",
+    email: "hello@lyfeco.ai",
   },
 } as const
 
@@ -49,9 +45,6 @@ export function MarketingFooter() {
             <LyfeLogo />
             <p className="text-foreground/80 text-sm leading-relaxed">
               {footerConfig.brand.description}
-            </p>
-            <p className="text-foreground/60 text-sm">
-              {footerConfig.brand.location}
             </p>
           </div>
 
