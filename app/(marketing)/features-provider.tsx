@@ -89,7 +89,7 @@ export function ProviderFeatures() {
               Focus on Patients, Not Paperwork
             </GradientHeading>
             <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
-              Go live in less than one week. Complete patient histories before every visit.
+              Go live in one week. Complete patient histories before every visit.
             </p>
           </motion.div>
 

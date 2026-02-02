@@ -118,7 +118,7 @@ export function HowItWorks() {
                   className="max-w-3xl mx-auto"
                 >
                   {audience === "provider"
-                    ? "Live in Less Than One Week"
+                    ? "Live in One Week"
                     : "Your Complete Health Story in Minutes"}
                 </GradientHeading>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
