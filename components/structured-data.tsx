@@ -107,6 +107,8 @@ interface VideoSchemaProps {
   contentUrl?: string
   uploadDate?: string
   duration?: string
+  /** The URL of the page where the video can be watched (embedUrl for Google) */
+  embedUrl?: string
 }
 
 export function VideoSchema({
@@ -116,26 +118,40 @@ export function VideoSchema({
   contentUrl,
   uploadDate = "2026-02-01T00:00:00Z",
   duration = "PT3M30S",
+  embedUrl = baseUrl,
 }: VideoSchemaProps = {}) {
   if (!contentUrl) return null
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
+    "@id": `${baseUrl}#video`,
     name,
     description,
     thumbnailUrl,
     contentUrl,
+    embedUrl,
     uploadDate,
     duration,
+    // Critical: tells Google this page is a watch page for the video
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": baseUrl,
+    },
     publisher: {
       "@type": "Organization",
       name: "Lyfe AI",
       logo: {
         "@type": "ImageObject",
         url: `${baseUrl}images/brand/lyfe-logo.png`,
+        width: 512,
+        height: 512,
       },
     },
+    // Additional fields for better Google indexing
+    inLanguage: "en-US",
+    isFamilyFriendly: true,
+    isAccessibleForFree: true,
   }
 
   return (
@@ -143,6 +159,52 @@ export function VideoSchema({
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
+  )
+}
+
+/**
+ * Hidden video element for SEO crawlers.
+ * Google requires a detectable video element on the page to index it as a "watch page".
+ * This component renders a visually hidden but crawlable video element.
+ */
+interface SEOVideoElementProps {
+  src: string
+  poster?: string
+  title?: string
+}
+
+export function SEOVideoElement({
+  src,
+  poster,
+  title = "Lyfe AI Platform Demo",
+}: SEOVideoElementProps) {
+  if (!src) return null
+
+  return (
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        width: "1px",
+        height: "1px",
+        padding: 0,
+        margin: "-1px",
+        overflow: "hidden",
+        clip: "rect(0, 0, 0, 0)",
+        whiteSpace: "nowrap",
+        border: 0,
+      }}
+    >
+      <video
+        src={src}
+        poster={poster}
+        preload="none"
+        playsInline
+        title={title}
+      >
+        <track kind="captions" label="English" srcLang="en" />
+      </video>
+    </div>
   )
 }
 
