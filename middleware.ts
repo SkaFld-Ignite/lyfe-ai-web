@@ -1,8 +1,18 @@
-import { type NextRequest } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 
 import { updateSession } from "@/lib/db/middleware"
 
+// Hidden pages - redirects to home. Set to [] to re-enable access.
+const HIDDEN_PAGES = ["/checkout", "/pricing", "/about", "/dashboard"]
+
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Block access to hidden pages - redirect to home
+  if (HIDDEN_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`))) {
+    return NextResponse.redirect(new URL("/", request.url))
+  }
+
   return await updateSession(request)
 }
 
