@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   },
   description:
     "AI-powered platform that aggregates scattered medical records into one searchable timeline and syncs back to your EMR. HIPAA compliant, FHIR R4 integrated.",
+  applicationName: "Lyfe AI",
   keywords: [
     "medical records",
     "patient history",
