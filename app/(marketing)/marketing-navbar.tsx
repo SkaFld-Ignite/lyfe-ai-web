@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { User } from "@supabase/supabase-js"
 import { LogIn, Menu } from "lucide-react"
 import { motion, useScroll, useTransform } from "motion/react"
@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils"
 import { useAudience, Audience } from "@/lib/context/audience-context"
 import { useRequestAccessModal } from "@/lib/context/request-access-modal-context"
 import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/ui/mode-toggle"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { HeaderAccountDropdown } from "@/components/account-dropdown"
 import { LyfeLogo } from "@/components/lyfe-logo"
@@ -21,6 +20,7 @@ type MainNavProps = {
 
 export function MainNav({ session }: MainNavProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const { scrollY } = useScroll()
   const { audience, setAudience } = useAudience()
   const { openModal } = useRequestAccessModal()
@@ -39,6 +39,13 @@ export function MainNav({ session }: MainNavProps) {
   // Handle audience-specific navigation (scrolls to hero and sets audience toggle)
   const handleAudienceNavClick = (targetAudience: Audience) => {
     setAudience(targetAudience)
+
+    // If not on homepage, navigate home first then scroll
+    if (pathname !== "/") {
+      router.push(`/#${targetAudience}s`)
+      return
+    }
+
     // Scroll to hero section
     const heroElement = document.getElementById("hero")
     if (heroElement) {
@@ -148,7 +155,6 @@ export function MainNav({ session }: MainNavProps) {
                 >
                   Request Access
                 </Button>
-                <ModeToggle />
               </div>
             )}
 
@@ -222,9 +228,6 @@ export function MainNav({ session }: MainNavProps) {
                       >
                         Request Access
                       </Button>
-                      <div className="flex justify-end mt-4">
-                        <ModeToggle />
-                      </div>
                     </div>
                   )}
                 </div>

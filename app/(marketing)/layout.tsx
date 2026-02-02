@@ -18,7 +18,8 @@ export default function MarketingLayout({
     <MarketingProviders>
       <main className="bg-background">
         <SiteHeader />
-        <div className="container mx-auto max-w-7xl pt-1 md:pt-1 px-1">
+        {/* pt-20 accounts for fixed header (h-16 = 64px) + small buffer */}
+        <div className="container mx-auto max-w-7xl pt-20 md:pt-24 px-1">
           {children}
           <MarketingFooter />
         </div>
