@@ -23,9 +23,9 @@ export function LandingHeroSection() {
     >
       <div className="w-full h-32 md:h-32 lg:h-[130px] shrink-0" aria-hidden="true" />
       <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12">
-        {/* Audience Toggle */}
+        {/* Audience Toggle - initial={false} prevents opacity:0 on first render for SEO */}
         <motion.div
-          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -10 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration, ease: "easeOut" }}
           className="flex justify-center mb-8 md:mb-12"
@@ -35,13 +35,13 @@ export function LandingHeroSection() {
 
         {/* Hero Content with Crossfade Animation */}
         <div className="relative">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             {audience === "provider" ? (
               <motion.div
                 key="provider-hero"
-                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -yOffset }}
+                exit={{ opacity: 0, y: -yOffset }}
                 transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="provider-content"
               >
@@ -50,9 +50,9 @@ export function LandingHeroSection() {
             ) : (
               <motion.div
                 key="patient-hero"
-                initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : -yOffset }}
+                exit={{ opacity: 0, y: -yOffset }}
                 transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="patient-content"
               >

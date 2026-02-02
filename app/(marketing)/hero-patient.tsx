@@ -24,9 +24,9 @@ export function PatientHero() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       {/* Left Column - Text Content */}
       <div className="flex flex-col space-y-6 text-center lg:text-left">
-        {/* Headline */}
+        {/* Headline - initial={false} for SEO (content visible on first render) */}
         <motion.h1
-          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration,
@@ -43,7 +43,7 @@ export function PatientHero() {
 
         {/* Subheadline */}
         <motion.p
-          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration,
@@ -57,7 +57,7 @@ export function PatientHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: shouldReduceMotion ? 1 : 0, y: yOffset }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration,
@@ -106,7 +106,7 @@ export function PatientHero() {
 
       {/* Right Column - Mobile App Mockup */}
       <motion.div
-        initial={{ opacity: shouldReduceMotion ? 1 : 0, x: shouldReduceMotion ? 0 : 30 }}
+        initial={false}
         animate={{ opacity: 1, x: 0 }}
         transition={{
           duration: duration * 1.2,
