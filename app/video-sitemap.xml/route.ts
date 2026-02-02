@@ -1,25 +1,18 @@
-import { getURL } from "@/lib/utils"
-
-const baseUrl = getURL()
-const DEMO_VIDEO_URL = process.env.NEXT_PUBLIC_DEMO_VIDEO_URL || ""
-
 export async function GET() {
-  const hasVideo = DEMO_VIDEO_URL && DEMO_VIDEO_URL.length > 0
-
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-${hasVideo ? `  <url>
-    <loc>${baseUrl}</loc>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://lyfeco.ai/</loc>
     <video:video>
-      <video:thumbnail_loc>${baseUrl}images/brand/macbook-display.png</video:thumbnail_loc>
+      <video:thumbnail_loc>https://lyfeco.ai/images/brand/macbook-display.png</video:thumbnail_loc>
       <video:title>Lyfe AI Platform Demo - Complete Patient Stories</video:title>
       <video:description>See how Lyfe AI aggregates scattered medical records into one searchable clinical timeline. Watch how providers can access complete patient histories before appointments.</video:description>
-      <video:content_loc>${DEMO_VIDEO_URL}</video:content_loc>
+      <video:content_loc>https://bzbtfrlvgxhkrxlwwhu.supabase.co/storage/v1/object/public/demo-video/Lyfe%20AI%20Demo%20Video.mov</video:content_loc>
+      <video:publication_date>2026-02-01</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
     </video:video>
-  </url>` : `  <!-- No video URL configured. Set NEXT_PUBLIC_DEMO_VIDEO_URL to enable. -->`}
+  </url>
 </urlset>`
 
   return new Response(xml, {
