@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 
 import { useAudience } from "@/lib/context/audience-context"
@@ -10,10 +11,20 @@ import { PatientHero } from "./hero-patient"
 export function LandingHeroSection() {
   const { audience } = useAudience()
   const shouldReduceMotion = useReducedMotion()
+  const [isClient, setIsClient] = useState(false)
+
+  // Detect client-side hydration for animations
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Animation values - reduced when user prefers reduced motion
   const yOffset = shouldReduceMotion ? 0 : 10
   const duration = shouldReduceMotion ? 0 : 0.3
+
+  // Animation config: SSR renders visible, client enables animations
+  const getInitial = () => (isClient ? { opacity: 0, y: -yOffset } : false)
+  const getAnimate = () => ({ opacity: 1, y: 0 })
 
   return (
     <section
@@ -23,10 +34,10 @@ export function LandingHeroSection() {
     >
       <div className="w-full h-32 md:h-32 lg:h-[130px] shrink-0" aria-hidden="true" />
       <div className="container mx-auto px-4 max-w-7xl py-8 md:py-12">
-        {/* Audience Toggle - initial={false} prevents opacity:0 on first render for SEO */}
+        {/* Audience Toggle */}
         <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
+          initial={getInitial()}
+          animate={getAnimate()}
           transition={{ duration, ease: "easeOut" }}
           className="flex justify-center mb-8 md:mb-12"
         >
@@ -35,12 +46,12 @@ export function LandingHeroSection() {
 
         {/* Hero Content with Crossfade Animation */}
         <div className="relative">
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence mode="wait" initial={!isClient}>
             {audience === "provider" ? (
               <motion.div
                 key="provider-hero"
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
+                initial={getInitial()}
+                animate={getAnimate()}
                 exit={{ opacity: 0, y: -yOffset }}
                 transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="provider-content"
@@ -50,8 +61,8 @@ export function LandingHeroSection() {
             ) : (
               <motion.div
                 key="patient-hero"
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
+                initial={getInitial()}
+                animate={getAnimate()}
                 exit={{ opacity: 0, y: -yOffset }}
                 transition={{ duration, ease: "easeInOut" }}
                 aria-labelledby="patient-content"

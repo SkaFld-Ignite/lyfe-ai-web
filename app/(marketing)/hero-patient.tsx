@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ArrowRight, BookOpen } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
@@ -13,6 +14,12 @@ export function PatientHero() {
   const isMobile = useIsMobile()
   const { openModal } = useRequestAccessModal()
   const shouldReduceMotion = useReducedMotion()
+  const [isClient, setIsClient] = useState(false)
+
+  // Detect client-side hydration for animations
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // Stagger animation values - disabled when reduced motion preferred
   const baseDelay = shouldReduceMotion ? 0 : isMobile ? 0.1 : 0.2
@@ -20,14 +27,19 @@ export function PatientHero() {
   const duration = shouldReduceMotion ? 0 : isMobile ? 0.3 : 0.5
   const yOffset = shouldReduceMotion ? 0 : 20
 
+  // Animation config: SSR renders visible, client enables animations
+  const getInitial = (axis: "y" | "x" = "y") =>
+    isClient ? { opacity: 0, [axis]: axis === "y" ? yOffset : 30 } : false
+  const getAnimate = () => ({ opacity: 1, y: 0, x: 0 })
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       {/* Left Column - Text Content */}
       <div className="flex flex-col space-y-6 text-center lg:text-left">
-        {/* Headline - initial={false} for SEO (content visible on first render) */}
+        {/* Headline */}
         <motion.h1
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
+          initial={getInitial("y")}
+          animate={getAnimate()}
           transition={{
             duration,
             delay: baseDelay,
@@ -43,8 +55,8 @@ export function PatientHero() {
 
         {/* Subheadline */}
         <motion.p
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
+          initial={getInitial("y")}
+          animate={getAnimate()}
           transition={{
             duration,
             delay: baseDelay + staggerDelay,
@@ -57,8 +69,8 @@ export function PatientHero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
+          initial={getInitial("y")}
+          animate={getAnimate()}
           transition={{
             duration,
             delay: baseDelay + staggerDelay * 2,
@@ -106,8 +118,8 @@ export function PatientHero() {
 
       {/* Right Column - Mobile App Mockup */}
       <motion.div
-        initial={false}
-        animate={{ opacity: 1, x: 0 }}
+        initial={getInitial("x")}
+        animate={getAnimate()}
         transition={{
           duration: duration * 1.2,
           delay: baseDelay + staggerDelay,
