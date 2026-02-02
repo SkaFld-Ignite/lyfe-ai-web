@@ -14,7 +14,7 @@ const contentByAudience = {
   provider: {
     headline: "Stop Wasting Time. Start Delivering Better Care.",
     subheadline:
-      "Join innovative practices getting complete patient records with one click. Go live in less than a week.",
+      "Join innovative practices getting complete patient records with one click. Go live in one week.",
     cta: "Request Access",
   },
   patient: {
