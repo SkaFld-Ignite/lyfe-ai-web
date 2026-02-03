@@ -2,12 +2,17 @@ import { Metadata } from "next"
 
 import { getURL } from "@/lib/utils"
 import { FadeIn } from "@/components/fade-in"
-import { VideoSchema, FAQSchema } from "@/components/structured-data"
+import {
+  VideoSchema,
+  FAQSchema,
+  ROICalculatorSchema,
+} from "@/components/structured-data"
 import { LandingHeroSection } from "@/app/(marketing)/marketing-hero"
 import { MarketingSocialProof } from "./marketing-social-proof"
 import { ProductWorkflow } from "./marketing-workflow"
 import { HowItWorks } from "./marketing-how-it-works"
 import FeaturesSection from "./marketing-features"
+import { ROICalculator } from "./roi-calculator"
 import { MarketingPricing } from "./marketing-pricing"
 import MarketingFAQ from "./marketing-faq"
 import { MarketingCTA } from "./marketing-cta"
@@ -112,6 +117,7 @@ export default async function LandingPage() {
         watchUrl={getURL()}
       />
       <FAQSchema items={faqItemsForSchema} />
+      <ROICalculatorSchema />
 
       {/* Hero Section - Full viewport, extends behind header */}
       <LandingHeroSection />
@@ -136,6 +142,11 @@ export default async function LandingPage() {
         {/* Features - Audience-specific value propositions */}
         <FadeIn>
           <FeaturesSection />
+        </FadeIn>
+
+        {/* ROI Calculator - Help providers understand value before pricing */}
+        <FadeIn>
+          <ROICalculator />
         </FadeIn>
 
         {/* Pricing - Provider only (conditionally shown) */}
