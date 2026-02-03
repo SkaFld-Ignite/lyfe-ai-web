@@ -79,12 +79,12 @@ export function PatientFeatures() {
             <GradientHeading
               size="lg"
               weight="bold"
-              className="max-w-3xl mx-auto"
+              className="max-w-3xl mx-auto px-4"
             >
-              Control Your Health Story
+              Everything You Need
             </GradientHeading>
             <p className="text-muted-foreground text-xl max-w-2xl mx-auto leading-relaxed">
-              Your health data belongs to you. We just make it accessible—always free, always yours.
+              Access, understand, and share your medical records—no cost, no hassle, no limits.
             </p>
           </motion.div>
 

@@ -151,16 +151,16 @@ export function ProductWorkflow() {
                 <GradientHeading
                   size="lg"
                   weight="bold"
-                  className="max-w-3xl mx-auto"
+                  className="max-w-3xl mx-auto px-4"
                 >
                   {audience === "provider"
                     ? "From Scattered to Structured—In One Click"
-                    : "From Scattered to Complete—In Minutes"}
+                    : "From Scattered to Complete"}
                 </GradientHeading>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
                   {audience === "provider"
                     ? "Complete patient records from 95% of US providers, organized and ready for care."
-                    : "All your health records from every provider, unified and always free."}
+                    : "See how we bring together records from every doctor, hospital, and lab you've visited."}
                 </p>
               </motion.div>
             </AnimatePresence>

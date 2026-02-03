@@ -115,16 +115,16 @@ export function HowItWorks() {
                 <GradientHeading
                   size="lg"
                   weight="bold"
-                  className="max-w-3xl mx-auto"
+                  className="max-w-3xl mx-auto px-4"
                 >
                   {audience === "provider"
                     ? "Live in One Week"
-                    : "Your Complete Health Story in Minutes"}
+                    : "Get Started in Minutes"}
                 </GradientHeading>
                 <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
                   {audience === "provider"
                     ? "We handle the heavy lifting—patient onboarding, technical setup, ongoing support."
-                    : "Simple, secure, and always free. Connect once and access your records forever."}
+                    : "Four simple steps to access your complete medical history. Connect once, access forever."}
                 </p>
               </motion.div>
             </AnimatePresence>

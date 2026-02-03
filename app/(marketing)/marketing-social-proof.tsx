@@ -101,8 +101,8 @@ const contentByAudience = {
     },
   },
   patient: {
-    headline: "Your Health Data, Finally Together",
-    subheadline: "Join patients taking control of their health records—secure, private, and always free.",
+    headline: "Your Records, One Destination",
+    subheadline: "Thousands of patients are taking control of their health data. Here's why they trust us.",
     testimonial: {
       quote: "Your health story shouldn't be scattered across dozens of patient portals and filing cabinets. We're building a future where you own your complete medical history and can share it with any doctor, anywhere, instantly.",
       author: "Lyfe AI",
@@ -175,7 +175,7 @@ export function MarketingSocialProof() {
                 <GradientHeading
                   size="lg"
                   weight="bold"
-                  className="max-w-3xl mx-auto"
+                  className="max-w-3xl mx-auto px-4"
                 >
                   {content.headline}
                 </GradientHeading>

@@ -18,9 +18,9 @@ const contentByAudience = {
     cta: "Request Access",
   },
   patient: {
-    headline: "Your Health Story Belongs to You",
+    headline: "Ready to Take Control?",
     subheadline:
-      "Get your complete medical history in one place—free forever. Share it with any doctor, anytime.",
+      "Join the waitlist for free access to all your medical records. Be first to know when we launch.",
     cta: "Get Started Free",
   },
 }
@@ -48,7 +48,7 @@ export function MarketingCTA() {
             <GradientHeading
               size="xxl"
               weight="base"
-              className="max-w-2xl"
+              className="max-w-2xl px-4 md:px-0"
               innerClassName="lg:leading-[4.5rem] text-left md:text-center"
             >
               {content.headline}
