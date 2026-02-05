@@ -12,6 +12,9 @@ import { MarketingSocialProof } from "./marketing-social-proof"
 import { ProductWorkflow } from "./marketing-workflow"
 import { HowItWorks } from "./marketing-how-it-works"
 import FeaturesSection from "./marketing-features"
+// Feature flag: ROI Calculator only shown in dev environment
+const SHOW_ROI_CALCULATOR = process.env.NEXT_PUBLIC_SHOW_ROI_CALCULATOR === "true"
+
 import { ROICalculator } from "./roi-calculator"
 import { MarketingPricing } from "./marketing-pricing"
 import MarketingFAQ from "./marketing-faq"
@@ -117,7 +120,7 @@ export default async function LandingPage() {
         watchUrl={getURL()}
       />
       <FAQSchema items={faqItemsForSchema} />
-      <ROICalculatorSchema />
+      {SHOW_ROI_CALCULATOR && <ROICalculatorSchema />}
 
       {/* Hero Section - Full viewport, extends behind header */}
       <LandingHeroSection />
@@ -145,9 +148,12 @@ export default async function LandingPage() {
         </FadeIn>
 
         {/* ROI Calculator - Help providers understand value before pricing */}
-        <FadeIn>
-          <ROICalculator />
-        </FadeIn>
+        {/* Feature flagged: Only shown in dev environment */}
+        {SHOW_ROI_CALCULATOR && (
+          <FadeIn>
+            <ROICalculator />
+          </FadeIn>
+        )}
 
         {/* Pricing - Provider only (conditionally shown) */}
         <FadeIn>
